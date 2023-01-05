@@ -17,11 +17,7 @@ def users_list(queries: UserQueries = Depends()):
 
 
 
-
-  
-
-
-@router.post("/api/users/")
+@router.post("/api/users")
 def create_user(
     user: UserIn,
     repo: UserRepository = Depends()
