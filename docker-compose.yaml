@@ -1,4 +1,5 @@
-# volumes:
+volumes:
+  planit:
 services:
   fastapi:
     build:
@@ -8,7 +9,21 @@ services:
       - 8000:8000
     volumes:
       - ./sample_service:/app
-      
+    environment:
+      DATABASE_URL: postgresql://planit:planit@db/planit
+  db:
+    build:
+      context: data
+      dockerfile: Dockerfile.dev
+    volumes:
+      - planit:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: planit
+      POSTGRES_USER: planit
+      POSTGRES_DB: planit
+    ports:
+      - "15432:5432"
+
   ghi:
     image: node:lts-bullseye
     command: /bin/bash run.sh
@@ -23,4 +38,3 @@ services:
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
       REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
-            
