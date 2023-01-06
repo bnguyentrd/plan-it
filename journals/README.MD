@@ -56,7 +56,7 @@ request working. After much troubleshooting, our code seemed to "magically"
 work although we still cant pinpoint what we did differently in order for it to function. My main concern is that upon starting my container, my
 database container will automatically shut down, but upon restarting that individual container, it will stay on and function with no problems. I suspect that the container automatically shuts down because something in our code for that particular container depends on something else to successfully load. I will have to talk to a SEIR about this because this topic is a bit too open ended to find an answer online.
 
-I also managed to finish writing the code to delete a user by myself but have yet to mark that issue as done.
+I also managed to finish writing the code to delete a user, and get user detail by myself but have yet to mark that issue as done since it needs a peer review.
 
 <!--
 Petra and I had a hard time figuring out the logic

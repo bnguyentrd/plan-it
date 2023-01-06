@@ -1,5 +1,7 @@
 from pydantic import BaseModel
 from pool import pool
+from typing import Optional
+
 
 class UserOut(BaseModel):
   id: int
@@ -62,3 +64,42 @@ class UserRepository:
         except Exception as e:
             print(e)
             return False
+
+
+
+    def get_one(self, user_id: int) -> Optional[UserOut]:
+            try:
+                with pool.connection() as conn:
+                    with conn.cursor() as db:
+                        result = db.execute(
+                            """
+                            SELECT id
+                                , first_name
+                                , last_name
+                                , avatar
+                                , email
+                                , username
+                            FROM users
+                            WHERE id = %s
+                            """,
+                            [user_id]
+                        )
+                        record = result.fetchone()
+                        if record is None:
+                            return None
+                        return self.record_to_user_out(record)
+            except Exception as e:
+                print(e)
+                return {"message": "Could find that user"}
+
+
+
+    def record_to_user_out(self, record):
+            return UserOut(
+                id=record[0],
+                first_name=record[1],
+                last_name=record[2],
+                avatar=record[3],
+                email=record[4],
+                username=record[5],
+            )
