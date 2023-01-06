@@ -24,6 +24,10 @@ class UserQueries:
 
         return results
 
+  # def post_user(self) -> UserOut:
+  #   UserRepository.create
+
+
 
 # class CreateUser:
 #     def create_user(self) -> UserOut:

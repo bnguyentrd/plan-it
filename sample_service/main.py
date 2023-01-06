@@ -21,8 +21,8 @@ def launch_details():
     return {
         "launch_details": {
             "year": 2022,
-            "month": 12,
-            "day": "9",
+            "month": 1,
+            "day": "2",
             "hour": 19,
             "min": 0,
             "tz:": "PST"

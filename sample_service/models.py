@@ -43,5 +43,6 @@ class UserRepository:
                     ]
                 )
                 id = result.fetchone()[0]
-                return self.create(id, user)
-                # return id
+                # return self.create(id, user)
+                # return id, user
+                return user
