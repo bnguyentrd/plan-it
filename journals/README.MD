@@ -10,7 +10,7 @@ Recommended naming convention is `first_last.md`.
 
 Today, I worked on:
 
-- Finished wireframe, endpoint design, and got started on writing Gitlab issues
+- Finished wireframe, endpoint design, and got started on writing Gitlab issues [x]
 
 Today I started contributing with my team members on finishing
 up our first iteration of our API endpoint design and successfully
@@ -21,7 +21,7 @@ so that our pipeline isn't failing anymore.
 
 Today, I worked on:
 
-- Project setup
+- Project setup [x]
 
 Today I lead our first daily stand up and used my notes
 from Learn and Andrew's Lectures to compile a starting
@@ -35,7 +35,7 @@ to my branch so that my team members could have a working copy.
 
 Today, I worked on:
 
-- Create User POST REQUEST
+- Create User POST REQUEST []
 
 Screenshared for the entire coding session again. Most of our session today was revolving around decomposing yesterday's code to try to implement that same boilerplate code to a different function: Create User POST REQUEST. We were having issues with generating an id for a new user but James gave us some guidance and reading material. I learned that a lot of this is trial and error but it also involves taking a step back to freshen up my memory on how to write code for fast API. I had to comb through a lot of the videos concerning fast API from our winter study guide. Not much else was done on this project today because our LEARN Explorations was quite extensive.
 
@@ -43,8 +43,9 @@ Screenshared for the entire coding session again. Most of our session today was 
 
 Today, I worked on:
 
-- Create User POST REQUEST
-- Delete User DELETE REQUEST
+- Create User POST REQUEST [x]
+- Delete User DELETE REQUEST [x]
+- User Detail GET REQUEST [x]
 
 Although we're supposed to be doing pair-coding, our team came
 to an agreement that it was beneficial for all to work together
@@ -57,6 +58,15 @@ work although we still cant pinpoint what we did differently in order for it to 
 database container will automatically shut down, but upon restarting that individual container, it will stay on and function with no problems. I suspect that the container automatically shuts down because something in our code for that particular container depends on something else to successfully load. I will have to talk to a SEIR about this because this topic is a bit too open ended to find an answer online.
 
 I also managed to finish writing the code to delete a user, and get user detail by myself but have yet to mark that issue as done since it needs a peer review.
+
+
+
+
+## January 6, 2023
+
+Today, I worked on:
+
+- Figuring out 
 
 <!--
 Petra and I had a hard time figuring out the logic

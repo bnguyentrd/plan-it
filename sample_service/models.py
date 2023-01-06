@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from pool import pool
-from typing import Optional
+from typing import Optional, Union
 
 
 class UserOut(BaseModel):
@@ -21,6 +21,9 @@ class UserIn(BaseModel):
     avatar: str
     email: str
     username: str
+
+class Error(BaseModel):
+    message: str
 
 
 class UserRepository:
@@ -103,3 +106,39 @@ class UserRepository:
                 email=record[4],
                 username=record[5],
             )
+
+
+
+    def update(self, user_id: int, user: UserIn) -> Union[UserOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE users
+                        SET first_name = %s
+                          , last_name = %s
+                          , avatar = %s
+                          , email = %s
+                          , username = %s
+                        WHERE id = %s
+                        """,
+                        [
+                            user.first_name,
+                            user.last_name,
+                            user.avatar,
+                            user.email,
+                            user.username,
+                            user_id
+                        ]
+                    )
+                    return self.user_in_to_out(user_id, user)
+
+        except Exception as e:
+            print(e)
+            return {"message": "Could not update user data"}
+
+
+    def user_in_to_out(self, id: int, user: UserOut):
+        old_data = user.dict()
+        return UserOut(id=id, **old_data)
