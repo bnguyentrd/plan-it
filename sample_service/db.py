@@ -24,13 +24,20 @@ class UserQueries:
 
         return results
 
-  # def post_user(self) -> UserOut:
-  #   UserRepository.create
+# not sure if this is doing anything..but its not breaking the code so far
+  def delete_user(user_id: int):
+    with pool.connection() as conn:
+        with conn.cursor() as db:
+            result = db.execute(
+                """
+                DELETE FROM users
+                WHERE id = {id}
+                """
+            )
+            return result, {"message": "User deleted successfully"}
 
 
 
-# class CreateUser:
-#     def create_user(self) -> UserOut:
-#         with pool.connection() as conn:
-#             with conn.cursor() as cur:
-#                 cur.execute
+
+
+

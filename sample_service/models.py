@@ -46,3 +46,19 @@ class UserRepository:
                 # return self.create(id, user)
                 # return id, user
                 return user
+
+    def delete(self, id: int) -> bool:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        DELETE FROM users
+                        WHERE id = %s
+                        """,
+                        [id]
+                    )
+                    return True
+        except Exception as e:
+            print(e)
+            return False
