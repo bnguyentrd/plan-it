@@ -59,14 +59,21 @@ database container will automatically shut down, but upon restarting that indivi
 
 I also managed to finish writing the code to delete a user, and get user detail by myself but have yet to mark that issue as done since it needs a peer review.
 
-
-
-
 ## January 6, 2023
 
 Today, I worked on:
 
-- Figuring out 
+- Figuring out Authentication
+- Setting up pgAdmin
+- Fully fixed USER DETAIL GET REQUEST [x]
+
+Today I successfully got the User Detail PUT REQUEST to update user details successfully. I also noticed that the GET REQUEST for user detail was only working for users that exist but was returning a 500 error for users. I fixed that to return a 404 error instead to display null. We also started to work setting up pgAdmin and hopefully be able to start implementing authentication and authorization.
+
+## January 9, 2023
+
+Today, I worked on:
+
+-
 
 <!--
 Petra and I had a hard time figuring out the logic

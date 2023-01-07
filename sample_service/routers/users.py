@@ -13,15 +13,28 @@ def users_list(queries: UserQueries = Depends()):
     }
 
 
-# ATTEMPT 3 SUCCESS
-@router.get("/api/users/{id}", response_model=UserOut)
+# ATTEMPT 3 Only works for users that exist
+# @router.get("/api/users/{id}", response_model=UserOut)
+# def user_detail(
+#   id: int,
+#   response: Response,
+#   repo: UserRepository = Depends(),
+# ) -> UserOut:
+#   user = repo.get_one(id)
+#   if user is None:
+#     response.status_code= 404
+#   return user
+
+@router.get("/api/users/{id}", response_model=Optional[UserOut])
 def user_detail(
   id: int,
   response: Response,
   repo: UserRepository = Depends(),
 ) -> UserOut:
-  return repo.get_one(id)
-
+  user = repo.get_one(id)
+  if user is None:
+    response.status_code= 404
+  return user
 
 # ATTEMPT 2
 # @router.get("api/users/{id}", response_model=Optional[UserOut])
@@ -105,3 +118,4 @@ def update_user(
 #     repo: UserRepository = Depends(),
 # ) -> UserIn:
 #     return repo.update(user_id, user)
+
