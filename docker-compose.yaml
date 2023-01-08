@@ -27,7 +27,7 @@ services:
     volumes:
         - ./events_service:/app
     environment:
-        DATABASE_URL: postgresql://eventsdb:password@postgres/eventsdb
+        DATABASE_URL: postgresql://admin:test-databases@postgres/eventsdb
         WAIT_HOSTS: postgres:5432
 
 
