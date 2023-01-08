@@ -1,6 +1,8 @@
 volumes:
   postgres-data:
     external: true
+  pg-admin:
+    external: true
 
 services:
   postgres:
@@ -10,8 +12,9 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_MULTIPLE_DATABASES=eventsdb
-      - POSTGRES_PASSWORD=test-databases
+      POSTGRES_MULTIPLE_DATABASES: eventsdb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: test-databases
     ports:
       - 15432:5432
 
@@ -24,7 +27,7 @@ services:
     volumes:
         - ./events_service:/app
     environment:
-        DATABASE_URL: postgresql://user-name:password@postgres/eventsdb
+        DATABASE_URL: postgresql://eventsdb:password@postgres/eventsdb
         WAIT_HOSTS: postgres:5432
 
 
@@ -42,3 +45,14 @@ services:
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
       REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
+
+  pg-admin:
+    image: dpage/pgadmin4
+    volumes:
+      - pg-admin:/var/lib/pgadmin
+    ports:
+      - 8082:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: elijah@admin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_DISABLE_POSTFIX: 1

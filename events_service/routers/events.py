@@ -19,3 +19,13 @@ def get_one_event(
     if event is None:
         response.status_code = 404
     return event
+
+
+@router.post("/events", response_model=Union[EventOut, Error])
+def create_event(
+    event: EventIn,
+    response: Response,
+    repo: EventRepository = Depends(),
+):
+    response.status_code = 400
+    return repo.create(event)
