@@ -1,15 +1,28 @@
 from fastapi import APIRouter, Depends, Response
-from db import UserQueries
+from queries.accounts import AccountQueries
 import models
-from models import UserIn, UserRepository, UsersOut, UserOut, Error
+from queries.accounts import AccountOut
+from queries.accounts import AccountIn, AccountQueries, AccountsOut, AccountOut, Error
 from typing import Optional, Union
 
 router = APIRouter()
 
-@router.get("/api/users", response_model=UsersOut)
-def users_list(queries: UserQueries = Depends()):
+
+# @router.post("/api/things")
+# async def create_thing(
+#     account_data: Optional[dict] = Depends(authenticator.get_current_account_data),
+# ):
+#     if account_data:
+#         return personalized_list
+#     return general_list
+
+
+
+
+@router.get("/api/accounts", response_model=AccountsOut)
+def accounts_list(queries: AccountQueries = Depends()):
     return {
-      "users": queries.get_all_users()
+      "accounts": queries.get_all_accounts()
     }
 
 
@@ -25,16 +38,20 @@ def users_list(queries: UserQueries = Depends()):
 #     response.status_code= 404
 #   return user
 
-@router.get("/api/users/{id}", response_model=Optional[UserOut])
-def user_detail(
+
+
+@router.get("/api/accounts/{id}", response_model=Optional[AccountOut])
+def account_detail(
   id: int,
   response: Response,
-  repo: UserRepository = Depends(),
-) -> UserOut:
+  repo: AccountQueries = Depends(),
+) -> AccountOut:
   user = repo.get_one(id)
   if user is None:
     response.status_code= 404
   return user
+
+
 
 # ATTEMPT 2
 # @router.get("api/users/{id}", response_model=Optional[UserOut])
@@ -60,48 +77,42 @@ def user_detail(
 
 
 
-@router.post("/api/users")
-def create_user(
-    user: UserIn,
-    repo: UserRepository = Depends()
+@router.post("/api/accounts")
+def create_account(
+    user: AccountIn,
+    repo: AccountQueries = Depends()
 ):
     return repo.create(user)
 
 
 
-@router.delete("/api/users/{id}", response_model=bool)
-def delete_user(
+@router.delete("/api/accounts/{id}", response_model=bool)
+def delete_account(
     id: int,
     response: Response,
-    repo: UserRepository = Depends(),
+    repo: AccountQueries = Depends(),
 ) -> bool:
     return repo.delete(id)
 
 
-  # attempt 1
+  # attempt 1 = FAIL
   # @router.delete("/api/users/{id}", response_model=bool)
   # def delete_user(id: int, queries: UserQueries = Depends()):
   #   queries.delete_user(id)
   #   return True
 
-@router.delete("/token")
-def log_out():
-  pass
-
-@router.post("/token")
-def log_in():
-  pass
 
 
-@router.put("/api/users/{user_id}", response_model=Union[UserOut, Error])
-def update_user(
-    user_id: int,
-    user: UserIn,
-    repo: UserRepository = Depends(),
-) -> Union[Error, UserOut]:
-    return repo.update(user_id, user)
 
+@router.put("/api/accounts/{id}", response_model=Union[AccountOut, Error])
+def update_account(
+    id: int,
+    user: AccountIn,
+    repo: AccountQueries = Depends(),
+) -> Union[Error, AccountOut]:
+    return repo.update(id, user)
 
+# FAIL
 # @router.put("/api/users/{user_id}", response_model=UserOut)
 # def update_user(
 #     user_id: int,
@@ -110,7 +121,7 @@ def update_user(
 # ) -> UserOut:
 #     return repo.update(user_id, user)
 
-
+# FAIL
 # @router.put("/api/users/{user_id}", response_model=UserIn)
 # def update_user(
 #     user_id: int,
@@ -118,4 +129,3 @@ def update_user(
 #     repo: UserRepository = Depends(),
 # ) -> UserIn:
 #     return repo.update(user_id, user)
-

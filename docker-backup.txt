@@ -1,7 +1,21 @@
 volumes:
-  planit:
+  postgres-data:
+    external: true
+
 services:
-  fastapi:
+  postgres:
+    build:
+      context: ./relational-data
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=
+      - POSTGRES_PASSWORD=test-databases
+    ports:
+      - 15432:5432
+
+  accounts_service:
     build:
       context: accounts_service
       dockerfile: Dockerfile.dev
@@ -16,13 +30,13 @@ services:
       context: data
       dockerfile: Dockerfile.dev
     volumes:
-      - planit:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     environment:
+      POSTGRES_MULTIPLE_DATABASES: planit
       POSTGRES_PASSWORD: planit
       POSTGRES_USER: planit
-      POSTGRES_DB: planit
     ports:
-      - "15432:5432"
+      - "8001:8001"
 
   ghi:
     image: node:lts-bullseye
@@ -37,4 +51,4 @@ services:
       NODE_ENV: development
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
-      REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
+      REACT_APP_ACCOUNTS_SERVICE_API_HOST: http://localhost:8100
