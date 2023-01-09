@@ -1,12 +1,25 @@
 volumes:
   planit:
 services:
-  fastapi:
+  postgres:
     build:
-      context: accounts_service
-      dockerfile: Dockerfile.dev
+      context: ./relational-data
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_MULTIPLE_DATABASES: eventsdb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: test-databases
     ports:
-      - 8000:8000
+      - 15432:5432
+
+  events_service:
+    build:
+        context: ./events_service
+        dockerfile: ./Dockerfile.dev
+    ports:
+        - "8001:8000"
     volumes:
       - ./accounts_service:/app
     environment:
