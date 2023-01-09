@@ -24,8 +24,14 @@ class AccountOut(BaseModel):
   email: str
   username: str
 
+class AccountOutWithPassword:
+    hashed_password: str
+
 class AccountsOut(BaseModel):
   accounts: list[AccountOut]
+
+class DuplicateAccountError(ValueError):
+    pass
 
 class AccountQueries:
   def get_all_accounts(self) -> list[AccountOut]:
