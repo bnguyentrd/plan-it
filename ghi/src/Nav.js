@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  };
+  }
 
   return (
     <nav>
-      <button className="menu-button" onClick={toggleMenu}>
-        Menu
-      </button>
+      <button className="menu-button" onClick={toggleMenu}>Menu</button>
       {isMenuOpen && (
         <ul className="menu">
           <li className="nav-li">Home</li>
