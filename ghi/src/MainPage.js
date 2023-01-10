@@ -2,17 +2,28 @@ import React from 'react';
 import logo from './logo/logo.png';
 import Nav from './Nav';
 import Slideshow from './Slideshow';
-import './css/Slideshow.css';
+import { useState } from 'react';
+import './css/DarkMode.css';
+// import ProfilePicture from './ProfilePicture';
 
 
-function MainPage(props) {
+function MainPage() {
 
-    const pad2 = num => String(num).padStart(2, '0');
+    const [darkMode, setDarkMode] = useState(false);
+
+    const toggleDarkMode = () => {
+        setDarkMode(!darkMode);
+    }
 
     return (
-        <div className="App">
+        <div className={darkMode ? "dark-mode" : "" }>
             <div className="top-right">
                 <Nav />
+                {/* <ProfilePicture /> */}
+            </div>
+            <div>
+            <button onClick={toggleDarkMode}>Dark Mode</button>
+                {darkMode ? <p>Dark mode is on</p> : <p>Dark mode is off</p>}
             </div>
             <header className="App-header">
                 <h1>

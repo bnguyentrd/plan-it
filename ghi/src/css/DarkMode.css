@@ -1,0 +1,15 @@
+/* Light mode styles */
+body {
+  background-color: white;
+  color: black;
+  text-align: center;
+}
+
+/* Dark mode styles */
+.dark-mode {
+  background-color: rgb(65, 59, 59);
+  color: white;
+  text-align: center;
+  opacity: 0.9;
+}
+
