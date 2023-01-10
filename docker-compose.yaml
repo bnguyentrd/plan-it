@@ -1,5 +1,8 @@
 volumes:
   planit:
+    external: true
+  postgres-data:
+    external: true
 services:
   postgres:
     build:
@@ -21,26 +24,22 @@ services:
     ports:
         - "8001:8000"
     volumes:
+        - ./events_service:/app
+    environment:
+        DATABASE_URL: postgresql://admin:test-databases@postgres/eventsdb
+        WAIT_HOSTS: postgres:5432
+
+  accounts_service:
+    build:
+      context: accounts_service
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8002:8000"
+    volumes:
       - ./accounts_service:/app
     environment:
-      # SIGNING_KEY:
-      # WAIT_HOSTS: db:5432
-      # WAIT_BEFORE: 5
-      # WAIT_TIMEOUT: 60
-      DATABASE_URL: postgresql://planit:planit@db/planit
-
-  db:
-    build:
-      context: data
-      dockerfile: Dockerfile.dev
-    volumes:
-      - planit:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: planit
-      POSTGRES_USER: planit
-      POSTGRES_DB: planit
-    ports:
-      - "15432:5432"
+      DATABASE_URL: postgresql://admin:test-databases@postgres/eventsdb
+      WAIT_HOSTS: postgres:5432
 
   ghi:
     image: node:lts-bullseye
