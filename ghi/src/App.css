@@ -3,12 +3,97 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #02bef7;
+  min-height: 50;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.top-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.menu-button {
+  width: 150px;
+  height: 70px;
+  border-radius: 15px;
+  font-size: 25px;
+  background-color: #02bef7;
+  border: 5px solid #ccc;
+}
+
+.menu {
+  border: 5px solid #ccc;
+  background-color: #f73c3cd2;
+  border-radius: 15px;
+}
+
+.nav-li {
+  font-size: 25px;
+}
+
+
+.slideshow img {
+  margin: 0 10px;
+}
+
+.logo-radius {
+  border-radius: 15px;
+}
+
+
+
+/* TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST */
+
+
+
+
+
+/* TESTIMONIALS SECTION */
+
+#testimonials {
+  text-align: center;
+  background-color: #ef8172;
+  color: #fff;
+}
+
+h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  font-size: 3rem;
+  line-height: 1.5;
+}
+
+.carousel-item {
+  padding: 7% 15%;
+}
+
+/* CIRCLE */
+.testimonial-image1 {
+  width: 10%;
+  border-radius: 100%;
+  margin: 20px;
+}
+
+/* ROUNDED SQUARE set width to 0 to hide */
+.testimonial-image2 {
+  width: 0%;
+  border-radius: 30%;
+}
+
+/* PLAIN IMAGE */
+.testimonial-image3 {
+  width: 0%;
+}
+
+/* TEST */
+.testimonial-image4 {
+  width: 0%;
+  border-radius: 10%;
 }
