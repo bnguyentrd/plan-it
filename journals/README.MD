@@ -73,7 +73,13 @@ Today I successfully got the User Detail PUT REQUEST to update user details succ
 
 Today, I worked on:
 
--
+- Figuring out Authentication [x]
+- Front End CSS Styling
+
+Today I was able to successfully setup the authorization requests. Users are now able to log in and the backend will authorize a session token.
+I was able to setup an example endpoint that would be locked for users who are not logged in. If a user is logged in, they should be able to see a generic boolean response as true and if users are not logged in, it should return a 401 response saying "Invalid token". Now the rest of the team should be able to implement this example to their respective endpoints to require users to log in before accessing locked features/endpoints on our app.
+
+I also helped Bobby with some frontend code today, mainly css styling elements when trying to implement a carousel. We finally got a very barebones carousel working but it could be improved upon. I foresaw that getting authorization would be a huge blocker and so now I need to figure out what other issues I can tackle.
 
 <!--
 Petra and I had a hard time figuring out the logic
