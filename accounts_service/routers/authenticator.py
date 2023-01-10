@@ -22,15 +22,21 @@
 # #         # Return the accounts. That's it.
 # #         return accounts
 
-# #     def get_hashed_password(self, account: AccountOutWithPassword):
-# #         # Return the encrypted password value from your
-# #         # account object
-# #         return account.hashed_password
+    def get_hashed_password(self, account: AccountOutWithPassword):
+        # Return the encrypted password value from your
+        # account object
+        return account["hashed_password"]
 
-# #     def get_account_data_for_cookie(self, account: AccountOut):
-# #         # Return the username and the data for the cookie.
-# #         # You must return TWO values from this method.
-# #         return account.username, AccountOut(**account.dict())
+    # suspected culprit
+    # def get_account_data_for_cookie(self, account: AccountOut):
+    #     # Return the username and the data for the cookie.
+    #     # You must return TWO values from this method.
+    #     return account.username, AccountOut(**account.dict())
+
+    def get_account_data_for_cookie(self, account: AccountOut):
+        # Return the username and the data for the cookie.
+        # You must return TWO values from this method.
+        return account["username"], AccountOut(**account)
 
 
 # # authenticator = PlanitAuthenticator(os.environ["SIGNING_KEY"])
