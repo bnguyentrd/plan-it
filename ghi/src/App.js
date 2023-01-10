@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
-import Construct from './Construct.js'
+// import Construct from './Construct.js'
+import MainPage from './MainPage.js'
 import ErrorNotification from './ErrorNotification';
 import './App.css';
+
 
 function App() {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -30,7 +32,7 @@ function App() {
   return (
     <div>
       <ErrorNotification error={error} />
-      <Construct info={launch_info} />
+      <MainPage info={launch_info} />
     </div>
   );
 }
