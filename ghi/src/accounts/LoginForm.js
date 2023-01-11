@@ -1,71 +1,36 @@
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-// import { useToken } from
+import React, { useState } from "react";
+import { useAuthContext } from "./Authentication";
 
-function LogInForm(props) {
-  // const [token, signup] = useToken();
+export const LoginForm = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { login } = useAuthContext();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const error = await login(username, password);
+    if (error) {
+      setError(error);
+    }
+  };
 
   return (
-    <>
-      <Container component="main" maxWidth="xs">
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <h1>Log In</h1>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="username"
-            label="Username"
-            // value={username}
-            // onChange={field}
-            variant="outlined"
-            autoFocus
-          />
-
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="email"
-            label="Email"
-            // value={username}
-            // onChange={field}
-            variant="outlined"
-            autoFocus
-          />
-
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            // value={username}
-            // onChange={field}
-            variant="outlined"
-            autoFocus
-          />
-        </Box>
-        <Button
-          variant="contained"
-          onClick={() => {
-            alert("clicked");
-          }}
-        >
-          Sign Up
-        </Button>
-      </Container>
-    </>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button type="submit">Login</button>
+      <div>{error}</div>
+    </form>
   );
-}
-
-export default LogInForm;
+};

@@ -73,10 +73,25 @@ Today I successfully got the User Detail PUT REQUEST to update user details succ
 
 Today, I worked on:
 
-- Figuring out Authentication [x]
+- Figuring out Authentication []
 - Front End CSS Styling
 
 Today I was able to successfully setup the authorization requests. Users are now able to log in and the backend will authorize a session token.
 I was able to setup an example endpoint that would be locked for users who are not logged in. If a user is logged in, they should be able to see a generic boolean response as true and if users are not logged in, it should return a 401 response saying "Invalid token". Now the rest of the team should be able to implement this example to their respective endpoints to require users to log in before accessing locked features/endpoints on our app.
 
 I also helped Bobby with some frontend code today, mainly css styling elements when trying to implement a carousel. We finally got a very barebones carousel working but it could be improved upon. I foresaw that getting authorization would be a huge blocker and so now I need to figure out what other issues I can tackle.
+
+## January 10, 2023
+
+Today, I worked on:
+
+- Figuring out Authentication []
+- Front End CSS Styling
+- Front End Form [x]
+
+Today I continued to work on authentication and realized that simply injecting "authenticator.get_current_account_data"
+into Depends was giving me an error when I tried to apply it to a different request. I wanted to test it on a different
+request coming from a different microservice other than users but we still didnt have our docker compose yaml file
+configured properly so I took care of that along with setting up pgAdmin. Now I can see the events microservice running properly
+but since I didnt touch anything in that microservice, I figured it was best to do some pair coding with Elijah tomorrow on that issue. Since I'm currently waiting on that, I moved onto writing a basic SignUpForm.js page and was able to successfully
+create a user from the frontend and see it reflected on the backend. Now it just needs some styling. Moving forward, I can share the boilerplate code for my team members should they need to make a post request on any of their respective forms.

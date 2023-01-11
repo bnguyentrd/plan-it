@@ -4,6 +4,7 @@ import MainPage from "./MainPage.js";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import SignUpForm from "./accounts/SignUpForm";
+import { LoginForm } from "./accounts/LoginForm.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -33,15 +34,9 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          {/* <Route>
-            <SignUpForm path="/signup"/>
-          </Route> */}
-          {/* <Route>
-            <MainPage path="/" />
-          </Route> */}
           <Route path="/" element={<MainPage/>} />
-
           <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/login" element={<LoginForm />} />
 
           {/* <ErrorNotification error={error} /> */}
           {/* <Construct info={launch_info} /> */}

@@ -11,11 +11,16 @@ class AccountIn(BaseModel):
     email: str
     password: str
 
+# class Account(AccountIn):
+#     id = PydanticObjectId
+#     roles: List[str]
+
+
 class Error(BaseModel):
     message: str
 
 class AccountOut(BaseModel):
-    id: str
+    id: int
     username: str
     email: str
 
@@ -87,25 +92,50 @@ class AccountQueries:
 
 
 
+#   def create(self, info: AccountIn, hashed_password: str) -> AccountOutWithPassword:
+#     with pool.connection() as conn:
+#         with conn.cursor() as cur:
+#             params = [info.username, info.email, hashed_password]
+#             cur.execute(
+#                 """
+#                 INSERT INTO accounts (username, email, hashed_password)
+#                 VALUES (%s, %s, %s)
+#                 RETURNING id, username, email, hashed_password
+#                 """,
+#                 params,
+#             )
+#             record = None
+#             row = cur.fetchone()
+#             if row is not None:
+#                 record = {}
+#                 for i, column in enumerate(cur.description):
+#                     record[column.name] = row[i]
+#             return record
   def create(self, info: AccountIn, hashed_password: str) -> AccountOutWithPassword:
-    with pool.connection() as conn:
-        with conn.cursor() as cur:
-            params = [info.username, info.email, hashed_password]
-            cur.execute(
-                """
-                INSERT INTO accounts (username, email, hashed_password)
-                VALUES (%s, %s, %s)
-                RETURNING id, username, email, hashed_password
-                """,
-                params,
-            )
-            record = None
-            row = cur.fetchone()
-            if row is not None:
-                record = {}
-                for i, column in enumerate(cur.description):
-                    record[column.name] = row[i]
-            return record
+    try:
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                params = [info.username, info.email, hashed_password]
+                cur.execute(
+                    """
+                    INSERT INTO accounts (username, email, hashed_password)
+                    VALUES (%s, %s, %s)
+                    RETURNING id, username, email, hashed_password
+                    """,
+                    params,
+                )
+                record = None
+                row = cur.fetchone()
+                if row is not None:
+                    record = {}
+                    for i, column in enumerate(cur.description):
+                        record[column.name] = row[i]
+                return record
+    except Exception as e:
+        print(e)
+        return {"message": "Username or email already exist"}
+
+
 
 
   def delete(self, id: int) -> bool:
