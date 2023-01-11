@@ -1,11 +1,11 @@
 volumes:
-    postgres-data:
-      external: true
-    pg-admin:
-      external: true
+  postgres-data:
+    external: true
+  pg-admin:
+    external: true
 
 services:
-  fastapi:
+  postgres:
     build:
       context: ./relational-data
       dockerfile: ./Dockerfile.dev
@@ -16,7 +16,6 @@ services:
       POSTGRES_PASSWORD: test-databases
     ports:
       - 15432:5432
-
 
   ghi:
     image: node:lts-bullseye
@@ -35,7 +34,6 @@ services:
       # REACT_APP_BLOG_SERVICE: http://localhost:8080
       REACT_APP_EVENTS_SERVICE: http://localhost:8090
       REACT_APP_ACCOUNTS_SERVICE_API_HOST: http://localhost:8000
-
 
   events_service:
     build:
