@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 
 
 
-function SignUpForm(props) {
+function SignUpForm() {
   return (
     <>
       <Container component="main" maxWidth="xs">

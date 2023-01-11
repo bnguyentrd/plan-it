@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import Construct from "./Construct.js";
 import MainPage from "./MainPage.js";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import SignUpForm from "./accounts/SignUpForm"
+import Nav from './Nav';
+
 
 
 function App() {
@@ -34,7 +35,6 @@ function App() {
       <ErrorNotification error={error} />
       {/* <Construct info={launch_info} /> */}
       <MainPage info={launch_info} />
-      <SignUpForm />
     </div>
   );
 }

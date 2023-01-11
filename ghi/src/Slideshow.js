@@ -11,13 +11,13 @@ function Slideshow({ images, size, duration }) {
     return () => clearInterval(interval);
   }, [middleIndex, images.length, duration]);
 
-  const goToPrevSlide = () => {
-    setMiddleIndex((middleIndex - 1 + images.length) % images.length);
-  }
+  // const goToPrevSlide = () => {
+  //   setMiddleIndex((middleIndex - 1 + images.length) % images.length);
+  // }
 
-  const goToNextSlide = () => {
-    setMiddleIndex((middleIndex + 1) % images.length);
-  }
+  // const goToNextSlide = () => {
+  //   setMiddleIndex((middleIndex + 1) % images.length);
+  // }
 
   const leftIndex = (middleIndex - 1 + images.length) % images.length;
   const rightIndex = (middleIndex + 1) % images.length;
@@ -34,3 +34,4 @@ function Slideshow({ images, size, duration }) {
 }
 
 export default Slideshow;
+

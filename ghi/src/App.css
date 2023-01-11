@@ -25,12 +25,12 @@
   border-radius: 15px;
   font-size: 25px;
   background-color: #02bef7;
-  border: 5px solid #ccc;
+  border: 5px solid rgb(15, 15, 15);
 }
 
 .menu {
-  border: 5px solid #ccc;
-  background-color: #f73c3cd2;
+  border: 5px solid rgb(20, 20, 20);
+  background-color: #f7efefd2;
   border-radius: 15px;
 }
 
@@ -48,52 +48,6 @@
 }
 
 
-
-/* TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST */
-
-
-
-
-
-/* TESTIMONIALS SECTION */
-
-#testimonials {
-  text-align: center;
-  background-color: #ef8172;
-  color: #fff;
-}
-
-h2 {
-  font-family: "Montserrat", sans-serif;
-  font-weight: bold;
-  font-size: 3rem;
-  line-height: 1.5;
-}
-
-.carousel-item {
-  padding: 7% 15%;
-}
-
-/* CIRCLE */
-.testimonial-image1 {
-  width: 10%;
-  border-radius: 100%;
-  margin: 20px;
-}
-
-/* ROUNDED SQUARE set width to 0 to hide */
-.testimonial-image2 {
-  width: 0%;
-  border-radius: 30%;
-}
-
-/* PLAIN IMAGE */
-.testimonial-image3 {
-  width: 0%;
-}
-
-/* TEST */
-.testimonial-image4 {
-  width: 0%;
-  border-radius: 10%;
+.nav-li {
+  padding-bottom: 10px; /* add space inside the item */
 }
