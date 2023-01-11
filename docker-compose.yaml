@@ -5,7 +5,7 @@ volumes:
       external: true
 
 services:
-  postgres:
+  fastapi:
     build:
       context: ./relational-data
       dockerfile: ./Dockerfile.dev
