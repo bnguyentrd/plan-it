@@ -2,11 +2,20 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-
-
-
+// import { useToken } from
 
 function SignUpForm(props) {
+    // const [token, signup] = useToken();
+
+
+
+
+
+
+
+
+
+
   return (
     <>
       <Container component="main" maxWidth="xs">
@@ -18,6 +27,7 @@ function SignUpForm(props) {
             alignItems: "center",
           }}
         >
+          <h1>Sign Up</h1>
           <TextField
             margin="normal"
             required
@@ -41,8 +51,27 @@ function SignUpForm(props) {
             variant="outlined"
             autoFocus
           />
+
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            // value={username}
+            // onChange={field}
+            variant="outlined"
+            autoFocus
+          />
         </Box>
-        <Button>Submit</Button>
+        <Button
+          variant="contained"
+          onClick={() => {
+            alert("clicked");
+          }}
+        >
+          Sign Up
+        </Button>
       </Container>
     </>
   );

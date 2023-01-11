@@ -3,7 +3,8 @@ import Construct from "./Construct.js";
 import MainPage from "./MainPage.js";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
-import SignUpForm from "./accounts/SignUpForm"
+import SignUpForm from "./accounts/SignUpForm";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -30,10 +31,23 @@ function App() {
 
   return (
     <div>
-      <ErrorNotification error={error} />
-      {/* <Construct info={launch_info} /> */}
-      <MainPage info={launch_info} />
-      <SignUpForm />
+      <BrowserRouter>
+        <Routes>
+          {/* <Route>
+            <SignUpForm path="/signup"/>
+          </Route> */}
+          {/* <Route>
+            <MainPage path="/" />
+          </Route> */}
+          <Route path="/" element={<MainPage/>} />
+
+          <Route path="/signup" element={<SignUpForm />} />
+
+          {/* <ErrorNotification error={error} /> */}
+          {/* <Construct info={launch_info} /> */}
+          {/* <MainPage info={launch_info} /> */}
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
