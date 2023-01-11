@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import SignUpForm from './accounts/SignUpForm';
-
+import React, { useState } from "react";
+// import { NavLink } from "react-router-dom";
+import SignUpForm from "./accounts/SignUpForm";
 
 function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

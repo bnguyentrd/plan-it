@@ -1,4 +1,4 @@
-# # authenticator.py
+# authenticator.py
 import os
 from fastapi import Depends
 from jwtdown_fastapi.authentication import Authenticator
@@ -12,7 +12,7 @@ class PlanitAuthenticator(Authenticator):
         accounts: AccountQueries,
     ):
         # Use your repo to get the account based on the
-        # username (which could be an email)
+        # email (which could be an email)
         return accounts.get(username)
 
     def get_account_getter(
