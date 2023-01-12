@@ -1,8 +1,9 @@
 volumes:
-  planit:
-    external: true
   postgres-data:
     external: true
+  pg-admin:
+    external: true
+
 services:
   postgres:
     build:
@@ -17,29 +18,43 @@ services:
     ports:
       - 15432:5432
 
-  events_service:
+  polls_service:
     build:
-        context: ./events_service
-        dockerfile: ./Dockerfile.dev
+      context: ./polls_service
+      dockerfile: ./Dockerfile.dev
     ports:
-        - "8001:8000"
+        - "8003:8000"
     volumes:
-        - ./events_service:/app
+      - ./polls_service:/app
     environment:
         DATABASE_URL: postgresql://admin:test-databases@postgres/eventsdb
         WAIT_HOSTS: postgres:5432
 
+  events_service:
+    build:
+      context: ./events_service
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "8090:8000"
+    volumes:
+      - ./events_service:/app
+    environment:
+      DATABASE_URL: postgresql://admin:test-databases@postgres/eventsdb
+      WAIT_HOSTS: postgres:5432
+
+
   accounts_service:
     build:
-      context: accounts_service
-      dockerfile: Dockerfile.dev
+      context: ./accounts_service
+      dockerfile: ./Dockerfile.dev
     ports:
-      - "8002:8000"
+      - "8000:8000"
     volumes:
       - ./accounts_service:/app
     environment:
       DATABASE_URL: postgresql://admin:test-databases@postgres/eventsdb
       WAIT_HOSTS: postgres:5432
+
 
   ghi:
     image: node:lts-bullseye
@@ -54,4 +69,7 @@ services:
       NODE_ENV: development
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
+      # # REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
+      # REACT_APP_BLOG_SERVICE: http://localhost:8080
+      REACT_APP_EVENTS_SERVICE: http://localhost:8090
       REACT_APP_ACCOUNTS_SERVICE_API_HOST: http://localhost:8000

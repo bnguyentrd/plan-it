@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS accounts, polls, poll_options;
+DROP TABLE IF EXISTS accounts, polls, pollOptions;
 
 CREATE TABLE accounts (
     -- id INTEGER NOT NULL UNIQUE,

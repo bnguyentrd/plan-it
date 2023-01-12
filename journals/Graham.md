@@ -21,6 +21,7 @@
 
 ## Jan. 8, 2023 ##
 -> continued work at ghi, initial look into 3rd party apis
+-> Dad's birthday, limited worktime
 
 ## Jan. 9, 2023 ##
 -> ghi running and stable
@@ -30,3 +31,7 @@
 ## Jan. 10, 2023 ##
 -> initial work into polling service
 -> creation of poll and option models
+
+## Jan. 11, 2023 ##
+-> initial work into CRUD functionality for polling service
+->
