@@ -1,3 +1,4 @@
+import { withTheme } from '@emotion/react';
 import React, { useState } from 'react';
 
 function ProfilePicture() {
@@ -32,6 +33,7 @@ function ProfilePicture() {
           backgroundRepeat: 'no-repeat',
           borderRadius: '50%',
           display: 'inline-block',
+          border: 'white'
         }}
       >
       <input

@@ -5,6 +5,7 @@ import "./App.css";
 import SignUpForm from "./accounts/SignUpForm";
 import { LoginForm } from "./accounts/LoginForm.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import AccountDetails from './accounts/AccountDetails';
 
 
 function App() {
@@ -37,7 +38,8 @@ function App() {
           <Route path="/" element={<MainPage/>} />
           <Route path="/signup" element={<SignUpForm />} />
           <Route path="/login" element={<LoginForm />} />
-
+          {/* <Route path="/api/accounts/{id}" element={<AccountDetails />} /> */}
+          {/* <Route path="/api/accounts/{id}" element={<AccountDetails />} /> */}
           {/* <ErrorNotification error={error} /> */}
           {/* <Construct info={launch_info} /> */}
           {/* <MainPage info={launch_info} /> */}

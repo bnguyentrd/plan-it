@@ -4,6 +4,8 @@ import Nav from './Nav';
 import Slideshow from './Slideshow';
 import { useState } from 'react';
 import './css/DarkMode.css';
+import ProfilePicture from './ProfilePicture';
+
 
 
 function MainPage() {
@@ -24,8 +26,8 @@ function MainPage() {
         <div className={darkMode ? "dark-mode" : "" }>
             <div className="top-right">
                 <Nav />
-                {/* <ProfilePicture /> */}
             </div>
+            <ProfilePicture />
             <div>
             <button className="toggle-switch" onClick={toggleDarkMode}></button>
                 {darkMode ? <p>Dark Mode is On</p> : <p>Dark Mode is Off</p>}
@@ -37,9 +39,9 @@ function MainPage() {
                 </h1>
                 <br></br>
             </header>
-            <div>
+            {/* <div>
                 <br></br>
-            </div>
+            </div> */}
             <div>
                 <Slideshow images={[
                 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Hiking_to_the_Ice_Lakes._San_Juan_National_Forest%2C_Colorado.jpg/1200px-Hiking_to_the_Ice_Lakes._San_Juan_National_Forest%2C_Colorado.jpg',

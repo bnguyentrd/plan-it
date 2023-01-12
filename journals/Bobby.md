@@ -59,4 +59,15 @@ When Festive Mode is activated, Website's contents will have CSS decorations for
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+Jan 11th:
+
+Today I worked on: 
+
+Got clickable links to function on drop down menu(nav bar) using routes and navlinks. 
+Started working on more aesthetics of the slideshow, getting the previous and next buttons to be transparent using bootstrap and also have it functioning. Currently dealing with the bootstrap buttons somehow overlapping the whole left and right side of the web page so the drop down menu isnt accessable. 
+
+
+Jan 12th:
+
+Today I worked on:
 

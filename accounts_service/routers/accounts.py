@@ -55,7 +55,7 @@ def account_detail(
   id: int,
   response: Response,
   # repo: AccountQueries = Depends(authenticator.get_current_account_data),
-  account: dict = Depends(authenticator.get_current_account_data),
+#   account: dict = Depends(authenticator.get_current_account_data),
   repo: AccountQueries = Depends(),
 ) -> AccountOut:
   print("this is the repooooooooooooooooooooooooooooooooooooooooooooooooo", repo)

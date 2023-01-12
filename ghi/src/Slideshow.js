@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './css/Slideshow.css';
 
+
 function Slideshow({ images, size, duration }) {
   const [middleIndex, setMiddleIndex] = useState(1);
 
@@ -11,27 +12,43 @@ function Slideshow({ images, size, duration }) {
     return () => clearInterval(interval);
   }, [middleIndex, images.length, duration]);
 
-  // const goToPrevSlide = () => {
-  //   setMiddleIndex((middleIndex - 1 + images.length) % images.length);
-  // }
+  const goToPrevSlide = () => {
+    setMiddleIndex((middleIndex - 1 + images.length) % images.length);
+  }
 
-  // const goToNextSlide = () => {
-  //   setMiddleIndex((middleIndex + 1) % images.length);
-  // }
+  const goToNextSlide = () => {
+    setMiddleIndex((middleIndex + 1) % images.length);
+  }
 
   const leftIndex = (middleIndex - 1 + images.length) % images.length;
   const rightIndex = (middleIndex + 1) % images.length;
 
   return (
-    <div className="slideshow">
-      <img className="slideshow" src={images[leftIndex]} alt="slideshow" style={{ width: size, height: size }} />
-      <img className="slideshow" src={images[middleIndex]} alt="slideshow" style={{ width: size, height: size }} />
-      <img className="slideshow" src={images[rightIndex]} alt="slideshow" style={{ width: size, height: size }} />
-      {/* <button onClick={goToPrevSlide}>Prev</button>
-      <button onClick={goToNextSlide}>Next</button> */}
+    <div className="slidebg">
+      {/* <img className="slidepic" src={images[leftIndex]} alt="slideshow" style={{ width: size, height: size }} /> */}
+      <img className="slidepic" src={images[middleIndex]} alt="slideshow" style={{ width: size, height: size }} />
+      {/* <img className="slidepic" src={images[rightIndex]} alt="slideshow" style={{ width: size, height: size }} /> */}
+      <button className="carousel-control-prev" onClick={goToPrevSlide}>
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        {/* <span className="visually-hidden">Previous</span> */}
+      </button>
+      <div>
+        <div style={{width: "!!important 300px", height: "!!important 100px"}}>
+      <button className="carousel-control-next" onClick={goToNextSlide}>
+        <span className="carousel-control-next-icon" ></span>
+        {/* <span className="visually-hidden">Next</span> */}
+      </button>
+      </div>
+      </div>
+        <br></br>
     </div>
   );
 }
 
 export default Slideshow;
 
+      // <div className="carousel-indicators">
+      //   <button data-bs-target="#carouselExampleIndicators" onClick={() => setMiddleIndex(0)} ></button>
+      //   <button data-bs-target="#carouselExampleIndicators" onClick={() => setMiddleIndex(1)} ></button>
+      //   <button data-bs-target="#carouselExampleIndicators" onClick={() => setMiddleIndex(2)} ></button>
+      // </div>

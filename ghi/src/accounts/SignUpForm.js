@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Container, Box, TextField, Button } from "@mui/material";
+import Nav from '../Nav';
 
 function SignUpForm() {
   const [username, setUsername] = useState("");
@@ -36,6 +37,7 @@ function SignUpForm() {
 
   return (
     <>
+      <Nav />
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
