@@ -10,6 +10,7 @@ class Question(Base):
 	id = Column(Integer, primary_key=True)
 	question_text = Column(String(200))
 	pub_date = Column(DateTime)
+	is_active = Column(Integer, default=1)
 
 	choices = relationship('Choice', back_populates="question")
 

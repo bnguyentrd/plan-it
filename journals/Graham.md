@@ -34,4 +34,9 @@
 
 ## Jan. 11, 2023 ##
 -> initial work into CRUD functionality for polling service
-->
+-> GET functionality for polls, options successful
+
+## Jan. 12, 2023 ##
+-> CRUD available for polls, poll options
+-> CRUD functional for polls, poll options
+-> poll option successfully relates to poll "host"

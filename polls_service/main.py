@@ -1,6 +1,5 @@
 from fastapi import FastAPI, HTTPException, Response, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from routers import polls
 import os
 import schema
 from typing import List
