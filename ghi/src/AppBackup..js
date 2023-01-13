@@ -8,11 +8,11 @@ import { LoginForm } from "./accounts/LoginForm.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AccountDetails from "./accounts/AccountDetail.js";
 import { About } from "./accounts/About.js";
-import { AuthProvider, AuthContext } from "./accounts/Authentication";
 
 function App() {
   const [launch_info, setLaunchInfo] = useState([]);
   const [error, setError] = useState(null);
+  const [token, setToken] = useState(false);
 
   useEffect(() => {
     async function getData() {
@@ -31,35 +31,37 @@ function App() {
       }
     }
     // getData();
+
+    // async function getToken() {
+    //   let url = "http://localhost:8000/token";
+    //   const response = await fetch(url);
+
+    //   if (response.ok) {
+    //     const data = await response.access_token;
+    //     // const json = JSON.stringify(response);
+    //     console.log(data);
+    //   }
+    // }
+
+    // getToken();
   }, []);
 
   return (
-    <>
-    <AuthProvider>
-      <AuthContext.Consumer>
-        {(context) => (
-          <div>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<MainPage />} />
-                <Route path="/signup" element={<SignUpForm />} />
-                <Route path="/login" element={<LoginForm />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/api/protected"/>
-                <Route
-                  path="/api/accounts/{id}"
-                  element={<AccountDetails token={context.token} />}
-                  />
-                {/* <ErrorNotification error={error} /> */}
-                {/* <Construct info={launch_info} /> */}
-                {/* <MainPage info={launch_info} /> */}
-              </Routes>
-            </BrowserRouter>
-          </div>
-        )}
-      </AuthContext.Consumer>
-    </AuthProvider>
-        </>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/signup" element={<SignUpForm />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/api/accounts/{id}" element={<AccountDetails />} />
+
+          {/* <ErrorNotification error={error} /> */}
+          {/* <Construct info={launch_info} /> */}
+          {/* <MainPage info={launch_info} /> */}
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

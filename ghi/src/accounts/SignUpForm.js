@@ -96,13 +96,16 @@ function SignUpForm() {
         {/* <Button variant="contained" onClick={handleSubmit}>
           Sign Up
         </Button> */}
-
+        <br></br>
+        <div>
         <button
           className="glow-on-hover glowing glow-button"
           onClick={handleSubmit}
         >
           Sign Up
         </button>
+
+        </div>
       </Box>
     </Container>
   );

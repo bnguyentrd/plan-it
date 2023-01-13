@@ -25,8 +25,13 @@ function MainPage() {
         {/* <ProfilePicture /> */}
       </div>
       <div>
-        <button className="toggle-switch" onClick={toggleDarkMode}></button>
-        {darkMode ? <p>Dark Mode is On</p> : <p>Dark Mode is Off</p>}
+        <button className="button-transpar" onClick={toggleDarkMode}>
+          <input type="checkbox" id="checkbox" />
+          <label for="checkbox"></label>
+        </button>
+
+        {/* <button className="toggle-switch" onClick={toggleDarkMode}></button> */}
+        {darkMode ? <p></p> : <p></p>}
       </div>
       <header className="App-header">
         <br></br>

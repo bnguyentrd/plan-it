@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+// import React, { useState, useEffect, navigate } from "react";
 import { useAuthContext } from "./Authentication";
 import { Container, Box, TextField, Button } from "@mui/material";
 import { useToken } from "./Authentication";
+import "../css/LoginForm.css";
 
 export const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -17,12 +19,20 @@ export const LoginForm = () => {
     //   setError(error);
     // }
     e.preventDefault();
-    alert("success");
+    // alert("success");
   };
+
+  // useEffect(() => {
+  //   if (token) {
+  //     setTimeout(() => {
+  //       navigate("/");
+  //     }, 2000);
+  //   }
+  // }, [token, navigate]);
 
   return (
     <>
-      <Container component="main" maxWidth="xs">
+      <Container className="login-form" component="main" maxWidth="xs">
         <Box
           sx={{
             marginTop: 8,
@@ -48,13 +58,19 @@ export const LoginForm = () => {
             margin="normal"
             required
             fullWidth
+            input
+            type="password"
             name="password"
             label="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             variant="outlined"
           />
-          <Button variant="contained" onClick={handleSubmit}>
+          <br></br>
+          <Button
+            className="glow-on-hover glowing glow-button"
+            onClick={handleSubmit}
+          >
             Login
           </Button>
           <div>{error}</div>

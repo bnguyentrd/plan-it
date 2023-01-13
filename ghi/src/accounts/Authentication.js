@@ -83,8 +83,27 @@ export function useToken() {
     }
   }
 
+  // async function login(username, password) {
+  //   const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/login/`;
+  //   const form = new FormData();
+  //   form.append("username", username);
+  //   form.append("password", password);
+  //   const response = await fetch(url, {
+  //     method: "post",
+  //     credentials: "include",
+  //     body: form,
+  //   });
+  //   if (response.ok) {
+  //     const token = await getTokenInternal();
+  //     setToken(token);
+  //     return;
+  //   }
+  //   let error = await response.json();
+  //   return handleErrorMessage(error);
+  // }
+
   async function login(username, password) {
-    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/login/`;
+    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`;
     const form = new FormData();
     form.append("username", username);
     form.append("password", password);
@@ -96,6 +115,9 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
       return;
     }
     let error = await response.json();

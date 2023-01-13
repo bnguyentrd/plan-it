@@ -13,33 +13,81 @@
   opacity: 1;
 }
 
-
 .toggle-switch {
-    position: relative; /* The circle elements will be absolutely positioned relative to this element */
-    width: 50px; /* The width of the toggle switch */
-    height: 32px; /* The height of the toggle switch */
-    background: grey; /* The background color of the toggle switch */
-    border-radius: 30px; /* The border radius of the toggle switch */
-    cursor: pointer; /* The cursor changes to a pointer when hovering over the toggle switch */
+  position: relative; /* The circle elements will be absolutely positioned relative to this element */
+  width: 50px; /* The width of the toggle switch */
+  height: 32px; /* The height of the toggle switch */
+  background: grey; /* The background color of the toggle switch */
+  border-radius: 30px; /* The border radius of the toggle switch */
+  cursor: pointer; /* The cursor changes to a pointer when hovering over the toggle switch */
 }
 
-
 .toggle-switch:before {
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    top: 5px;
-    left: 5px;
-    transition: left 0.2s ease;
-    background-image: url(https://cdn3.vectorstock.com/i/1000x1000/40/02/crescent-moon-symbol-icon-design-vector-22314002.jpg);
-    /* Add a background image of a moon */
-    background-size: cover; /* Scale the background image to cover the entire element */
-    background-position: center; /* Position the background image in the center of the element */
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  top: 5px;
+  left: 5px;
+  transition: left 0.2s ease;
+  background-image: url(https://cdn3.vectorstock.com/i/1000x1000/40/02/crescent-moon-symbol-icon-design-vector-22314002.jpg);
+  /* Add a background image of a moon */
+  background-size: cover; /* Scale the background image to cover the entire element */
+  background-position: center; /* Position the background image in the center of the element */
 }
 
 /* Change the position of the moon when the toggle switch is turned on */
 .toggle-switch.on:before {
-    left: 25px;
+  left: 25px;
+}
+
+input {
+  margin: 10px;
+  -webkit-appearance: none;
+  position: relative;
+  width: 100px;
+  height: 50px;
+  background-image: url(https://i.postimg.cc/857jHw2q/Screenshot-2020-04-16-at-1-07-06-PM.png);
+  background-size: cover;
+  border-radius: 50px;
+  outline: none;
+  background-color: transparent;
+  transition: background-image 0.9s;
+  box-shadow: 0px 2px 5px 1px gray;
+}
+
+input:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 50px;
+  background-color: navy;
+  border-radius: 50px;
+  transition: all 0.9s;
+  background-color: #f7ca33;
+}
+
+input:checked {
+  background-image: url(https://i.postimg.cc/Hn0nstVK/Screenshot-2020-04-16-at-1-07-19-PM.png);
+  transition: background-image 0.9s;
+}
+
+input:checked:before {
+  transform: translate(100%);
+  transition: all 0.9s;
+  /* background-color: #ECF0F3; */
+}
+
+.button-transpar {
+  background-color: transparent;
+  /* outline: 0; */
+  outline-color: transparent;
+  border: none;
+}
+
+.logo-radius {
+  box-shadow: 3px 3px 2px 0px rgb(83, 82, 82);
 }
