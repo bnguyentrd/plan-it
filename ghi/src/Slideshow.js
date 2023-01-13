@@ -25,9 +25,9 @@ function Slideshow({ images, size, duration }) {
 
   return (
     <div className="slidebg">
-      {/* <img className="slidepic" src={images[leftIndex]} alt="slideshow" style={{ width: size, height: size }} /> */}
+      <img className="slidepic" src={images[leftIndex]} alt="slideshow" style={{ width: size, height: size }} />
       <img className="slidepic" src={images[middleIndex]} alt="slideshow" style={{ width: size, height: size }} />
-      {/* <img className="slidepic" src={images[rightIndex]} alt="slideshow" style={{ width: size, height: size }} /> */}
+      <img className="slidepic" src={images[rightIndex]} alt="slideshow" style={{ width: size, height: size }} />
       <button className="carousel-control-prev" onClick={goToPrevSlide}>
         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
         {/* <span className="visually-hidden">Previous</span> */}

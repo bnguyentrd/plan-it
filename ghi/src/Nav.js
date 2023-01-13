@@ -2,6 +2,7 @@ import React, { useState } from "react";
 // import { NavLink } from "react-router-dom";
 import SignUpForm from "./accounts/SignUpForm";
 import { NavLink } from 'react-router-dom';
+import './css/Nav.css';
 
 function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,13 +13,13 @@ function Nav() {
 
   return (
     <nav>
-      <button className="menu-button" onClick={toggleMenu}>Menu</button>
+      <button onClick={toggleMenu}>Menu</button>
       {isMenuOpen && (
-        <ul className="menu">
-          <li className="nav-li">Profile</li>
+        <ul>
+          <li>Profile</li>
           <NavLink to="/">Home Page</NavLink>
-          <li className="nav-li">About</li>
-          <li className="nav-li">Contact</li>
+          <li>About</li>
+          <li>Contact</li>
             <li>
               <NavLink to="/signup">Sign Up</NavLink>
             </li>

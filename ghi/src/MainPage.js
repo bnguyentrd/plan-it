@@ -18,8 +18,6 @@ function MainPage() {
 
     const toggleDarkMode = () => {
     setDarkMode(!darkMode);
-    const toggleSwitch = document.querySelector('.toggle-switch');
-    toggleSwitch.classList.toggle('on');
     }
 
     return (
@@ -29,8 +27,11 @@ function MainPage() {
             </div>
             <ProfilePicture />
             <div>
-            <button className="toggle-switch" onClick={toggleDarkMode}></button>
-                {darkMode ? <p>Dark Mode is On</p> : <p>Dark Mode is Off</p>}
+            <button className="button-transpar" onClick={toggleDarkMode}>
+                <input type="checkbox" id="checkbox" />
+                <label for="checkbox"></label>
+            </button>
+                {darkMode ? <p></p> : <p></p>}
             </div>
             <header className="App-header">
                 <br></br>
