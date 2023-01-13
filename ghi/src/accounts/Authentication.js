@@ -7,7 +7,10 @@ export function getToken() {
 }
 
 export async function getTokenInternal() {
+  // original
   const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/me/token/`;
+  // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/{id}/token/`;
+  // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/id/token/`;
   try {
     const response = await fetch(url, {
       credentials: "include",
@@ -117,7 +120,7 @@ export function useToken() {
       setToken(token);
       setTimeout(() => {
         navigate("/");
-      }, 2000);
+      }, 1000);
       return;
     }
     let error = await response.json();

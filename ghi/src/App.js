@@ -30,36 +30,37 @@ function App() {
         setError(data.message);
       }
     }
-    // getData();
+    getData();
   }, []);
 
   return (
     <>
-    <AuthProvider>
-      <AuthContext.Consumer>
-        {(context) => (
-          <div>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<MainPage />} />
-                <Route path="/signup" element={<SignUpForm />} />
-                <Route path="/login" element={<LoginForm />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/api/protected"/>
-                <Route
-                  path="/api/accounts/{id}"
-                  element={<AccountDetails token={context.token} />}
+      <AuthProvider>
+        <AuthContext.Consumer>
+          {(context) => (
+            <div>
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<MainPage />} />
+                  <Route path="/signup" element={<SignUpForm />} />
+                  <Route path="/login" element={<LoginForm />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/api/protected" />
+                  <Route
+                    path="/api/accounts/{id}"
+                    // path="/api/accounts/me/token"
+                    element={<AccountDetails token={context.token} />}
                   />
-                {/* <ErrorNotification error={error} /> */}
-                {/* <Construct info={launch_info} /> */}
-                {/* <MainPage info={launch_info} /> */}
-              </Routes>
-            </BrowserRouter>
-          </div>
-        )}
-      </AuthContext.Consumer>
-    </AuthProvider>
-        </>
+                  {/* <ErrorNotification error={error} /> */}
+                  {/* <Construct info={launch_info} /> */}
+                  {/* <MainPage info={launch_info} /> */}
+                </Routes>
+              </BrowserRouter>
+            </div>
+          )}
+        </AuthContext.Consumer>
+      </AuthProvider>
+    </>
   );
 }
 
