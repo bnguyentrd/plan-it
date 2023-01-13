@@ -71,3 +71,19 @@ Jan 12th:
 
 Today I worked on:
 
+Fixed a weird bootstrap error where the slideshow button was being clickable from a large area(from top to bottom of both sides of the webpage). Used CSS to override the under the hood styles from the bootstrap code used in slideshow buttons. 
+
+Changed dark mode button slider to have 2 different pictures, one day time themed and one night time themed. when clicking on the slider/button, a slide animation is presented with a fade in/fade out effect. 
+
+Tore down placeholder styles for drop down menu aesthetics in preparation for next day's workload.
+
+
+Jan 13th:
+
+Today I worked on:
+
+Things to ask group:
+1. ask connor to present what hes done so far
+2. ask elijah how the weather api is coming along(ask if he needs me to help)
+3. ask graham if he wants me to tackle his front end
+4. ask elijah if he wants me to tackle his front end 

@@ -49,6 +49,11 @@ function MainPage() {
                 'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aGlraW5nfGVufDB8fDB8fA%3D%3D&w=1000&q=80',
                 'https://dep.nj.gov/wp-content/uploads/njfw/fishing_freshwater_thumb.jpg',
                 'https://drugpolicy.org/sites/default/files/crowd-at-concert_0.png',
+                'https://static.stacker.com/s3fs-public/styles/sar_screen_maximum_large/s3/croppedshutterstock741884605O3SDjpg_773.JPEG',
+                'https://howtostartanllc.com/images/business-ideas/business-idea-images/fine-dining.jpg',
+                'https://luccastyle.com/wp-content/uploads/2022/10/pg-fine-dining-1641394981-1080x630.jpg',
+                'https://www.perrygroup.com/wp-content/uploads/2016/02/shutterstock_287171675.jpg',
+                'https://www.ft.com/__origami/service/image/v2/images/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2F164e49da-ec60-448d-b398-ca04eb5bf0fc.jpg?fit=scale-down&source=next&width=700'
                 
             ]} 
             size={400}
