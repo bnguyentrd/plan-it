@@ -1,34 +1,59 @@
-import { useState,useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+// import { useEffect, useState } from 'react';
+import { useGetEventsQuery } from '../store/eventsApi';
 
 
-function EventList(props) {
-    const [events, setEvents] = useState([])
-    const navigate = useNavigate()
+export default function EventList() {
+    const { data, isLoading } = useGetEventsQuery()
 
-    useEffect(() -> {
-        async function fetchEvents() {
-            const url = ('/events')
+    if (isLoading) {
+        return (
+            <progress className='progress is-primary' max="100"></progress>
+        )
+    }
 
-            const response = await fetch(url, {
-                method: 'get',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            })
-            if (response.ok) {
-                const data = await response.json()
-                setEvents(data)
-            }
-        }
-        const cancelEvent = async (event_id) => {
-            const url = `/events/${event_id}`
-            const fetchConfig = {
-                method: 'delete',
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            }
-        }
-    })
+
+    return (
+        <div className='columns is-centered'>
+            <table className='table is-striped'>
+                <thead>
+                    <tr>
+                        <th>title</th>
+                        <th>Location</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Details</th>
+                        <th>weather</th>
+                        <th>Images</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.events.map(events => (
+                        <tr key={events.id}>
+                            <td>
+                                {events.title}
+                            </td>
+                            <td>
+                                {events.location}
+                            </td>
+                            <td>
+                                {events.from_date}
+                            </td>
+                            <td>
+                                {events.to_date}
+                            </td>
+                            <td>
+                                {events.description}
+                            </td>
+                            <td>
+                                {events.weather}
+                            </td>
+                            <td>
+                                {events.url}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    )
 }

@@ -77,4 +77,40 @@ Today, I worked on:
 
 Finalized all CRUD endpoints, solved issues in the queries events.py file.
 Solved issue when retrieving a single event using the ID value, simple error
-just needed to return the record. 
+just needed to return the record.
+
+
+
+## January 10th, 2023 - Tuesday
+
+Today, I worked on:
+
+* Creatung an Event Post form in the front end
+
+Created an Event Form, no css or styling just wanted to verify that
+the configurations and urls actually allowed for the Front End to
+directly input data in the database
+
+
+## January 11th, 2023 - Wednesnday
+
+Today, I worked on:
+
+* Trying to intergrate the OpenWeather API
+
+Got started on intergrating a third party API, did not succeed. Created
+keys.py file and configured gitignore to not leak the API keys. Created a function
+that retireved the lat and lon of an area in order to recieve the description
+of the weather for that area in real time.
+
+
+## January 12th, 2023 - Thursday
+
+Today, I worked on:
+
+* Creating a list page for the events
+
+Brought total number of errors in console down from 12 to 4.
+No styling or CSS just needed to verfiy that i can display the data in the
+frontend. Created a Store repo in the GHI to store my eventsAPI, then called that API
+in the List Form. 

@@ -7,6 +7,7 @@ from queries.events import (
     EventOut
 )
 
+
 router = APIRouter()
 
 @router.get("/events/{event_id}", response_model=Optional[EventOut])

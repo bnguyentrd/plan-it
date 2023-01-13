@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import List, Optional, Union
 from datetime import date
 from queries.pool import pool
-
+from queries.acls import get_weather
 
 class Error(BaseModel):
     message: str
@@ -27,7 +27,6 @@ class EventOut(BaseModel):
     description: str
     url: Optional[str]
     weather: Optional[str]
-
 
 class EventRepository:
     def get_one(self, event_id: int) -> Optional[EventOut]:
