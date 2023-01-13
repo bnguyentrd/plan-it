@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Container, Box, TextField, Button } from "@mui/material";
+import "../css/SignUp.css";
+
+// import "../css/SignUp.css";
 
 function SignUpForm() {
   const [username, setUsername] = useState("");
@@ -22,71 +25,86 @@ function SignUpForm() {
       }),
     });
 
-    if (!response.ok) {
-      // Handle error response
-      const error = await response.json();
-      console.log(error);
-    } else {
+    // if (!response.ok) {
+    //   // Handle error response
+    //   const error = await response.json();
+    //   console.log(error);
+    // } else {
+    //   const data = await response.json();
+    //   console.log(data);
+    // }
+
+    if (response.ok) {
       const data = await response.json();
       console.log(data);
+      // Handle error response
+    } else {
+      const error = await response.json();
+      console.log(error);
     }
 
     // Handle successful response
   }
 
   return (
-    <>
-      <Container component="main" maxWidth="xs">
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
+    <Container className="signup-form-spacing" component="main" maxWidth="xs">
+      <Box
+        sx={{
+          // marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          // alignItems: "center",
+          // marginBottom: 27
+        }}
+      >
+        <h1>Sign Up</h1>
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          name="username"
+          label="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          variant="outlined"
+          autoFocus
+        />
+
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          name="email"
+          label="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          variant="outlined"
+          autoFocus
+        />
+
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          name="password"
+          label="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          variant="outlined"
+          autoFocus
+        />
+        {/* <Button variant="contained" onClick={handleSubmit}>
+          Sign Up
+        </Button> */}
+
+        <button
+          className="glow-on-hover glowing glow-button"
+          onClick={handleSubmit}
         >
-          <h1>Sign Up</h1>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="username"
-            label="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            variant="outlined"
-            autoFocus
-          />
-
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="email"
-            label="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            variant="outlined"
-            autoFocus
-          />
-
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            variant="outlined"
-            autoFocus
-          />
-          <Button variant="contained" onClick={handleSubmit}>
-            Sign Up
-          </Button>
-        </Box>
-      </Container>
-    </>
+          Sign Up
+        </button>
+      </Box>
+    </Container>
   );
 }
 

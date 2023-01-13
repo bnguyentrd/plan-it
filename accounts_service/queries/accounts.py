@@ -111,6 +111,7 @@ class AccountQueries:
 #                 for i, column in enumerate(cur.description):
 #                     record[column.name] = row[i]
 #             return record
+
   def create(self, info: AccountIn, hashed_password: str) -> AccountOutWithPassword:
     try:
         with pool.connection() as conn:

@@ -1,3 +1,36 @@
 .slideshow {
-    border-radius: 20px;
+  border-radius: 20px;
+}
+
+.slidebg {
+  /* background: #02bef7; */
+  padding: 10px;
+}
+.slidepic {
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.slidetransparency {
+  opacity: 0.1;
+}
+
+.slidebutton {
+  padding: 12px 16px;
+}
+
+.carousel-control-prev {
+  position: absolute;
+  top: 26rem;
+  left: 8rem;
+  height: 100px !important;
+  width: 100px !important;
+}
+
+.carousel-control-next {
+  position: absolute;
+  top: 26rem;
+  right: 8rem;
+  height: 100px !important;
+  width: 100px !important;
 }
