@@ -40,7 +40,7 @@ function App() {
     <BrowserRouter basename={basename}>
       <Routes>
         <Route path="/events" element={<EventList />} />
-        <Route path="create" element={<EventForm />} />
+        <Route path="/create" element={<EventForm />} />
       </Routes>
     </BrowserRouter>
   );

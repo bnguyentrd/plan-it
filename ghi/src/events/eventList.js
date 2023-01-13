@@ -3,7 +3,7 @@ import { useGetEventsQuery } from '../store/eventsApi';
 
 
 export default function EventList() {
-    const { data, isLoading } = useGetEventsQuery()
+    const { data: eventData, isLoading } = useGetEventsQuery()
 
     if (isLoading) {
         return (
@@ -27,28 +27,28 @@ export default function EventList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.events.map(events => (
-                        <tr key={events.id}>
+                    {eventData.map(event => (
+                        <tr key={event.id}>
                             <td>
-                                {events.title}
+                                {event.title}
                             </td>
                             <td>
-                                {events.location}
+                                {event.location}
                             </td>
                             <td>
-                                {events.from_date}
+                                {event.from_date}
                             </td>
                             <td>
-                                {events.to_date}
+                                {event.to_date}
                             </td>
                             <td>
-                                {events.description}
+                                {event.description}
                             </td>
                             <td>
-                                {events.weather}
+                                {event.weather}
                             </td>
                             <td>
-                                {events.url}
+                                {event.url}
                             </td>
                         </tr>
                     ))}
