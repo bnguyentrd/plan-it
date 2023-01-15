@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import '../css/EventForm.css';
-import Nav from '../Nav';
+
+
+                        ///////////////////////////////////////
+                        // THIS EVENT FORM IS FOR MAIN PAGE //
+                        /////////////////////////////////////
 
 
 
@@ -43,65 +46,64 @@ const EventForm = () => {
     }
 
     return (
-        <div className='container evntfrm'>
-            <Nav />
-            <div className='offset-3 col-6 evntform'>
-                <div className='shadow p-4 mt-4 event-curve'>
+        <div className='container'>
+            <div className='offset-3 col-6'>
+                <div className='shadow p-4 mt-4'>
                     <h1>Create An Event</h1>
                     <form onSubmit={handleSubmit} id='create-event-form'>
                         <div className='form-floating mb-3'>
                             <input
-                            className="event-size"
                              value={title}
                              onChange={(e) => setTitle(e.target.value)}
                              placeholder='Title'
                              required type='text'
                              name='title'
                              id='title'
+                             className='form-control'
                             />
                         </div>
                         <div className='form-floating mb-3'>
                             <input
-                            className="event-size"
                              value={location}
                              onChange={(e) => setLocation(e.target.value)}
                              placeholder='Location'
                              required type='text'
                              name='location'
                              id='location'
+                             className='form-control'
                             />
                         </div>
                         <div className='form-floating mb-3'>
                             <input
-                            className="event-size"
                              value={from_date}
                              onChange={(e) => setFromDate(e.target.value)}
                              placeholder='From'
                              required type='date'
                              name='from_date'
                              id='from_date'
+                             className='form-control'
                             />
                         </div>
                         <div className='form-floating mb-3'>
                             <input
-                            className="event-size"
                              value={to_date}
                              onChange={(e) => setToDate(e.target.value)}
                              placeholder='To'
                              required type='date'
                              name='to_date'
                              id='to_date'
+                             className='form-control'
                             />
                         </div>
                         <div className='form-floating mb-3'>
                             <input
-                            className="event-size"
                              value={description}
                              onChange={(e) => setDescription(e.target.value)}
                              placeholder='Details'
                              required type='text'
                              name='description'
                              id='description'
+                             className='form-control'
                             />
                         </div>
                         <button className='btn btn-primary'>Create</button>

@@ -13,24 +13,30 @@ function Nav() {
 
   return (
     <nav>
-      <button onClick={toggleMenu}>Menu</button>
-      {isMenuOpen && (
-        <ul>
-          <li>Profile</li>
-          <NavLink to="/">Home Page</NavLink>
-          <li>About</li>
-          <li>Contact</li>
-            <li>
-              <NavLink to="/signup">Sign Up</NavLink>
+      <div>
+        <button className="navbtn" onClick={toggleMenu}>Menu</button>
+        {isMenuOpen && (
+          <ul className="drpdwn">
+            <li className="item-1">
+            <NavLink to="/">Home Page</NavLink>
             </li>
-            <li>
-              <NavLink to="/login">Log In</NavLink>
-            </li>
-            <li>
-              <NavLink to="/accountdetails">Account Details</NavLink>
-            </li>
-        </ul>
-      )}
+            <li className="item-2">About</li>
+            <li className="item-1">Contact</li>
+              <li className="item-2">
+                <NavLink to="/signup">Sign Up</NavLink>
+              </li>
+              <li className="item-1">
+                <NavLink to="/login">Log In</NavLink>
+              </li>
+              <li className="item-2">
+                <NavLink to="/accountdetails">Account Details</NavLink>
+              </li>
+              <li className="item-1">
+                <NavLink to="/create">Create Event Form</NavLink>
+              </li>
+          </ul>
+        )}
+      </div>
     </nav>
   );
 }

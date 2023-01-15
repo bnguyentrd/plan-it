@@ -82,8 +82,4 @@ Jan 13th:
 
 Today I worked on:
 
-Things to ask group:
-1. ask connor to present what hes done so far
-2. ask elijah how the weather api is coming along(ask if he needs me to help)
-3. ask graham if he wants me to tackle his front end
-4. ask elijah if he wants me to tackle his front end 
+Built nav dropdown menu from an empty css file. Was able to get it to look how I want for now, most likely will come back to this and pretty up the actual button. Started working on event form. Had to duplicate the eventform.js file because having an event form on the main page and on the dropdown menu wasnt allowing me to change the cosmetics of one event form without the other changing.
