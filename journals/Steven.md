@@ -95,3 +95,19 @@ request coming from a different microservice other than users but we still didnt
 configured properly so I took care of that along with setting up pgAdmin. Now I can see the events microservice running properly
 but since I didnt touch anything in that microservice, I figured it was best to do some pair coding with Elijah tomorrow on that issue. Since I'm currently waiting on that, I moved onto writing a basic SignUpForm.js page and was able to successfully
 create a user from the frontend and see it reflected on the backend. Now it just needs some styling. Moving forward, I can share the boilerplate code for my team members should they need to make a post request on any of their respective forms.
+
+## January 12, 2023
+
+Today, I worked on:
+
+- Authentication
+- Front End Styling Sign Up Form
+
+Today I continued to work on Authentication and was finally able to login as a user. To verify that I could access
+locked requests, I made a request to view account details which was also successful. The only issue now is that
+we dont understand how to make sure that the data we're viewing as a logged in user is unique to said logged in user.
+I havent had much time to look into it since we had a lot of explorations again and I was preoccupied with both my CSM
+meeting and an interview. Hopefully, after looking at andrew's new zip files, I can gain some insight on what my code
+is missing.
+
+

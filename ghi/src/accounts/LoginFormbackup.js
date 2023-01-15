@@ -1,4 +1,5 @@
-import React, { useState, useEffect, navigate } from "react";
+import React, { useState } from "react";
+// import React, { useState, useEffect, navigate } from "react";
 import { useAuthContext } from "./Authentication";
 import { Container, Box, TextField, Button } from "@mui/material";
 import { useToken } from "./Authentication";
@@ -10,18 +11,25 @@ export const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [token, login] = useToken();
   const [error, setError] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const { login } = useAuthContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     login(username, password);
+    // if (error) {
+    //   setError(error);
+    // }
+    e.preventDefault();
+    // alert("success");
   };
 
-  useEffect(() => {
-    if (token) {
-      setIsLoggedIn(true);
-    }
-  }, [token]);
+  // useEffect(() => {
+  //   if (token) {
+  //     setTimeout(() => {
+  //       navigate("/");
+  //     }, 1000);
+  //   }
+  // }, [token, navigate]);
 
   return (
     <>
@@ -67,7 +75,10 @@ export const LoginForm = () => {
             Login
           </Button>
           <div>{error}</div>
-          {isLoggedIn ? <div>You are logged in</div> : null}
+          {/* <div>You are logged in</div> */}
+          <div style={{ display: token ? "block" : "none" }}>
+            You are logged in
+          </div>
         </Box>
       </Container>
     </>

@@ -1,39 +1,12 @@
-# def fix_misspellings(corrections):
-#     for entry in corrections:
-#         # print(entry.values())
-#         # print(entry["word"])
-#         # print(entry["position"])
-#         entry["word"].pop(entry["position"])
-#         return corrections
+def find_sum_indexes(nums, target):
+    for i in range(len(nums)):
+        for j in range(i + 1, len(nums)):
+            if nums[i] + nums[j] == target:
+                return [i, j]
 
 
+a = [1, 3, 5, 7 , 6, 4]
 
-# def fix_misspellings(corrections):
-#     corrected_words = []
-#     for correction in corrections:
-#         word = correction["word"]
-#         index = int(correction["index"])
-#         corrected_word = word[:index - 1] + word[index:]
-#         corrected_words.append(corrected_word)
-#     return corrected_words
+print(find_sum_indexes(a, 10))
 
 
-
-def fix_misspellings(corrections):
-    result = []
-    for entry in corrections:
-        word = entry["word"]
-        position = int(entry["position"])
-        corrected_word = word[:position - 1] + word[position:]
-        result.append(corrected_word)
-        print(word[:position - 1])
-        print(word[position:])
-    return result
-
-
-a = [ { "word": "tablett", "position": 7 },
-  { "word": "marrble", "position": 4 },
-  { "word": "xdocker", "position": 1 },
-]
-
-print(fix_misspellings(a))
