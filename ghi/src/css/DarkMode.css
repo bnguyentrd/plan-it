@@ -42,7 +42,7 @@
   left: 25px;
 }
 
-input {
+.input {
   margin: 10px;
   -webkit-appearance: none;
   position: relative;
@@ -57,7 +57,7 @@ input {
   box-shadow: 0px 2px 5px 1px gray;
 }
 
-input:before {
+.input:before {
   content: "";
   position: absolute;
   top: 0;

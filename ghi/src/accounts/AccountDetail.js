@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { getToken } from "./Authentication";
+import { getToken, getTokenInternal } from "./Authentication";
 
 function AccountDetails() {
   const [profilePicture, setProfilePicture] = useState(null);
@@ -11,27 +11,32 @@ function AccountDetails() {
 
   useEffect(() => {
     async function fetchAccountDetails() {
-      const token = await getToken();
+      const token = await getTokenInternal();
+      // if (!token.access_token) {
       if (!token) {
         navigate("/login");
       } else {
+        console.log("PASSED TOKEN CHECK");
         // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/me/`;
-        const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/{id}/`;
+        // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/{id}/`;
+        const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}/`;
         try {
           const response = await fetch(url, {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${token.access_token}`,
             },
           });
+          console.log(response);
           if (response.ok) {
+            console.log("RECEIVED GOOD RESPONSE");
             const data = await response.json();
             setAccountDetails(data);
           } else {
-            navigate("/login");
+            navigate("/");
           }
         } catch (e) {
           console.log(e);
-          navigate("/login");
+          // navigate("/login");
         }
       }
     }

@@ -1,3 +1,4 @@
+// 11:39PM 1/13/
 // import { createContext, useContext, useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // let internalToken = null;
@@ -7,15 +8,20 @@
 // }
 
 // export async function getTokenInternal() {
-//   const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/me/token/`;
+//   // original
+//   // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/me/token/`;
+//   const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token/`;
+//   // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/{id}/token/`;
+//   // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/id/token/`;
 //   try {
 //     const response = await fetch(url, {
 //       credentials: "include",
 //     });
 //     if (response.ok) {
 //       const data = await response.json();
-//       internalToken = data.access_token;
-//       return internalToken;
+//       // internalToken = data.access_token;
+//       // return internalToken;
+//       return data;
 //     }
 //   } catch (e) {}
 //   return false;
@@ -73,9 +79,11 @@
 //     }
 //   }, [setToken, token]);
 
+//   // ORIGINAL LOGOUT WORKING on backend. but not frontend
 //   async function logout() {
 //     if (token) {
-//       const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/token/refresh/logout/`;
+//       // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/token/refresh/logout/`;
+//       const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`;
 //       await fetch(url, { method: "delete", credentials: "include" });
 //       internalToken = null;
 //       setToken(null);
@@ -83,8 +91,9 @@
 //     }
 //   }
 
+
 //   async function login(username, password) {
-//     const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/login/`;
+//     const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`;
 //     const form = new FormData();
 //     form.append("username", username);
 //     form.append("password", password);
@@ -96,6 +105,9 @@
 //     if (response.ok) {
 //       const token = await getTokenInternal();
 //       setToken(token);
+//       setTimeout(() => {
+//         navigate("/");
+//       }, 1000);
 //       return;
 //     }
 //     let error = await response.json();

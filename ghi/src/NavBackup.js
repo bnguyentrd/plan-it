@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import SignUpForm from "./accounts/SignUpForm";
 // import { useToken } from "./Authentication";
 
-function Nav(props) {
+function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [token, useToken] = useState();
 
@@ -48,9 +48,7 @@ function Nav(props) {
             {/* <NavLink to="/accountdetails">Account Details</NavLink> */}
             {/* <NavLink to="/api/accounts/me/token/">Account Details</NavLink> */}
             {/* <NavLink to="/api/accounts/me/id/">Account Details</NavLink> */}
-            <NavLink to={`/api/accounts/${props.accountid}/`}>
-              Account Details
-            </NavLink>
+            <NavLink to="/api/accounts/{id}/">Account Details</NavLink>
           </li>
         </ul>
       )}

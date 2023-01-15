@@ -1,0 +1,81 @@
+.navbtn {
+    height: 60px;
+    width: 150px;
+    position: fixed;
+    top: 2%;
+    /* left: 10%; */
+    right: 1%;
+    border-radius: 10px;
+    background-color: white;
+    font-weight: 900;
+    font-size: 30px;
+    /* background-image: url('https://images.assetsdelivery.com/compings_v2/123vector/123vector1802/123vector180200134.jpg');
+    background-repeat: no-repeat;
+    background-position: 0px 0px 50px 30px;
+    background-size: cover;
+    background-position: 0px -35px; */
+    background-color: transparent;
+    color: white;
+    /* box-shadow: 2px 2px 2px 2px; */
+}
+
+.navbtn:hover {
+    background-color: rgb(228, 205, 233);
+}
+
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.1;
+    }
+    25% {
+        opacity: 0.25;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.drpdwn {
+    right: -2.5%;
+    top: 2.5%;
+    margin: 60px;
+    padding: 25px;
+    border-radius: 15px;
+    /* background-color: white; */
+    background-image: url('https://ih1.redbubble.net/image.854420408.5128/flat,750x,075,f-pad,750x1000,f8f8f8.jpg');
+    position: fixed;
+    background-size: stretch;
+    background-position: 0px;
+    animation: fadeInAnimation ease 0.8s;
+    opacity: 0.9;
+    color: rgb(80, 75, 75);
+    box-shadow: 3px 3px 3px 3px;
+}
+
+.item-1 {
+    background-color: rgb(221, 184, 190);
+    border-radius: 10px;
+    opacity: 0.6;
+    height: 30px;
+    margin: 1px;
+    font-weight: 700;
+    position: flex;
+}
+
+.item-2 {
+    background-color: rgb(175, 203, 212);
+    border-radius: 10px;
+    opacity: 0.6;
+    height: 30px;
+    font-weight: 700;
+    position: flex;
+    margin: 1px;
+}
