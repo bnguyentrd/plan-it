@@ -119,10 +119,10 @@ function Slideshow({ images, size, duration }) {
   const rightIndex = (middleIndex + 1) % images.length;
 
   return (
-    <div className="slidebg slideshow-container">
-      <img className="slidepic fixed-size" src={images[leftIndex]} alt="slideshow" style={{ width: size, height: size }} />
-      <img className="slidepic fixed-size" src={images[middleIndex]} alt="slideshow" style={{ width: size, height: size }} />
-      <img className="slidepic fixed-size" src={images[rightIndex]} alt="slideshow" style={{ width: size, height: size }} />
+    <div className="slideshow-container slidebg">
+      <img className="slidepic" src={images[leftIndex]} alt="slideshow" style={{ width: size, height: size }} />
+      <img className="slidepic" src={images[middleIndex]} alt="slideshow" style={{ width: size, height: size }} />
+      <img className="slidepic" src={images[rightIndex]} alt="slideshow" style={{ width: size, height: size }} />
       <button className="carousel-control-prev" onClick={goToPrevSlide}>
         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
         {/* <span className="visually-hidden">Previous</span> */}

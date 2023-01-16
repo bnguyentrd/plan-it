@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 // import { NavLink } from "react-router-dom";
 import SignUpForm from "./accounts/SignUpForm";
-import { NavLink } from 'react-router-dom';
 import './css/Nav.css';
 // import { useToken } from "./Authentication";
 
@@ -24,30 +23,29 @@ function Nav(props) {
   return (
     <nav>
       <div>
-      <button className="menu-button" onClick={toggleMenu}>
+      <button className="navbtn" onClick={toggleMenu}>
         Menu
       </button>
       {isMenuOpen && (
-        <ul className="menu">
-          <li>
+        <ul className="drpdwn">
+          <li className="item-1">
             <NavLink to="/">Home</NavLink>
           </li>
-          <li>
+          <li className="item-2">
             <NavLink to="/about">About</NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink to="/api/protected">Protected</NavLink>
-          </li>
-
+          </li> */}
           {/* <li className="nav-li">About</li> */}
-          <li className="nav-li">Contact</li>
-          <li>
+          <li className="item-1">Contact</li>
+          <li className="item-2">
             <NavLink to="/signup">Sign Up</NavLink>
           </li>
-          <li>
+          <li className="item-1">
             <NavLink to="/login">Log in</NavLink>
           </li>
-          <li>
+          <li className="item-2">
             {/* <NavLink to="/accountdetails">Account Details</NavLink> */}
             {/* <NavLink to="/api/accounts/me/token/">Account Details</NavLink> */}
             {/* <NavLink to="/api/accounts/me/id/">Account Details</NavLink> */}

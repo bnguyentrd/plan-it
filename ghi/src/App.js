@@ -8,7 +8,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AccountDetails from "./accounts/AccountDetail.js";
 import { About } from "./accounts/About.js";
 import { AuthProvider, AuthContext } from "./accounts/Authentication";
-import EventForm from './events/EventForm';
+import EventForm from './events/eventForm';
+import EventList from './events/eventList';
 
 function App(props) {
   const [launch_info, setLaunchInfo] = useState([]);
