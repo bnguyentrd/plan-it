@@ -90,7 +90,6 @@ export function useToken() {
     }
   }
 
-
   async function login(username, password) {
     const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`;
     const form = new FormData();
@@ -153,3 +152,5 @@ export function useToken() {
 
   return [token, login, logout, signup, update];
 }
+
+// export default logout;

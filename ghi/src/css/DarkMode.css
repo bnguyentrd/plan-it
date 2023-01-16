@@ -1,46 +1,22 @@
-/* Light mode styles */
-/* body {
-  background: linear-gradient(140deg, rgb(253, 253, 253) 0%, rgb(107, 166, 235) 50%, rgba(146, 112, 238, 0.63) 75%);
-  color: black;
+
+body {
+  background-image: linear-gradient(140deg, rgb(253, 253, 253) 0%, rgb(107, 166, 235) 50%, rgba(146, 112, 238, 0.63) 75%);
+  /* color: black; */
   text-align: center;
-} */
+}
 
 /* Dark mode styles */
 .dark-mode {
   background-color: rgb(65, 59, 59);
-  color: white;
+  /* color: white; */
   /* text-align: center; */
-  opacity: 1;
-}
-
-.toggle-switch {
-  position: relative; /* The circle elements will be absolutely positioned relative to this element */
-  width: 50px; /* The width of the toggle switch */
-  height: 32px; /* The height of the toggle switch */
-  background: grey; /* The background color of the toggle switch */
-  border-radius: 30px; /* The border radius of the toggle switch */
-  cursor: pointer; /* The cursor changes to a pointer when hovering over the toggle switch */
-}
-
-.toggle-switch:before {
-  content: "";
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  top: 5px;
-  left: 5px;
-  transition: left 0.2s ease;
-  background-image: url(https://cdn3.vectorstock.com/i/1000x1000/40/02/crescent-moon-symbol-icon-design-vector-22314002.jpg);
-  /* Add a background image of a moon */
-  background-size: cover; /* Scale the background image to cover the entire element */
-  background-position: center; /* Position the background image in the center of the element */
+  /* opacity: 1; */
 }
 
 /* Change the position of the moon when the toggle switch is turned on */
-.toggle-switch.on:before {
-  left: 25px;
-}
+/* .toggle-switch.on:before {
+    left: 25px;
+}  */
 
 .input {
   margin: 10px;
@@ -48,12 +24,12 @@
   position: relative;
   width: 100px;
   height: 50px;
-  background-image: url(https://i.postimg.cc/857jHw2q/Screenshot-2020-04-16-at-1-07-06-PM.png);
+  background-image: url('https://i.postimg.cc/857jHw2q/Screenshot-2020-04-16-at-1-07-06-PM.png');
   background-size: cover;
   border-radius: 50px;
   outline: none;
   background-color: transparent;
-  transition: background-image 0.9s;
+  transition: background-image .90s;
   box-shadow: 0px 2px 5px 1px gray;
 }
 
@@ -64,21 +40,26 @@
   left: 0;
   height: 50px;
   width: 50px;
-  background-color: navy;
+  /* background-color: navy; */
   border-radius: 50px;
-  transition: all 0.9s;
-  background-color: #f7ca33;
+  transition: all .9s;
+  /* background-color: #F7CA33; */
+  background-size: cover;
+  background-image: url('https://www.iconpacks.net/icons/2/free-sun-icon-1846-thumb.png');
 }
 
-input:checked {
-  background-image: url(https://i.postimg.cc/Hn0nstVK/Screenshot-2020-04-16-at-1-07-19-PM.png);
-  transition: background-image 0.9s;
+.input:checked {
+  background-image: url('https://i.postimg.cc/Hn0nstVK/Screenshot-2020-04-16-at-1-07-19-PM.png');
+  transition: background-image .90s;
 }
 
-input:checked:before {
+.input:checked:before {
   transform: translate(100%);
-  transition: all 0.9s;
+  transition: all .9s;
   /* background-color: #ECF0F3; */
+  background-size: cover;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px rgb(138, 135, 135);
+  background-image: url('https://i.pinimg.com/564x/1c/22/43/1c22433b8d3aec799fd8187ca3030193.jpg');
 }
 
 .button-transpar {
@@ -90,4 +71,9 @@ input:checked:before {
 
 .logo-radius {
   box-shadow: 3px 3px 2px 0px rgb(83, 82, 82);
+}
+
+.footer-1 {
+  padding: 10rem;
+  position: flex;
 }

@@ -6,7 +6,7 @@ import { useState } from "react";
 // import "./css/DarkMode.css";
 // import { logout } from "./accounts."
 import { useToken } from "./accounts/Authentication";
-
+import logout from "./accounts/Authentication";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext, setToken } from "./accounts/Authentication";
@@ -15,6 +15,7 @@ function MainPage(props) {
   const navigate = useNavigate();
   // const { token, setToken } = useAuthContext();
   const [currentUser, setCurrentUser] = useState(null);
+  const [darkMode, setDarkMode] = useState(false);
 
   const logout = () => {
     fetch(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`, {
@@ -25,11 +26,9 @@ function MainPage(props) {
     });
   };
 
-  // const toggleDarkMode = () => {
-  //   setDarkMode(!darkMode);
-  //   const toggleSwitch = document.querySelector(".toggle-switch");
-  //   toggleSwitch.classList.toggle("on");
-  // };
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    }
 
   return (
     <div>
@@ -38,13 +37,13 @@ function MainPage(props) {
         {/* <ProfilePicture /> */}
       </div>
       <div>
-        {/* <button className="button-transpar" onClick={toggleDarkMode}>
+        <button className="button-transpar" onClick={toggleDarkMode}>
           <input className="input" type="checkbox" id="checkbox" />
           <label htmlFor="checkbox"></label>
-        </button> */}
+        </button>
 
-        {/* <button className="toggle-switch" onClick={toggleDarkMode}></button> */}
-        {/* {darkMode ? <p></p> : <p></p>} */}
+        <button className="toggle-switch" onClick={toggleDarkMode}></button>
+        {darkMode ? <p></p> : <p></p>}
       </div>
       <header className="App-header">
         <br></br>
@@ -56,11 +55,12 @@ function MainPage(props) {
       <div>
         <br></br>
         <div>
-          {currentUser ? (
+          <button onClick={logout}>Logout</button>
+          {/* {currentUser ? (
             <button onClick={logout}>Logout</button>
           ) : (
             <div>You are not logged in</div>
-          )}
+          )} */}
         </div>
         <Slideshow
           images={[

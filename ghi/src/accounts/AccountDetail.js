@@ -1,12 +1,16 @@
+// last updated 1/15  3:24 PM
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { getToken, getTokenInternal } from "./Authentication";
+import MainPage from "../MainPage";
+import { getToken, getTokenInternal, useToken } from "./Authentication";
+import { logout } from "../MainPage";
 
 function AccountDetails() {
   const [profilePicture, setProfilePicture] = useState(null);
   const [accountDetails, setAccountDetails] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [token, logout] = useToken();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,6 +47,27 @@ function AccountDetails() {
     fetchAccountDetails();
   }, []);
 
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    const token = await getTokenInternal();
+    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}/`;
+    const response = await fetch(url, {
+      method: "DELETE",
+
+    });
+    if (response.ok) {
+      fetch(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`, {
+        method: "DELETE",
+        credentials: "include", // include cookies in the request
+      });
+      navigate("/");
+    } else {
+      console.log("testing to see if this code got hit");
+      const error = await response.json();
+      setError(error.message);
+    }
+  };
+
   const handleUpload = (e) => {
     setProfilePicture(e.target.files[0]);
   };
@@ -73,6 +98,7 @@ function AccountDetails() {
       <h1>HELLO</h1>
       <h2>to do list</h2>
       <li>change username</li>
+      <button onClick={handleDelete}>Delete Account</button>
     </>
   );
 }
