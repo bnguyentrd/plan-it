@@ -7,10 +7,14 @@ body {
 
 /* Dark mode styles */
 .dark-mode {
-  background-color: rgb(65, 59, 59);
-  /* color: white; */
+  background-color: rgb(92, 88, 88);
+  color: white;
   /* text-align: center; */
   /* opacity: 1; */
+  /* background-image: url('https://wallpaperaccess.com/full/695413.jpg');
+  background-size: cover;
+  image-rendering: auto;
+  opacity: 0.9; */
 }
 
 /* Change the position of the moon when the toggle switch is turned on */
@@ -76,4 +80,16 @@ body {
 .footer-1 {
   padding: 10rem;
   position: flex;
+}
+
+/* .logotxt {
+  color: linear-gradient(45deg, #7dcfbb, #00eeff);
+  font-family: bradley hand, cursive;
+  left: 1%;
+  top: 11%;
+  position: absolute;
+} */
+
+.eventform {
+  border-radius: 20px;
 }

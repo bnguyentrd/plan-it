@@ -83,3 +83,9 @@ Jan 13th:
 Today I worked on:
 
 Built nav dropdown menu from an empty css file. Was able to get it to look how I want for now, most likely will come back to this and pretty up the actual button. Started working on event form. Had to duplicate the eventform.js file because having an event form on the main page and on the dropdown menu wasnt allowing me to change the cosmetics of one event form without the other changing.
+
+
+tuesday to-do's:
+
+Once logged in, need nav to not show login and signup
+when not logged in, need logout to not show

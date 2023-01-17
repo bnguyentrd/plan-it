@@ -23,8 +23,10 @@ function Nav(props) {
   return (
     <nav>
       <div>
-      <button className="navbtn" onClick={toggleMenu}>
-        Menu
+      <button className={`navbtn container ${isMenuOpen ? "change" : ""}`} onClick={toggleMenu}>
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
       </button>
       {isMenuOpen && (
         <ul className="drpdwn">

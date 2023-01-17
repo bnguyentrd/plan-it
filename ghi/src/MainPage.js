@@ -88,6 +88,7 @@ import { useState } from 'react';
 import './css/DarkMode.css';
 // import ProfilePicture from './ProfilePicture';
 import EventForm from './EventForm';
+import ProfilePicture from './ProfilePicture';
 
 
 
@@ -116,20 +117,26 @@ function MainPage() {
             <div className="top-right">
                 <Nav />
             </div>
-            {/* <ProfilePicture /> */}
+            {/* <text className="logotxt" 
+            style={{ fontWeight: 'bold', fontSize: 50 }}>
+            Plan it
+            </text> */}
+            <ProfilePicture />
             <div>
             <button className="button-transpar" onClick={toggleDarkMode}>
-                <input className="input" type="checkbox" id="checkbox" />
+                <input className="input" type="checkbox"/>
                 <label htmlFor="checkbox"></label>
             </button>
                 {/* {darkMode ? <p></p> : <p></p>} */}
             </div>
             <header className="App-header">
-                <br></br>
+                {/*
                 <h1>
                     <img className="logo-radius" src={logo} width="500" />
-                </h1>
-                <br></br>
+                    <text className="logotxt" style={{ fontSize: 200}}>
+                        ∞
+                    </text> 
+                </h1> */}
             </header>
             <div>
                 <Slideshow images={[
@@ -164,3 +171,4 @@ function MainPage() {
         }
 
 export default MainPage;
+
