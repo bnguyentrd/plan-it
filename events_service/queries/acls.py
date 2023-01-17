@@ -29,6 +29,8 @@ def get_weather(city, state):
     res = requests.get(url, params=params)
     json = res.json()
     return {
-        "temp": json["main"]["temp"],
+        # "temp": json["main"]["temp"],
         "description": json["weather"][0]["description"],
     }
+
+
