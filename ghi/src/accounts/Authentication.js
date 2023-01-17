@@ -131,10 +131,33 @@ export function useToken() {
     return false;
   }
 
+  // currently working 1/16
+  // async function update(username, password, email) {
+  //   const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/`;
+  //   const response = await fetch(url, {
+  //     method: "put",
+  //     body: JSON.stringify({
+  //       username,
+  //       password,
+  //       email,
+  //     }),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${token.access_token}`,
+  //     },
+  //   });
+  //   if (response.ok) {
+  //     const data = await response.json();
+  //     return data;
+  //   }
+  //   return false;
+  // }
+
+  // test
   async function update(username, password, email) {
     const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/`;
     const response = await fetch(url, {
-      method: "patch",
+      method: "put",
       body: JSON.stringify({
         username,
         password,
@@ -142,10 +165,12 @@ export function useToken() {
       }),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token.access_token}`,
       },
     });
     if (response.ok) {
-      await login(username, password);
+      const data = await response.json();
+      return data;
     }
     return false;
   }

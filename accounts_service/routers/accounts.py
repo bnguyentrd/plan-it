@@ -1,4 +1,5 @@
 from fastapi import (
+  Body,
   Depends,
   HTTPException,
   status,
@@ -13,6 +14,8 @@ from pydantic import BaseModel
 
 from queries.accounts import (
   Error,
+  EmailIn,
+  EmailOut,
   AccountIn,
   AccountOut,
   AccountsOut,
@@ -21,7 +24,18 @@ from queries.accounts import (
 
 from typing import Optional, Union
 
+import re
+
+def is_valid_email(email: str) -> bool:
+    pattern = re.compile(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
+    return pattern.match(email) is not None
+
+
+
+
+
 router = APIRouter()
+
 
 
 
@@ -109,11 +123,37 @@ def delete_account(
     return repo.delete(id)
 
 
+# working but includes all attributes for input
+# @router.put("/api/accounts/{id}", response_model=Union[AccountOut, Error])
+# def update_account(
+#     id: int,
+#     user: AccountIn,
+#     account: dict = Depends(authenticator.get_current_account_data),
+#     repo: AccountQueries = Depends(),
+# ) -> Union[Error, AccountOut]:
+#     return repo.update(id, user)
 
-@router.put("/api/accounts/{id}", response_model=Union[AccountOut, Error])
-def update_account(
+
+# @router.put("/api/accounts/{id}", response_model=Union[EmailOut, Error])
+# def update_account(
+#     id: int,
+#     email_update: EmailIn,
+#     account: dict = Depends(authenticator.get_current_account_data),
+#     repo: AccountQueries = Depends(),
+# ) -> Union[Error, AccountOut]:
+#     repo.update_email(id, email_update.email)
+#     return repo.get_one(id)
+
+
+@router.put("/api/accounts/{id}", response_model=Union[EmailOut, Error])
+def update_email(
     id: int,
-    user: AccountIn,
+    email: Optional[EmailOut] = Body(None),
+    account: dict = Depends(authenticator.get_current_account_data),
     repo: AccountQueries = Depends(),
-) -> Union[Error, AccountOut]:
-    return repo.update(id, user)
+) -> Union[Error, EmailOut]:
+    if email and email.email:
+        if not is_valid_email(email.email):
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Invalid Email')
+        return repo.update_email(id, email.email)
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Email is required')

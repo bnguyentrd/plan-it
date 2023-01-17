@@ -9,6 +9,14 @@ app = FastAPI()
 app.include_router(authenticator.router)
 app.include_router(accounts.router)
 
+# app.options("*", function(req, res) {
+#   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+#   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+#   res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+#   res.send();
+# });
+
+# FastAPI(app, cors_allowed_origins=["*"])
 
 app.add_middleware(
     CORSMiddleware,

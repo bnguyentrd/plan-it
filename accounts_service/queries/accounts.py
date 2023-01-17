@@ -2,6 +2,7 @@ import os
 from queries.pool import pool
 from fastapi import HTTPException
 from pydantic import BaseModel
+# from pydantic import BaseModel, EmailStr
 from typing import Optional, Union
 
 
@@ -30,6 +31,14 @@ class AccountOutWithPassword(AccountOut):
 
 class AccountsOut(BaseModel):
   accounts: list[AccountOut]
+
+
+class EmailIn(BaseModel):
+    email: str
+
+class EmailOut(BaseModel):
+    email: str
+
 
 class DuplicateAccountError(ValueError):
     pass
@@ -176,6 +185,27 @@ class AccountQueries:
         except Exception as e:
             print(e)
             return {"message": "Could not update user data"}
+
+  def update_email(self, id: int, user: AccountIn) -> Union[AccountOut, Error]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE accounts
+                        SET email = %s
+                        WHERE id = %s
+                        """,
+                        [
+                            user.email,
+                            id
+                        ]
+                    )
+                    return self.user_in_to_out(id, user)
+
+        except Exception as e:
+            print(e)
+            return {"message": "Could not update email"}
 
   def user_in_to_out(self, id: int, user: AccountOut):
       old_data = user.dict()
