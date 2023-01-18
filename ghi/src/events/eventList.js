@@ -18,7 +18,8 @@ export default function EventList() {
                 <thead>
                     <tr>
                         <th>title</th>
-                        <th>Location</th>
+                        <th>city</th>
+                        <th>state</th>
                         <th>From</th>
                         <th>To</th>
                         <th>Details</th>
@@ -33,7 +34,10 @@ export default function EventList() {
                                 {event.title}
                             </td>
                             <td>
-                                {event.location}
+                                {event.city}
+                            </td>
+                            <td>
+                                {event.state}
                             </td>
                             <td>
                                 {event.from_date}

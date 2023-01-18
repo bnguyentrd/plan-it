@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 const EventForm = () => {
     const [title, setTitle] = useState("")
-    const [location, setLocation] = useState("")
+    const [city, setCity] = useState("")
+    const [state, setState] = useState("")
     const [from_date, setFromDate] = useState("")
     const [to_date, setToDate] = useState("")
     const [description, setDescription] = useState("")
@@ -17,7 +18,8 @@ const EventForm = () => {
         event.preventDefault()
         const data = {
             "title": title,
-            "location": location,
+            "city": city,
+            "state": state,
             "from_date": from_date,
             "to_date": to_date,
             "description": description,
@@ -59,12 +61,23 @@ const EventForm = () => {
                         </div>
                         <div className='form-floating mb-3'>
                             <input
-                             value={location}
-                             onChange={(e) => setLocation(e.target.value)}
-                             placeholder='Location'
+                             value={city}
+                             onChange={(e) => setCity(e.target.value)}
+                             placeholder='City'
                              required type='text'
-                             name='location'
-                             id='location'
+                             name='city'
+                             id='city'
+                             className='form-control'
+                            />
+                        </div>
+                        <div className='form-floating mb-3'>
+                            <input
+                             value={state}
+                             onChange={(e) => setState(e.target.value)}
+                             placeholder='State'
+                             required type='text'
+                             name='state'
+                             id='state'
                              className='form-control'
                             />
                         </div>
