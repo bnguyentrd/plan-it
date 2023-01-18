@@ -111,3 +111,20 @@ meeting and an interview. Hopefully, after looking at andrew's new zip files, I 
 is missing.
 
 
+## Jan 13
+
+Today, I worked on:
+
+- Authentication
+- Put Request to edit user data
+
+Today I worked on allowing users to edit their account info and realized that the JSON body for the put request on the backend contains serveral attributes but the way we designed out frontend was to allow users to click a button to edit only one of those attributes. I am now dealing with a 422 unprocessible entity error which makes sense since I don't know how to set the attributes of the other fields to default to
+the current user's data.
+
+## Jan 17
+
+Today, I worked on:
+
+- Authentication
+
+Today I worked on the put request to edit logged in user's account data again. I was able to successfully change the user's email from the front end by submitting a change to a single attribute but im not sure it's the cleanest way to write my code. At this point, I might have to make shallow copies of that code to with a different method to allow users to edit their username and email respectively. Im not even sure if I can have several put requests to the same endpoint so for now im bypassing that issue by using restful endpoints with the drawback of writing a separate detailed method in my queries.
