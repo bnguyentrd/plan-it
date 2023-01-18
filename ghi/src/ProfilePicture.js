@@ -31,7 +31,7 @@ function ProfilePicture() {
           backgroundImage: `url(${imageUrl || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'})`,
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
-          borderRadius: '50%',
+          borderRadius: '55px',
           display: 'inline-block',
         //   border: 'white'
         }}

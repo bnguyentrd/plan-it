@@ -30,6 +30,7 @@ function Nav(props) {
       </button>
       {isMenuOpen && (
         <ul className="drpdwn">
+          <h1 className="neonText">Plan it</h1>
           <li className="item-1">
             <NavLink to="/">Home</NavLink>
           </li>
