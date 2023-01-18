@@ -1,4 +1,4 @@
-// 11:51 PM 1/13 code works with correct url id
+// 4:53  1/15
 // import React from "react";
 // import logo from "./logo/logo.png";
 // import Nav from "./Nav";
@@ -7,26 +7,24 @@
 // // import "./css/DarkMode.css";
 // // import { logout } from "./accounts."
 // import { useToken } from "./accounts/Authentication";
-
+// import logout from "./accounts/Authentication"
 // import { useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 // import { useAuthContext, setToken } from "./accounts/Authentication";
 
 // function MainPage(props) {
 //   const navigate = useNavigate();
-//   const { token, setToken } = useAuthContext();
-//   const [tokens, logout] = useToken();
+//   // const { token, setToken } = useAuthContext();
+//   const [currentUser, setCurrentUser] = useState(null);
 
-//   const handleLogout = async () => {
-//     try {
-//       await logout();
-//       setToken(null);
-//       console.log("TOKEN ACTUALLY GOT SET TO NULL");
-//       localStorage.removeItem("token");
-//       navigate("/");
-//     } catch (error) {
-//       console.log(error);
-//     }
+//   const logout = () => {
+//     fetch(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`, {
+//       method: "DELETE",
+//       credentials: "include", // include cookies in the request
+//     }).then(() => {
+//       setCurrentUser(null);
+
+//     });
 //   };
 
 //   // const toggleDarkMode = () => {
@@ -59,9 +57,14 @@
 //       </header>
 //       <div>
 //         <br></br>
-//       </div>
-//       <button onClick={handleLogout}>Logout</button>
-//       <div>
+//         <div>
+//           <button onClick={logout}>Logout</button>
+//           {/* {currentUser ? (
+//             <button onClick={logout}>Logout</button>
+//           ) : (
+//             <div>You are not logged in</div>
+//           )} */}
+//         </div>
 //         <Slideshow
 //           images={[
 //             "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Hiking_to_the_Ice_Lakes._San_Juan_National_Forest%2C_Colorado.jpg/1200px-Hiking_to_the_Ice_Lakes._San_Juan_National_Forest%2C_Colorado.jpg",
