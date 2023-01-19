@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 // import { NavLink } from "react-router-dom";
 import SignUpForm from "./accounts/SignUpForm";
+import './css/Nav.css';
+// import { useToken } from "./Authentication";
 import { useToken } from "./accounts/Authentication";
 
 function Nav(props) {
@@ -42,41 +44,48 @@ function Nav(props) {
 
   return (
     <nav>
-      <button className="menu-button" onClick={toggleMenu}>
-        Menu
+      <div>
+      <button className={`navbtn container ${isMenuOpen ? "change" : ""}`} onClick={toggleMenu}>
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
       </button>
       {isMenuOpen && (
-        <ul className="menu">
-          <li>
+        <ul className="drpdwn">
+          <header className="neonText">Plan it</header>
+          <div className="breakbar"></div>
+          <li className="item-1">
             <NavLink to="/">Home</NavLink>
           </li>
-          <li>
+          <li className="item-2">
             <NavLink to="/about">About</NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink to="/api/protected">Protected</NavLink>
-          </li>
-
+          </li> */}
           {/* <li className="nav-li">About</li> */}
-          <li className="nav-li">Contact</li>
-          <li>
+          <li className="item-1">Contact</li>
+          <li className="item-2">
             <NavLink to="/signup">Sign Up</NavLink>
           </li>
           {/* <li> <NavLink to="/login">Log in</NavLink> </li> */}
           {!isLoggedIn ? (
-            <li>
+            <li className="item-1">
               {" "}
               <NavLink to="/login">Log in</NavLink>{" "}
             </li>
           ) : null}
 
-          <li>
+          <li className="item-2">
             {/* <NavLink to="/accountdetails">Account Details</NavLink> */}
             {/* <NavLink to="/api/accounts/me/token/">Account Details</NavLink> */}
             {/* <NavLink to="/api/accounts/me/id/">Account Details</NavLink> */}
             <NavLink to={`/api/accounts/${props.accountid}/`}>
               Account Details
             </NavLink>
+          </li>
+          <li className="item-1">
+            <NavLink to="/create">Create Event Form</NavLink>
           </li>
 
           {isLoggedIn ? (
@@ -87,8 +96,10 @@ function Nav(props) {
           ) : null}
         </ul>
       )}
+        </div>
     </nav>
   );
 }
 
 export default Nav;
+

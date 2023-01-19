@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import Construct from "./Construct.js";
 import MainPage from "./MainPage.js";
-import ErrorNotification from "./ErrorNotification";
+// import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import SignUpForm from "./accounts/SignUpForm";
 import { LoginForm } from "./accounts/LoginForm.js";
@@ -9,6 +8,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AccountDetails from "./accounts/AccountDetail.js";
 import { About } from "./accounts/About.js";
 import { AuthProvider, AuthContext } from "./accounts/Authentication";
+import EventForm from './events/eventForm';
+import EventList from './events/eventList';
 
 function App(props) {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -16,40 +17,20 @@ function App(props) {
   const [account_id, setAccountId] = useState(0);
 
   async function getAccount() {
-    // console.log("TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST");
     const url = `http://localhost:8000/token`;
     const response = await fetch(url, {
       credentials: "include",
     });
     if (response.ok) {
       const data = await response.json();
-      // console.log(data);
       let id = data.account.id;
-      // console.log(data.account.id);
       setAccountId(id);
       return id;
     }
   }
 
-  // console.log(getAccount());
 
   useEffect(() => {
-    // async function getData() {
-    //   let url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/launch-details`;
-    //   console.log("fastapi url: ", url);
-    //   let response = await fetch(url);
-    //   console.log("------- hello? -------");
-    //   let data = await response.json();
-
-    //   if (response.ok) {
-    //     console.log("got launch data!");
-    //     setLaunchInfo(data.launch_details);
-    //   } else {
-    //     // console.log("drat! something happened");
-    //     setError(data.message);
-    //   }
-    // }
-    // getData();
     getAccount();
   }, []);
 
@@ -75,6 +56,8 @@ function App(props) {
                     // path="/api/accounts/me/token"
                     element={<AccountDetails token={context.token} />}
                   />
+                  <Route path="/events" element={<EventList />} />
+                  <Route path="/create" element={<EventForm />} />
                   {/* <ErrorNotification error={error} /> */}
                   {/* <Construct info={launch_info} /> */}
                   {/* <MainPage info={launch_info} /> */}
