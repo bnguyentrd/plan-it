@@ -17,6 +17,8 @@ export const LoginForm = () => {
     login(username, password);
   };
 
+  // issue: when logged out, the logged in message still displays
+  // unless I hard refresh the page
   useEffect(() => {
     if (token) {
       setIsLoggedIn(true);
