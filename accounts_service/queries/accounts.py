@@ -16,6 +16,8 @@ class AccountIn(BaseModel):
 #     id = PydanticObjectId
 #     roles: List[str]
 
+class Username(BaseModel):
+    username: str
 
 class Error(BaseModel):
     message: str
@@ -34,10 +36,12 @@ class AccountsOut(BaseModel):
 
 
 class EmailIn(BaseModel):
+    # username: str
     email: str
 
-class EmailOut(BaseModel):
-    email: str
+
+class UsernameIn(BaseModel):
+    username: str
 
 
 class DuplicateAccountError(ValueError):
@@ -164,29 +168,29 @@ class AccountQueries:
         print(e)
         return False
 
-  def update(self, id: int, user: AccountIn) -> Union[AccountOut, Error]:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as db:
-                    db.execute(
-                        """
-                        UPDATE accounts
-                        SET username = %s, email = %s
-                        WHERE id = %s
-                        """,
-                        [
-                            user.username,
-                            user.email,
-                            id
-                        ]
-                    )
-                    return self.user_in_to_out(id, user)
+#   def update(self, id: int, user: AccountIn) -> Union[AccountOut, Error]:
+#         try:
+#             with pool.connection() as conn:
+#                 with conn.cursor() as db:
+#                     db.execute(
+#                         """
+#                         UPDATE accounts
+#                         SET username = %s, email = %s
+#                         WHERE id = %s
+#                         """,
+#                         [
+#                             user.username,
+#                             user.email,
+#                             id
+#                         ]
+#                     )
+#                     return self.user_in_to_out(id, user)
 
-        except Exception as e:
-            print(e)
-            return {"message": "Could not update user data"}
+#         except Exception as e:
+#             print(e)
+#             return {"message": "Could not update user data"}
 
-  def update_email(self, id: int, user: AccountIn) -> Union[AccountOut, Error]:
+  def updateEmail(self, id: int, user: dict):
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -197,15 +201,39 @@ class AccountQueries:
                         WHERE id = %s
                         """,
                         [
-                            user.email,
+                            user["email"],
+                            # user["username"],
                             id
                         ]
                     )
-                    return self.user_in_to_out(id, user)
+                    return True
 
         except Exception as e:
             print(e)
-            return {"message": "Could not update email"}
+            return {"message": "Could not update user data"}
+
+  def updateUsername(self, id: int, user: dict):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE accounts
+                        SET username = %s
+                        WHERE id = %s
+                        """,
+                        [
+                            # user["email"],
+                            user["username"],
+                            id
+                        ]
+                    )
+                    return True
+
+        except Exception as e:
+            print(e)
+            return {"message": "Could not update user data"}
+
 
   def user_in_to_out(self, id: int, user: AccountOut):
       old_data = user.dict()

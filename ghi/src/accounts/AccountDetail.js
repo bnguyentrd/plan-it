@@ -14,7 +14,6 @@ function AccountDetails() {
   const [token, update] = useToken();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
   useEffect(() => {
@@ -79,7 +78,7 @@ function AccountDetails() {
     e.preventDefault();
     setLoading(true);
     const token = await getTokenInternal();
-    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}/`;
+    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}/email`;
     try {
       const response = await fetch(url, {
         method: "PUT",
@@ -88,6 +87,34 @@ function AccountDetails() {
           Authorization: `Bearer ${token.access_token}`,
         },
         body: JSON.stringify({ email }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setAccountDetails(data);
+      } else {
+        const error = await response.json();
+        setError(error.message);
+      }
+    } catch (e) {
+      console.log(e);
+      setError(e.message);
+    }
+    setLoading(false);
+  };
+
+  const handleUsernameUpdate = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const token = await getTokenInternal();
+    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}/username`;
+    try {
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token.access_token}`,
+        },
+        body: JSON.stringify({ username }),
       });
       if (response.ok) {
         const data = await response.json();
@@ -121,8 +148,7 @@ function AccountDetails() {
               />
             </div>
             <div>
-              <h2>Username: {accountDetails.username}</h2>
-              {/* <h2>Email: {accountDetails.email}</h2> */}
+              {/* <h2>Username: {accountDetails.username}</h2> */}
               <div>
                 <h2>Email: {accountDetails.email}</h2>
                 <form onSubmit={handleEmailUpdate}>
@@ -132,6 +158,17 @@ function AccountDetails() {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                   <button type="submit">Update Email</button>
+                </form>
+              </div>
+              <div>
+                <h2>Username: {accountDetails.username}</h2>
+                <form onSubmit={handleUsernameUpdate}>
+                  <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                  <button type="submit">Update Username</button>
                 </form>
               </div>
             </div>
