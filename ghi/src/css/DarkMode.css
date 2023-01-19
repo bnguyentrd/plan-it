@@ -102,10 +102,6 @@ body {
   position: flex;
 }
 
-.footer-1 {
-  padding: 10rem;
-  position: flex;
-}
 
 /* .logotxt {
   color: linear-gradient(45deg, #7dcfbb, #00eeff);
@@ -117,4 +113,20 @@ body {
 
 .eventform {
   border-radius: 20px;
+}
+
+.footer1 {
+  background-color: rgba(4, 243, 231, 0.26);
+  height: 200px;
+  /* background-image: url('https://img.freepik.com/free-vector/abstract-elegant-paper-cut-banner-modern-template_1055-6400.jpg?w=2000') */
+}
+
+.aside1 {
+  right: 20% !important;
+  top: 30% !important;
+  font-size: 30px;
+  position: flex;
+  height: 200px;
+  width: 200px;
+  /* background-image: url('https://static.thenounproject.com/png/739210-200.png') */
 }

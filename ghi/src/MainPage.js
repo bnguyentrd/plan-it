@@ -7,10 +7,11 @@ import './css/DarkMode.css';
 // import ProfilePicture from './ProfilePicture';
 import EventForm from './EventForm';
 import ProfilePicture from './ProfilePicture';
+import { useSlotProps } from '@mui/base';
 
 
 
-function MainPage() {
+function MainPage(props) {
 
     const [darkMode, setDarkMode] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
@@ -33,12 +34,8 @@ function MainPage() {
     return (
         <div className={darkMode ? "dark-mode" : "" }>
             <div className="top-right">
-                <Nav />
+                <Nav accountid={props.accountid} />
             </div>
-            {/* <text className="logotxt" 
-            style={{ fontWeight: 'bold', fontSize: 50 }}>
-            Plan it
-            </text> */}
             <ProfilePicture />
             <div>
             <button className="button-transpar" onClick={toggleDarkMode}>
@@ -84,6 +81,9 @@ function MainPage() {
             <div>
                 <h1 className="footer-1">Plan it</h1>
             </div>
+            <footer className="footer1">
+                <h1> Hello </h1>
+            </footer>
         </div>
     )
         }

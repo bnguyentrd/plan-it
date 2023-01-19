@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import MainPage from "../MainPage";
 import { getToken, getTokenInternal, useToken } from "./Authentication";
 import { logout } from "../MainPage";
+import Nav from '../Nav';
 
 function AccountDetails() {
   const [profilePicture, setProfilePicture] = useState(null);
@@ -109,6 +110,7 @@ function AccountDetails() {
         {error && <p>{error}</p>}
         {!loading && !error && (
           <>
+          <Nav />
             <h1>Account Detail</h1>
             <div>
               <h2>Profile Picture</h2>

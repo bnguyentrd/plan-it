@@ -126,9 +126,9 @@
 }
 
 .neonText {
-  color: rgb(117, 213, 241);
+  color: rgb(60, 200, 243);
   text-shadow:
-    0 0 7px #fff,
+    0 0 7px rgb(58, 231, 243),
     0 0 10px #fff,
     0 0 21px #fff,
     0 0 42px #0fa,
@@ -137,4 +137,15 @@
     0 0 102px #0fa,
     0 0 151px #0fa;
     font-size: 30px;
+    font-weight: 350px;
+}
+
+.breakbar {
+    width: 100%;
+    height: 5px;
+    background-color: rgb(92, 87, 87);
+    margin-top: 5px 0;
+    margin-bottom: 50px;
+    transition: 0.4s;
+    border-radius: 5px;
 }

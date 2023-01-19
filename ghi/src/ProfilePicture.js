@@ -22,7 +22,7 @@ function ProfilePicture() {
 //   }
 
   return (
-    <div style={{ position: 'absolute', top: '0', left: '0' }}>
+    <div className="picposition">
       <div
         onClick={handleClick}
         style={{

@@ -52,7 +52,8 @@ function Nav(props) {
       </button>
       {isMenuOpen && (
         <ul className="drpdwn">
-          <h1 className="neonText">Plan it</h1>
+          <header className="neonText">Plan it</header>
+          <div className="breakbar"></div>
           <li className="item-1">
             <NavLink to="/">Home</NavLink>
           </li>
@@ -69,13 +70,13 @@ function Nav(props) {
           </li>
           {/* <li> <NavLink to="/login">Log in</NavLink> </li> */}
           {!isLoggedIn ? (
-            <li>
+            <li className="item-1">
               {" "}
               <NavLink to="/login">Log in</NavLink>{" "}
             </li>
           ) : null}
 
-          <li>
+          <li className="item-2">
             {/* <NavLink to="/accountdetails">Account Details</NavLink> */}
             {/* <NavLink to="/api/accounts/me/token/">Account Details</NavLink> */}
             {/* <NavLink to="/api/accounts/me/id/">Account Details</NavLink> */}

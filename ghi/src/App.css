@@ -77,3 +77,8 @@ body {
   padding-bottom: 10px; /* add space inside the item */
 }
 
+.picposition {
+  margin-left: 10px;
+  margin-top: 10px;
+  position: absolute;
+}
