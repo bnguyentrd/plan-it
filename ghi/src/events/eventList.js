@@ -3,7 +3,7 @@ import { useGetEventsQuery } from '../store/eventsApi';
 
 
 export default function EventList() {
-    const { data, isLoading } = useGetEventsQuery()
+    const { data: eventData, isLoading } = useGetEventsQuery()
 
     if (isLoading) {
         return (
@@ -18,7 +18,8 @@ export default function EventList() {
                 <thead>
                     <tr>
                         <th>title</th>
-                        <th>Location</th>
+                        <th>city</th>
+                        <th>state</th>
                         <th>From</th>
                         <th>To</th>
                         <th>Details</th>
@@ -27,28 +28,31 @@ export default function EventList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.events.map(events => (
-                        <tr key={events.id}>
+                    {eventData.map(event => (
+                        <tr key={event.id}>
                             <td>
-                                {events.title}
+                                {event.title}
                             </td>
                             <td>
-                                {events.location}
+                                {event.city}
                             </td>
                             <td>
-                                {events.from_date}
+                                {event.state}
                             </td>
                             <td>
-                                {events.to_date}
+                                {event.from_date}
                             </td>
                             <td>
-                                {events.description}
+                                {event.to_date}
                             </td>
                             <td>
-                                {events.weather}
+                                {event.description}
                             </td>
                             <td>
-                                {events.url}
+                                {event.weather}
+                            </td>
+                            <td>
+                                {event.url}
                             </td>
                         </tr>
                     ))}

@@ -68,6 +68,12 @@ function App(props) {
         </AuthContext.Consumer>
       </AuthProvider>
     </>
+    // <BrowserRouter basename={basename}>
+    //   <Routes>
+    //     <Route path="/events" element={<EventList />} />
+    //     <Route path="/create" element={<EventForm />} />
+    //   </Routes>
+    // </BrowserRouter>
   );
 }
 
