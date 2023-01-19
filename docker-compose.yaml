@@ -18,7 +18,7 @@ services:
     ports:
       - 15432:5432
 
-  events_service:
+  polls_service:
     build:
       context: ./polls_service
       dockerfile: ./Dockerfile.dev
@@ -29,6 +29,18 @@ services:
     environment:
         DATABASE_URL: postgresql://polls:password@postgres/polls
         WAIT_HOSTS: postgres:5432
+
+  events_service:
+    build:
+      context: ./events_service
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./events_service:/app
+    environment:
+      DATABASE_URL: postgresql://admin:test-databases@postgres/eventsdb
+      WAIT_HOSTS: postgres:5432
 
   ghi:
     image: node:lts-bullseye
