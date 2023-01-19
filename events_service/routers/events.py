@@ -7,6 +7,8 @@ from queries.events import (
     EventOut
 )
 
+from queries.acls import get_weather
+
 
 router = APIRouter()
 
@@ -30,6 +32,8 @@ def create_event(
     repo: EventRepository = Depends(),
 ):
     try:
+        event.weather = get_weather(event.city, event.state)["description"]
+        # print("::::::::::", event)
         return repo.create(event)
     except Exception:
         response.status_code = 400

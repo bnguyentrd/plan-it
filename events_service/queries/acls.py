@@ -32,3 +32,5 @@ def get_weather(city, state):
         "temp": json["main"]["temp"],
         "description": json["weather"][0]["description"],
     }
+
+

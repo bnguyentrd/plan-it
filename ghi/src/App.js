@@ -41,6 +41,7 @@ function App(props) {
           {(context) => (
             <div>
               <BrowserRouter>
+              {/* <BrowserRouter basename={basename}></BrowserRouter> */}
                 <Routes>
                   <Route
                     path="/"
