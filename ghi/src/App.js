@@ -6,6 +6,7 @@ import './App.css';
 import EventForm from './events/eventForm.js';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import EventList from './events/eventList.js';
+import EventDetails from './events/eventDetails.js';
 
 
 const domain = /https:\/\/[^/]+/
@@ -41,6 +42,7 @@ function App() {
       <Routes>
         <Route path="/events" element={<EventList />} />
         <Route path="/create" element={<EventForm />} />
+        <Route path="/details/:id" element={<EventDetails />} />
       </Routes>
     </BrowserRouter>
   );
