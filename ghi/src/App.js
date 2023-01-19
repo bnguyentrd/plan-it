@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react";
-import MainPage from "./MainPage.js";
-// import ErrorNotification from "./ErrorNotification";
-import "./App.css";
-import SignUpForm from "./accounts/SignUpForm";
-import { LoginForm } from "./accounts/LoginForm.js";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AccountDetails from "./accounts/AccountDetail.js";
-import { About } from "./accounts/About.js";
-import { AuthProvider, AuthContext } from "./accounts/Authentication";
-import EventForm from './events/eventForm';
-import EventList from './events/eventList';
+import { useEffect, useState } from 'react';
+import Construct from './Construct.js'
+import ErrorNotification from './ErrorNotification';
+import './App.css';
+// import Nav from './Nav';
+import EventForm from './events/eventForm.js';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import EventList from './events/eventList.js';
 
 function App(props) {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -41,6 +37,7 @@ function App(props) {
           {(context) => (
             <div>
               <BrowserRouter>
+              {/* <BrowserRouter basename={basename}></BrowserRouter> */}
                 <Routes>
                   <Route
                     path="/"
@@ -68,12 +65,6 @@ function App(props) {
         </AuthContext.Consumer>
       </AuthProvider>
     </>
-    // <BrowserRouter basename={basename}>
-    //   <Routes>
-    //     <Route path="/events" element={<EventList />} />
-    //     <Route path="/create" element={<EventForm />} />
-    //   </Routes>
-    // </BrowserRouter>
   );
 }
 
