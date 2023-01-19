@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import events
+from routers import events, checklists
 import os
 
 app = FastAPI()
@@ -16,3 +16,4 @@ app.add_middleware(
 )
 
 app.include_router(events.router)
+app.include_router(checklists.router)
