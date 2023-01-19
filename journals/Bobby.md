@@ -103,4 +103,4 @@ Today I worked on:
 
 Didnt have much time to work on project today. I had to join andrew's auth session to get a better understanding of how to properly get auth to work. After that, we had CS then had to attend shahzad's session for a better understanding of Big O and algorithms. 
 
-Now working with steven and graham to try and get graham's poll backend to work. 
+Now working with steven and graham to try and get graham's poll backend to work. Graham got poll backend to work with carters help. Now working on debugging event container not turning on with steven. 
