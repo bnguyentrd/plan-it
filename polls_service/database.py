@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 
-SQLALCHEMY_DATABASE_URL = "postgresql://admin:test-databases@postgres/eventsdb"
+SQLALCHEMY_DATABASE_URL = "postgresql://polls:password@postgres/polls"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL

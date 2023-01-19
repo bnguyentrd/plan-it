@@ -12,8 +12,8 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_MULTIPLE_DATABASES: accounts, events
-      POSTGRES_PASSWORD: test-databases
+      - POSTGRES_MULTIPLE_DATABASES=accounts, events, polls
+      - POSTGRES_PASSWORD=password
     ports:
       - 15432:5432
 
@@ -26,7 +26,7 @@ services:
     volumes:
       - ./polls_service:/app
     environment:
-        DATABASE_URL: postgresql://admin:test-databases@postgres/eventsdb
+        DATABASE_URL: postgresql://polls:password@postgres/polls
         WAIT_HOSTS: postgres:5432
 
   ghi:
