@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import MainPage from "../MainPage";
 import { getToken, getTokenInternal, useToken } from "./Authentication";
 import { logout } from "../MainPage";
-import Nav from '../Nav';
+import Nav from "../Nav";
 
 function AccountDetails() {
   const [profilePicture, setProfilePicture] = useState(null);
@@ -178,12 +178,12 @@ function AccountDetails() {
 
   return (
     <>
-      <div>
+      <div className="account-detail-size">
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
         {!loading && !error && (
           <>
-          <Nav />
+            <Nav />
             <h1>Account Detail</h1>
             <div>
               <h2>Profile Picture</h2>
@@ -222,9 +222,9 @@ function AccountDetails() {
             </div>
           </>
         )}
+        <br></br>
+        <button onClick={handleDelete}>Delete Account</button>
       </div>
-
-      <button onClick={handleDelete}>Delete Account</button>
     </>
   );
 }

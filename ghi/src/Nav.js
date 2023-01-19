@@ -5,6 +5,7 @@ import SignUpForm from "./accounts/SignUpForm";
 import './css/Nav.css';
 // import { useToken } from "./Authentication";
 import { useToken } from "./accounts/Authentication";
+import { useNavigate } from "react-router-dom";
 
 function Nav(props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,6 +13,8 @@ function Nav(props) {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, login] = useToken();
+  const navigate = useNavigate();
+
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -37,6 +40,7 @@ function Nav(props) {
     }).then(() => {
       setCurrentUser(null);
       setIsLoggedIn(false);
+      navigate("/")
     });
   };
 
@@ -88,12 +92,7 @@ function Nav(props) {
             <NavLink to="/create">Create Event Form</NavLink>
           </li>
 
-          {isLoggedIn ? (
-            <li>
-              {" "}
-              <NavLink onClick={logout}>Logout</NavLink>{" "}
-            </li>
-          ) : null}
+          {isLoggedIn ? ( <li> {" "} <NavLink onClick={logout}>Logout</NavLink>{" "} </li> ) : null}
         </ul>
       )}
         </div>
@@ -102,4 +101,3 @@ function Nav(props) {
 }
 
 export default Nav;
-
