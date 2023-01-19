@@ -18,6 +18,21 @@ app.include_router(accounts.router)
 
 # FastAPI(app, cors_allowed_origins=["*"])
 
+# origins added from learn but i think we handle this in lines 27-35
+# origins = [
+#     os.environ.get("REACT_APP_SERVICE", None),
+#     os.environ.get("CORS_HOST", None),
+# ]
+
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=origins,
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
+
+# original working
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[

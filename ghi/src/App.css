@@ -82,3 +82,7 @@ body {
   margin-top: 10px;
   position: absolute;
 }
+
+.account-detail-size {
+  height: 100vh;
+}

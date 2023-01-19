@@ -1,6 +1,4 @@
-// // last updated 1/15 10:20 PM
-
-// // last updated 1/15  3:24 PM
+// // last updated 1/18  3:24 PM
 // import React, { useState, useEffect, useContext } from "react";
 // import { useNavigate } from "react-router-dom";
 // import MainPage from "../MainPage";
@@ -12,8 +10,12 @@
 //   const [accountDetails, setAccountDetails] = useState({});
 //   const [loading, setLoading] = useState(false);
 //   const [error, setError] = useState(null);
-//   const [token, logout] = useToken();
+//   const [token, update] = useToken();
 //   const navigate = useNavigate();
+//   const [username, setUsername] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [updateUsername, setUpdateUsername] = useState(false);
+//   const [updateEmail, setUpdateEmail] = useState(false);
 
 //   useEffect(() => {
 //     async function fetchAccountDetails() {
@@ -47,15 +49,16 @@
 //       }
 //     }
 //     fetchAccountDetails();
-//   }, []);
+//     // issue: page is reloading instead of rerendering
+//     // when updating form for a second time, page is empty unless I hard refresh
+//   }, [updateUsername, updateEmail]);
 
 //   const handleDelete = async (e) => {
 //     e.preventDefault();
 //     const token = await getTokenInternal();
-//     const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}/`;
+//     const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}`;
 //     const response = await fetch(url, {
 //       method: "DELETE",
-
 //     });
 //     if (response.ok) {
 //       fetch(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`, {
@@ -72,6 +75,66 @@
 
 //   const handleUpload = (e) => {
 //     setProfilePicture(e.target.files[0]);
+//   };
+
+//   const handleEmailUpdate = async (e) => {
+//     e.preventDefault();
+//     setLoading(true);
+//     const token = await getTokenInternal();
+//     const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}/email`;
+//     try {
+//       const response = await fetch(url, {
+//         method: "PUT",
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: `Bearer ${token.access_token}`,
+//         },
+//         body: JSON.stringify({ email }),
+//       });
+//       if (response.ok) {
+//         const data = await response.json();
+//         // switch test. details was first. result: didnt change anything
+//         setAccountDetails(data);
+//         window.location.reload();
+//         setUpdateEmail(true);
+//       } else {
+//         const error = await response.json();
+//         setError(error.message);
+//       }
+//     } catch (e) {
+//       console.log(e);
+//       setError(e.message);
+//     }
+//     setLoading(false);
+//   };
+
+//   const handleUsernameUpdate = async (e) => {
+//     e.preventDefault();
+//     setLoading(true);
+//     const token = await getTokenInternal();
+//     const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}/username`;
+//     try {
+//       const response = await fetch(url, {
+//         method: "PUT",
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: `Bearer ${token.access_token}`,
+//         },
+//         body: JSON.stringify({ username }),
+//       });
+//       if (response.ok) {
+//         const data = await response.json();
+//         setAccountDetails(data);
+//       } else {
+//         const error = await response.json();
+//         setError(error.message);
+//       }
+//     } catch (e) {
+//       console.log(e);
+//       setError(e.message);
+//     }
+//     setLoading(false);
+//     setUpdateUsername(true);
 //   };
 
 //   return (
@@ -91,15 +154,36 @@
 //               />
 //             </div>
 //             <div>
-//               <h2>Username: {accountDetails.username}</h2>
-//               <h2>Email: {accountDetails.email}</h2>
+//               {/* <h2>Username: {accountDetails.username}</h2> */}
+//               <div>
+//                 <h2>Email: {accountDetails.email}</h2>
+//                 <form onSubmit={handleEmailUpdate}>
+//                   <input
+//                     type="email"
+//                     value={email}
+//                     onChange={(e) => setEmail(e.target.value)}
+//                   />
+//                   <button type="submit">Update Email</button>
+//                 </form>
+//               </div>
+//               <div>
+//                 <h2>Username: {accountDetails.username}</h2>
+//                 {/* test */}
+//                 {/* <div>{updateUsername}</div> */}
+//                 <form onSubmit={handleUsernameUpdate}>
+//                   <input
+//                     type="text"
+//                     value={username}
+//                     onChange={(e) => setUsername(e.target.value)}
+//                   />
+//                   <button type="submit">Update Username</button>
+//                 </form>
+//               </div>
 //             </div>
 //           </>
 //         )}
 //       </div>
-//       <h1>HELLO</h1>
-//       <h2>to do list</h2>
-//       <li>change username</li>
+
 //       <button onClick={handleDelete}>Delete Account</button>
 //     </>
 //   );

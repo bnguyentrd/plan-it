@@ -1,10 +1,11 @@
-// last updated 1/15  3:24 PM
+// last updated 1/18  3:24 PM
 import React, { useState, useEffect, useContext } from "react";
+// import React, { useState, useEffect, useContext, useReducer } from "react";1
 import { useNavigate } from "react-router-dom";
 import MainPage from "../MainPage";
 import { getToken, getTokenInternal, useToken } from "./Authentication";
 import { logout } from "../MainPage";
-import Nav from '../Nav';
+import Nav from "../Nav";
 
 function AccountDetails() {
   const [profilePicture, setProfilePicture] = useState(null);
@@ -15,6 +16,9 @@ function AccountDetails() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [updateUsername, setUpdateUsername] = useState(false);
+  const [updateEmail, setUpdateEmail] = useState(false);
+  // const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
 
   useEffect(() => {
     async function fetchAccountDetails() {
@@ -48,6 +52,13 @@ function AccountDetails() {
       }
     }
     fetchAccountDetails();
+    // issue: page is reloading instead of rerendering
+    // when updating form for a second time, page is empty unless I hard refresh
+    // }, [updateUsername, updateEmail]);
+  }, [updateEmail]);
+
+  useEffect(() => {
+    // ...
   }, []);
 
   const handleDelete = async (e) => {
@@ -74,6 +85,37 @@ function AccountDetails() {
     setProfilePicture(e.target.files[0]);
   };
 
+  // const handleEmailUpdate = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   const token = await getTokenInternal();
+  //   const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}/email`;
+  //   try {
+  //     const response = await fetch(url, {
+  //       method: "PUT",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token.access_token}`,
+  //       },
+  //       body: JSON.stringify({ email }),
+  //     });
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       // switch test. details was first. result: didnt change anything
+  //       setAccountDetails(data);
+  //       // window.location.reload();
+  //       // setUpdateEmail(true);
+  //     } else {
+  //       const error = await response.json();
+  //       setError(error.message);
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //     setError(e.message);
+  //   }
+  //   setLoading(false);
+  // };
+
   const handleEmailUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -90,7 +132,11 @@ function AccountDetails() {
       });
       if (response.ok) {
         const data = await response.json();
+        // switch test. details was first. result: didnt change anything
         setAccountDetails(data);
+        // forceUpdate();
+        window.location.reload();
+        setUpdateEmail(true);
       } else {
         const error = await response.json();
         setError(error.message);
@@ -128,16 +174,17 @@ function AccountDetails() {
       setError(e.message);
     }
     setLoading(false);
+    // setUpdateUsername(true);
   };
 
   return (
     <>
-      <div>
+      <div className="account-detail-size">
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
         {!loading && !error && (
           <>
-          <Nav />
+            <Nav />
             <h1>Account Detail</h1>
             <div>
               <h2>Profile Picture</h2>
@@ -162,6 +209,8 @@ function AccountDetails() {
               </div>
               <div>
                 <h2>Username: {accountDetails.username}</h2>
+                {/* test */}
+                {/* <div>{updateUsername}</div> */}
                 <form onSubmit={handleUsernameUpdate}>
                   <input
                     type="text"
@@ -174,9 +223,9 @@ function AccountDetails() {
             </div>
           </>
         )}
+        <br></br>
+        <button onClick={handleDelete}>Delete Account</button>
       </div>
-
-      <button onClick={handleDelete}>Delete Account</button>
     </>
   );
 }

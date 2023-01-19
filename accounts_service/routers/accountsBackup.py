@@ -1,5 +1,6 @@
-# # 1/17 working 3:16pm
 # from fastapi import (
+#   # Body,
+#   Query,
 #   Depends,
 #   HTTPException,
 #   status,
@@ -15,7 +16,8 @@
 # from queries.accounts import (
 #   Error,
 #   EmailIn,
-#   EmailOut,
+#   UsernameIn,
+#   # Username,
 #   AccountIn,
 #   AccountOut,
 #   AccountsOut,
@@ -69,7 +71,7 @@
 #   id: int,
 #   response: Response,
 #   # repo: AccountQueries = Depends(authenticator.get_current_account_data),
-#   account: dict = Depends(authenticator.get_current_account_data),
+# #   account: dict = Depends(authenticator.get_current_account_data),
 #   repo: AccountQueries = Depends(),
 # ) -> AccountOut:
 #   print("this is the repooooooooooooooooooooooooooooooooooooooooooooooooo", repo)
@@ -132,3 +134,39 @@
 #     repo: AccountQueries = Depends(),
 # ) -> Union[Error, AccountOut]:
 #     return repo.update(id, user)
+
+# # test
+# # @router.put("/api/accounts/{id}", response_model=bool)
+# # def update_account(
+# #     id: int,
+# #     formData: EmailIn,
+# #     account: dict = Depends(authenticator.get_current_account_data),
+# #     repo: AccountQueries = Depends(),
+# # ) -> bool:
+# #     print(account)
+# #     user_id = account["id"]
+# #     return repo.update(user_id, formData)
+
+
+# @router.put("/api/accounts/{id}/email", response_model=bool)
+# def update_email(
+#     formData: EmailIn,
+#     user_data: dict = Depends(authenticator.get_current_account_data),
+#     repo: AccountQueries = Depends(),
+# ) -> bool:
+#     user_id = user_data["id"]
+#     # user_data["username"] = formData.username
+#     user_data["email"] = formData.email
+#     return repo.updateEmail(user_id, user_data)
+
+
+# @router.put("/api/accounts/{id}/username", response_model=bool)
+# def update_username(
+#     formData: UsernameIn,
+#     user_data: dict = Depends(authenticator.get_current_account_data),
+#     repo: AccountQueries = Depends(),
+# ) -> bool:
+#     user_id = user_data["id"]
+#     # user_data["username"] = formData.username
+#     user_data["username"] = formData.username
+#     return repo.updateUsername(user_id, user_data)
