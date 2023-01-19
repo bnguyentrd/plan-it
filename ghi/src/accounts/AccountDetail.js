@@ -1,5 +1,6 @@
 // last updated 1/18  3:24 PM
-import React, { useState, useEffect, useContext, useReducer } from "react";
+import React, { useState, useEffect, useContext } from "react";
+// import React, { useState, useEffect, useContext, useReducer } from "react";1
 import { useNavigate } from "react-router-dom";
 import MainPage from "../MainPage";
 import { getToken, getTokenInternal, useToken } from "./Authentication";
@@ -17,7 +18,7 @@ function AccountDetails() {
   const [email, setEmail] = useState("");
   const [updateUsername, setUpdateUsername] = useState(false);
   const [updateEmail, setUpdateEmail] = useState(false);
-  const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
+  // const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
 
   useEffect(() => {
     async function fetchAccountDetails() {
@@ -56,9 +57,9 @@ function AccountDetails() {
     // }, [updateUsername, updateEmail]);
   }, [updateEmail]);
 
-  // useEffect(() => {
-  //   // ...
-  // }, [updateEmail]);
+  useEffect(() => {
+    // ...
+  }, []);
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -133,8 +134,8 @@ function AccountDetails() {
         const data = await response.json();
         // switch test. details was first. result: didnt change anything
         setAccountDetails(data);
-        forceUpdate();
-        // window.location.reload();
+        // forceUpdate();
+        window.location.reload();
         setUpdateEmail(true);
       } else {
         const error = await response.json();
