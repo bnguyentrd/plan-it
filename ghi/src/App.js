@@ -36,12 +36,41 @@ function App(props) {
   }, []);
 
   return (
-    <BrowserRouter basename={basename}>
-      <Routes>
-        <Route path="/events" element={<EventList />} />
-        <Route path="/create" element={<EventForm />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <AuthProvider>
+        <AuthContext.Consumer>
+          {(context) => (
+            <div>
+              <BrowserRouter>
+              {/* <BrowserRouter basename={basename}></BrowserRouter> */}
+                <Routes>
+                  <Route
+                    path="/"
+                    element={<MainPage accountid={account_id} />}
+                  />
+                  <Route path="/signup" element={<SignUpForm />} />
+                  <Route path="/login" element={<LoginForm />} />
+                  {/* <Route path="/about" /> */}
+                  <Route path="/about" element={<About />} />
+                  <Route path="/api/protected" />
+                  <Route
+                    path="/api/accounts/:id"
+                    // path="/api/accounts/me/token"
+                    element={<AccountDetails token={context.token} />}
+                  />
+                  <Route path="/events" element={<EventList />} />
+                  <Route path="/create" element={<EventForm />} />
+                  <Route path="/details" element={<EventDetails />} />
+                  {/* <ErrorNotification error={error} /> */}
+                  {/* <Construct info={launch_info} /> */}
+                  {/* <MainPage info={launch_info} /> */}
+                </Routes>
+              </BrowserRouter>
+            </div>
+          )}
+        </AuthContext.Consumer>
+      </AuthProvider>
+    </>
   );
 }
 
