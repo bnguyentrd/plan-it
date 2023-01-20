@@ -10,11 +10,12 @@ import { useNavigate } from "react-router-dom";
 
 function Nav(props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [token, useToken] = useState();
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   // const [token, logout] = useToken();
   // const [token, login] = useToken();
+  // const [token, useToken] = useState();
+  // console.log("this is the token", token);
   const [token] = useToken();
   const navigate = useNavigate();
 
@@ -34,7 +35,7 @@ function Nav(props) {
     } else {
       setIsLoggedIn(false);
     }
-  }, [token]);
+  }, [isLoggedIn]);
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
