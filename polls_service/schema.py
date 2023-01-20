@@ -10,12 +10,12 @@ class ChoiceBase(BaseModel):
 	choice_text: str
 	votes: int = 0
 
+
 class ChoiceCreate(ChoiceBase):
 	pass
 
 class ChoiceList(ChoiceBase):
 	id: int
-
 	class Config:
 		orm_mode = True
 

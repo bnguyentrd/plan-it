@@ -1,5 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
+from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, ARRAY
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.orm import relationship
 
@@ -21,7 +21,7 @@ class Choice(Base):
 	question_id = Column(Integer, ForeignKey('question.id', ondelete='CASCADE'))
 	choice_text = Column(String(200))
 	votes = Column(Integer, default=0)
-	voted = Column("voted", postgresql.ARRAY(Integer))
+	voted = Column(ARRAY(Integer), nullable=True)
 
 
 	question = relationship("Question", back_populates="choices")
