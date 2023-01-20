@@ -10,7 +10,8 @@ lint-test-job:
   script:
     - pip install flake8
     - flake8 accounts_service
-    # - flake8 accounts_service events_service  might need to add events service later
+    # - flake8 events_service
+    # - flake8 polls_service
 
 # Run the unit tests
 # api-unit-test-job:  ORIGINAL
