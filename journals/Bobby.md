@@ -71,3 +71,36 @@ Jan 12th:
 
 Today I worked on:
 
+Fixed a weird bootstrap error where the slideshow button was being clickable from a large area(from top to bottom of both sides of the webpage). Used CSS to override the under the hood styles from the bootstrap code used in slideshow buttons. 
+
+Changed dark mode button slider to have 2 different pictures, one day time themed and one night time themed. when clicking on the slider/button, a slide animation is presented with a fade in/fade out effect. 
+
+Tore down placeholder styles for drop down menu aesthetics in preparation for next day's workload.
+
+
+Jan 13th:
+
+Today I worked on:
+
+Built nav dropdown menu from an empty css file. Was able to get it to look how I want for now, most likely will come back to this and pretty up the actual button. Started working on event form. Had to duplicate the eventform.js file because having an event form on the main page and on the dropdown menu wasnt allowing me to change the cosmetics of one event form without the other changing.
+
+Jan 14th:
+
+Today I worked on:
+
+Worked with steven to get user sign out to work on the front end. After a lot of troubleshooting, we were able to get it to work. User is now able to sign out.
+
+
+Jan 17th:
+
+Today I worked on:
+
+Worked on dropdown menu's icon. Got the icon to transition between 3 line hamburger when not clicked to an 'X' when dropdown menu is open. Added dropdown menu to every other page that's available. Worked with steven to try and figure out how to edit account info(one value instead of having to change all 3(id, username, and email) at once). 
+
+Jan 18th:
+
+Today I worked on:
+
+Didnt have much time to work on project today. I had to join andrew's auth session to get a better understanding of how to properly get auth to work. After that, we had CS then had to attend shahzad's session for a better understanding of Big O and algorithms. 
+
+Now working with steven and graham to try and get graham's poll backend to work. Graham got poll backend to work with carters help. Now working on debugging event container not turning on with steven. 

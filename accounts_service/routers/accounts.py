@@ -1,4 +1,6 @@
 from fastapi import (
+  # Body,
+  Query,
   Depends,
   HTTPException,
   status,
@@ -13,6 +15,9 @@ from pydantic import BaseModel
 
 from queries.accounts import (
   Error,
+  EmailIn,
+  UsernameIn,
+  # Username,
   AccountIn,
   AccountOut,
   AccountsOut,
@@ -21,7 +26,18 @@ from queries.accounts import (
 
 from typing import Optional, Union
 
+import re
+
+def is_valid_email(email: str) -> bool:
+    pattern = re.compile(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
+    return pattern.match(email) is not None
+
+
+
+
+
 router = APIRouter()
+
 
 
 
@@ -109,11 +125,48 @@ def delete_account(
     return repo.delete(id)
 
 
-
+# working but includes all attributes for input
 @router.put("/api/accounts/{id}", response_model=Union[AccountOut, Error])
 def update_account(
     id: int,
     user: AccountIn,
+    account: dict = Depends(authenticator.get_current_account_data),
     repo: AccountQueries = Depends(),
 ) -> Union[Error, AccountOut]:
     return repo.update(id, user)
+
+# test
+# @router.put("/api/accounts/{id}", response_model=bool)
+# def update_account(
+#     id: int,
+#     formData: EmailIn,
+#     account: dict = Depends(authenticator.get_current_account_data),
+#     repo: AccountQueries = Depends(),
+# ) -> bool:
+#     print(account)
+#     user_id = account["id"]
+#     return repo.update(user_id, formData)
+
+
+@router.put("/api/accounts/{id}/email", response_model=bool)
+def update_email(
+    formData: EmailIn,
+    user_data: dict = Depends(authenticator.get_current_account_data),
+    repo: AccountQueries = Depends(),
+) -> bool:
+    user_id = user_data["id"]
+    # user_data["username"] = formData.username
+    user_data["email"] = formData.email
+    return repo.updateEmail(user_id, user_data)
+
+
+@router.put("/api/accounts/{id}/username", response_model=bool)
+def update_username(
+    formData: UsernameIn,
+    user_data: dict = Depends(authenticator.get_current_account_data),
+    repo: AccountQueries = Depends(),
+) -> bool:
+    user_id = user_data["id"]
+    # user_data["username"] = formData.username
+    user_data["username"] = formData.username
+    return repo.updateUsername(user_id, user_data)

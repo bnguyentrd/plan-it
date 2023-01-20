@@ -1,0 +1,20 @@
+.evntfrm {
+    height: 100vh;
+}
+
+.evntform {
+    transform: translate(10%, 55%);
+}
+
+.event-input {
+    color: rgb(26, 25, 25) !important;
+}
+
+.event-size {
+    height: 60px;
+    width: 100%;
+}
+
+.event-curve {
+    border-radius: 5%;
+}

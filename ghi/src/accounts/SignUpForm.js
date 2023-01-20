@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Container, Box, TextField, Button } from "@mui/material";
-import Nav from '../Nav';
+import "../css/SignUp.css";
+import Nav from "../Nav";
+
+// import "../css/SignUp.css";
 
 function SignUpForm() {
   const [username, setUsername] = useState("");
@@ -23,28 +26,38 @@ function SignUpForm() {
       }),
     });
 
-    if (!response.ok) {
-      // Handle error response
-      const error = await response.json();
-      console.log(error);
-    } else {
+    // if (!response.ok) {
+    //   // Handle error response
+    //   const error = await response.json();
+    //   console.log(error);
+    // } else {
+    //   const data = await response.json();
+    //   console.log(data);
+    // }
+
+    if (response.ok) {
       const data = await response.json();
       console.log(data);
+      // Handle error response
+    } else {
+      const error = await response.json();
+      console.log(error);
     }
 
     // Handle successful response
   }
 
   return (
-    <>
-      <Nav />
-      <Container component="main" maxWidth="xs">
+    <div className="signup-form-size">
+      <div className="signup-form-location" component="main" maxWidth="xs">
+        <Nav />
         <Box
           sx={{
-            marginTop: 8,
+            // marginTop: 8,
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
+            // alignItems: "center",
+            // marginBottom: 27
           }}
         >
           <h1>Sign Up</h1>
@@ -83,12 +96,21 @@ function SignUpForm() {
             variant="outlined"
             autoFocus
           />
-          <Button variant="contained" onClick={handleSubmit}>
-            Sign Up
-          </Button>
+          {/* <Button variant="contained" onClick={handleSubmit}>
+          Sign Up
+        </Button> */}
+          <br></br>
+          <div>
+            <button
+              className="glow-on-hover glowing glow-button"
+              onClick={handleSubmit}
+            >
+              Sign Up
+            </button>
+          </div>
         </Box>
-      </Container>
-    </>
+      </div>
+    </div>
   );
 }
 

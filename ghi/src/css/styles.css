@@ -10,10 +10,10 @@
   color: white;
 }
 
-h1, h3 {
+h1,
+h3 {
   font-family: "Montserrat", sans-serif;
   font-weight: 900; /* black */
-
 }
 
 h1 {
@@ -36,6 +36,7 @@ p {
 
 body {
   font-family: "Montserrat";
+  min-width: 1150px;
 }
 
 /* Navigation Bar */
@@ -188,7 +189,6 @@ h2 {
   color: white;
   font-size: 3.5rem;
 }
-
 
 #footer {
   text-align: center;

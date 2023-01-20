@@ -95,3 +95,36 @@ request coming from a different microservice other than users but we still didnt
 configured properly so I took care of that along with setting up pgAdmin. Now I can see the events microservice running properly
 but since I didnt touch anything in that microservice, I figured it was best to do some pair coding with Elijah tomorrow on that issue. Since I'm currently waiting on that, I moved onto writing a basic SignUpForm.js page and was able to successfully
 create a user from the frontend and see it reflected on the backend. Now it just needs some styling. Moving forward, I can share the boilerplate code for my team members should they need to make a post request on any of their respective forms.
+
+## January 12, 2023
+
+Today, I worked on:
+
+- Authentication
+- Front End Styling Sign Up Form
+
+Today I continued to work on Authentication and was finally able to login as a user. To verify that I could access
+locked requests, I made a request to view account details which was also successful. The only issue now is that
+we dont understand how to make sure that the data we're viewing as a logged in user is unique to said logged in user.
+I havent had much time to look into it since we had a lot of explorations again and I was preoccupied with both my CSM
+meeting and an interview. Hopefully, after looking at andrew's new zip files, I can gain some insight on what my code
+is missing.
+
+
+## Jan 13
+
+Today, I worked on:
+
+- Authentication
+- Put Request to edit user data
+
+Today I worked on allowing users to edit their account info and realized that the JSON body for the put request on the backend contains serveral attributes but the way we designed out frontend was to allow users to click a button to edit only one of those attributes. I am now dealing with a 422 unprocessible entity error which makes sense since I don't know how to set the attributes of the other fields to default to
+the current user's data.
+
+## Jan 17
+
+Today, I worked on:
+
+- Authentication
+
+Today I worked on the put request to edit logged in user's account data again. I was able to successfully change the user's email from the front end by submitting a change to a single attribute but im not sure it's the cleanest way to write my code. At this point, I might have to make shallow copies of that code to with a different method to allow users to edit their username and email respectively. Im not even sure if I can have several put requests to the same endpoint so for now im bypassing that issue by using restful endpoints with the drawback of writing a separate detailed method in my queries.

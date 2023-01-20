@@ -2,7 +2,8 @@ from pydantic import BaseModel
 from typing import List, Optional, Union
 from datetime import date
 from queries.pool import pool
-
+from queries.acls import get_weather
+# from queries.locations import locations
 
 class Error(BaseModel):
     message: str
@@ -10,24 +11,25 @@ class Error(BaseModel):
 
 class EventIn(BaseModel):
     title: str
-    location: str
+    city: str
+    state: str
     from_date: date
     to_date: date
     description: str
-    url : Optional[str]
+    url: Optional[str]
     weather: Optional[str]
 
 
 class EventOut(BaseModel):
     id: int
     title: str
-    location: str
+    city: str
+    state: str
     from_date: date
     to_date: date
     description: str
-    url : Optional[str]
+    url: Optional[str]
     weather: Optional[str]
-
 
 class EventRepository:
     def get_one(self, event_id: int) -> Optional[EventOut]:
@@ -37,13 +39,14 @@ class EventRepository:
                     result = db.execute(
                         """
                         SELECT id
-                            , title
-                            , location
-                            , from_date
-                            , to_date
-                            , description
-                            , url
-                            , weather
+                          , title
+                          , city
+                          , state
+                          , from_date
+                          , to_date
+                          , description
+                          , url
+                          , weather
                         FROM events
                         WHERE id = %s
                         """,
@@ -52,11 +55,10 @@ class EventRepository:
                     record = result.fetchone()
                     if record is None:
                         return None
-                    return self.record_to_event_out
+                    return self.record_to_event_out(record)
         except Exception as e:
             print (e)
             return {"message": "Event Could Not Be Found"}
-            pass
 
     def delete(self, event_id: int) -> bool:
         try:
@@ -82,23 +84,25 @@ class EventRepository:
                         """
                         UPDATE events
                         SET title = %s
-                            , title = %s
-                            , location = %s
-                            , from_date = %s
-                            , to_date = %s
-                            , description = %s
-                            , url = %s
-                            , weather = %s
-                        WHERE id = %2
+                          , city = %s
+                          , state = %s
+                          , from_date = %s
+                          , to_date = %s
+                          , description = %s
+                          , url = %s
+                          , weather = %s
+                        WHERE id = %s
                         """,
                         [
                             event.title,
-                            event.location,
+                            event.city,
+                            event.state,
                             event.from_date,
                             event.to_date,
                             event.description,
                             event.url,
-                            event.weather
+                            event.weather,
+                            event_id
                         ]
                     )
                     return self.event_in_to_out(event_id, event)
@@ -112,7 +116,7 @@ class EventRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id, title, location, from_date, to_date, description, url, weather
+                        SELECT id, title, city, state, from_date, to_date, description, url, weather
                         FROM events
                         ORDER BY from_date
                         """
@@ -132,14 +136,15 @@ class EventRepository:
                     result = db.execute(
                         """
                         INSERT INTO events
-                            (title, location, from_date, to_date, description, url, weather)
+                            (title, city, state, from_date, to_date, description, url, weather)
                         VALUES
-                            (%s, %s, %s, %s, %s, %s, %s)
+                            (%s, %s, %s, %s, %s, %s, %s, %s)
                         RETURNING id
                         """,
                         [
                             event.title,
-                            event.location,
+                            event.city,
+                            event.state,
                             event.from_date,
                             event.to_date,
                             event.description,
@@ -151,6 +156,7 @@ class EventRepository:
                     return self.event_in_to_out(id, event)
         except Exception:
             return {"message": "Failed to Create Event"}
+
     def event_in_to_out(self, id: int, event: EventIn):
         old_data = event.dict()
         return EventOut(id=id, **old_data)
@@ -160,10 +166,11 @@ class EventRepository:
         return EventOut(
             id=record[0],
             title=record[1],
-            location=record[2],
-            from_date=record[3],
-            to_date=record[4],
-            description=record[5],
-            url=record[6],
-            weather=record[7]
+            city=record[2],
+            state=record[3],
+            from_date=record[4],
+            to_date=record[5],
+            description=record[6],
+            url=record[7],
+            weather=record[8]
         )
