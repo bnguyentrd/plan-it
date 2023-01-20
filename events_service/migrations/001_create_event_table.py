@@ -12,8 +12,17 @@ steps = [
             url VARCHAR(300),
             weather VARCHAR(300)
         );
+
+         CREATE TABLE checklists(
+            id SERIAL PRIMARY KEY NOT NULL,
+            event_id INT NOT NULL,
+            items VARCHAR[],
+            status BOOL[],
+            CONSTRAINT fk_event FOREIGN KEY(event_id) REFERENCES events(id)
+        );
         """,
         """
+        DROP TABLE checklists;
         DROP TABLE events;
         """
     ]
