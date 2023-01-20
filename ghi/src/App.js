@@ -60,7 +60,7 @@ function App(props) {
                   />
                   <Route path="/events" element={<EventList />} />
                   <Route path="/create" element={<EventForm />} />
-                  <Route path="/details" element={<EventDetails />} />
+                  <Route path="/details/:id" element={<EventDetails />} />
                   {/* <ErrorNotification error={error} /> */}
                   {/* <Construct info={launch_info} /> */}
                   {/* <MainPage info={launch_info} /> */}
