@@ -1,6 +1,5 @@
 from fastapi import (
     # Body,
-    Query,
     Depends,
     HTTPException,
     status,
@@ -18,7 +17,6 @@ from queries.accounts import (
     Error,
     EmailIn,
     UsernameIn,
-    # Username,
     AccountIn,
     AccountOut,
     AccountsOut,
