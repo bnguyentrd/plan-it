@@ -110,7 +110,6 @@ I havent had much time to look into it since we had a lot of explorations again 
 meeting and an interview. Hopefully, after looking at andrew's new zip files, I can gain some insight on what my code
 is missing.
 
-
 ## Jan 13
 
 Today, I worked on:
@@ -128,3 +127,37 @@ Today, I worked on:
 - Authentication
 
 Today I worked on the put request to edit logged in user's account data again. I was able to successfully change the user's email from the front end by submitting a change to a single attribute but im not sure it's the cleanest way to write my code. At this point, I might have to make shallow copies of that code to with a different method to allow users to edit their username and email respectively. Im not even sure if I can have several put requests to the same endpoint so for now im bypassing that issue by using restful endpoints with the drawback of writing a separate detailed method in my queries.
+
+## Jan 18
+
+Today, I worked on:
+
+- Docker-compose yml
+- Troubleshooting to get seperate microservices running
+- Troubleshooting uncovered errors after merging
+
+Today Elijah announced that he got his events microservice running properly on both the frontend and backend but up to this point,
+he was still only running his service off of the old docker-compose yml file so Bobby and I had to figure out how to configure it properly.
+We eventually got it to work and verified that his code was indeed working. Now that we have a better understanding of the git workflow,
+Bobby and I are merging our code so that his updated Navigation menu is populating on most pages. This was important because it allowed me to
+see how the Navigation menu was behaving depending on the state of the user's login status. I am now currently trying to wrap my head around
+how a page rerenders so that it is considered a SPA. If the nav menu is it's own component that needs to rerender
+everytime there's a change to the logged in status of the user, how do i rerender the nav component?
+
+As of now, when logged in, clicking logout link successfully logs out and redirects the user to the main page but the logout link still visible despite
+the user being logged out. I am verifying this by using the docs on the backend to check if the token is null.
+
+## Jan 19
+
+Today, I worked on:
+
+- Fixing the lint test issue
+- Deployment
+- CI/CD setup
+
+Today I worked on figuring out why all my pushes to my dev branch was constantly failing. It was because of the lint test but after following
+the lecture video, I couldnt run "black" like how Andrew did in the lecture. I found in the documentation that you had to use "python -m" before
+using black commands in the terminal. After that test finally passed, I noticed that the unit test was failing which was expected because we havent written
+any unit tests yet. I hope that isn't a prerequisite for deployment because that's what we're trying to do today as a team. After getting everybody up to speed
+with the code, we did our first merge request to main today and learned how to approve it from gitlab. Since our main branch is now up to date, we started working on deployment and expect to run into many errors because of its seemingly long list of complex steps. So far our first issue is that we dont have an
+image to copy from the container registry. Bobby and I also brainstormed some footer designs for the frontend to implement if we manage to get our mvps done. Currently watching videos and reading documentation for deployment setup.
