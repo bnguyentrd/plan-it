@@ -146,3 +146,10 @@ function Nav(props) {
 }
 
 export default Nav;
+
+    // <BrowserRouter basename={basename}>
+    //   <Routes>
+    //     <Route path="/events" element={<EventList />} />
+    //     <Route path="/create" element={<EventForm />} />
+    //   </Routes>
+    // </BrowserRouter>
