@@ -131,6 +131,12 @@ function Nav(props) {
             <li className="item-1">
               <NavLink to="/create">Create Event Form</NavLink>
             </li>
+            <li className="item-1">
+              <NavLink to="/events">Events</NavLink>
+            </li>
+            <li className="item-1">
+              <NavLink to="/details">Event Details</NavLink>
+            </li>
 
             {isLoggedIn ? (
               <li>

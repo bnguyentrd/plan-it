@@ -113,4 +113,59 @@ Today, I worked on:
 Brought total number of errors in console down from 12 to 4.
 No styling or CSS just needed to verfiy that i can display the data in the
 frontend. Created a Store repo in the GHI to store my eventsAPI, then called that API
-in the List Form. 
+in the List Form.
+
+
+## January 13th, 2023 - Friday
+
+Today, I worked on:
+
+* Successfully got a functioning List page for events
+
+Created a store folder that held the queries for the events on the list page,
+was able to see all of the listed events with all the proper data. Started researching on
+how to implement a third party API while using fastAPI
+
+
+## January 16th, 2023 - Monday
+
+Today, I worked on:
+
+* Marthur Luther King JR holiday, worked on OpenWeatherAPI
+
+minimal work, tried some solutions to implement weather api.
+No success
+
+
+## January 17th, 2023 - Tuesday
+
+Today, I worked on:
+
+* Successfully got the open weather API to function
+
+Had to refactor events service to include city and state
+variables instead of just a location, once the backend was working
+after making the changes mentioned, reconfigured the routers file in
+events to implement the weather on creation.
+
+## January 18th, 2023 - Wednesday
+
+Today, I worked on:
+
+* implementing a delete button, creating a event detail page
+
+Tried implementing a delete button in the list page for events,
+but returned a 422 status error. Decided to create a detail page that would house
+both the delete and update buttons. As well as the checklist feature
+
+
+## January 19th, 2023 - Thursday
+
+Today, I worked on:
+
+* Successfully got a functioning detail page for events
+
+Got the event detail page to function using the id number from
+existing events. Tested URL to verify that inputted URLS would display an
+image. Working on implementing delete and put methods for the event
+detail page

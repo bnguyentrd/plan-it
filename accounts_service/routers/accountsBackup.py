@@ -33,12 +33,7 @@
 #     return pattern.match(email) is not None
 
 
-
-
-
 # router = APIRouter()
-
-
 
 
 # @router.get("/api/protected", response_model=bool)
