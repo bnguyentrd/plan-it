@@ -100,8 +100,6 @@
 #             return self.record_to_user_out(record)
 
 
-
-
 # #   def create(self, info: AccountIn, hashed_password: str) -> AccountOutWithPassword:
 # #     with pool.connection() as conn:
 # #         with conn.cursor() as cur:
@@ -145,8 +143,6 @@
 #     except Exception as e:
 #         print(e)
 #         return {"message": "Username or email already exist"}
-
-
 
 
 #   def delete(self, id: int) -> bool:
