@@ -31,6 +31,7 @@ function AccountDetails() {
         // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/me/`;
         // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/{id}/`;
         const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}/`;
+        console.log("HERE IS THE TOKEN ID:", token.account.id);
         try {
           const response = await fetch(url, {
             headers: {

@@ -8,14 +8,14 @@ import { useToken } from "./accounts/Authentication";
 import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 
-
 function Nav(props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // const [token, useToken] = useState();
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   // const [token, logout] = useToken();
-  const [token, login] = useToken();
+  // const [token, login] = useToken();
+  const [token] = useToken();
   const navigate = useNavigate();
 
   const handleLogout = async (e) => {
@@ -55,26 +55,19 @@ function Nav(props) {
     });
   };
 
-//   const logout = async () => {
-//     try {
-//         await axios.delete(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`, {
-//             withCredentials: true,
-//         });
-//         setCurrentUser(null);
-//         setIsLoggedIn(false);
-//         localStorage.removeItem("token");
-//         navigate("/");
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
-
-
-
-
-
-
-
+  //   const logout = async () => {
+  //     try {
+  //         await axios.delete(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`, {
+  //             withCredentials: true,
+  //         });
+  //         setCurrentUser(null);
+  //         setIsLoggedIn(false);
+  //         localStorage.removeItem("token");
+  //         navigate("/");
+  //     } catch (error) {
+  //         console.error(error);
+  //     }
+  // }
 
   // const login = () => {}
 
@@ -141,7 +134,7 @@ function Nav(props) {
             {isLoggedIn ? (
               <li>
                 {" "}
-                <NavLink onClick={handleLogout}>Logout</NavLink>
+                <NavLink onClick={handleLogout}>Logout</NavLink>{" "}
               </li>
             ) : null}
           </ul>
