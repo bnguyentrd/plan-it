@@ -24,7 +24,7 @@ accounts_service-unit-test-job:
     - pip install -r requirements.txt
     - python -m pytest
 
-build-docker-master:
+build-accounts-image-job:
   image: docker:19.03.1
   stage: build
   services:
