@@ -60,7 +60,7 @@ build-front-end-job:
   image: node:lts-bullseye
   needs:
     - lint-test-job
-    - accounts_service-unit-test-job
+    # - accounts_service-unit-test-job
     # added line 37 as per instructions on learn. unsure if this will work since we havent written any unit tests yet.
   variables:
     # If either of these variables is defined in the GitLab
@@ -92,4 +92,3 @@ pages:
   artifacts:
     paths:
       - public
-
