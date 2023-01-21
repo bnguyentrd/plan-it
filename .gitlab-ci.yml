@@ -26,6 +26,9 @@ lint-test-job:
 #     - python -m pytest
 
 build-accounts-image-job:
+  rules:
+    # Only run if pushing to the main branch
+    - if: $CI_COMMIT_BRANCH == $CI_STEVEN_BRANCH
   image: docker:19.03.1
   stage: build
   services:
@@ -56,7 +59,7 @@ build-front-end-job:
   # rules added per learn. lines 30-32
   rules:
     # Only run if pushing to the main branch
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == $CI_STEVEN_BRANCH
   stage: build
   image: node:lts-bullseye
   needs:
@@ -69,7 +72,7 @@ build-front-end-job:
     # You need to substitute in your real values for
     # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
     PUBLIC_URL: https://plan-it1.gitlab.io/module3-project-gamma/
-    REACT_APP_SAMPLE_SERVICE_API_HOST: https://WEBSERVICE_NAME.onrender.com
+    REACT_APP_ACCOUNTS_SERVICE_API_HOST: https://accounts-service.sept-pt-12.mod3projects.com
   script:
     - cd ghi
     - npm install
@@ -83,7 +86,8 @@ build-front-end-job:
 pages:
   stage: deploy
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    # Only run if pushing to the main branch
+    - if: $CI_COMMIT_BRANCH == $CI_STEVEN_BRANCH
   dependencies:
     - build-front-end-job
   needs:
