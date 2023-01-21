@@ -30,7 +30,7 @@ lint-test-job:
 
 build-accounts-image-job:
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == $CI_STEVEN_BRANCH
   image: docker:19.03.1
   stage: build
   services:
@@ -58,7 +58,7 @@ build-accounts-image-job:
 build-front-end-job:
   # rules added per learn. lines 30-32
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == $CI_STEVEN_BRANCH
   stage: build
   image: node:lts-bullseye
   needs:
@@ -85,7 +85,7 @@ build-front-end-job:
 pages:
   stage: deploy
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == $CI_STEVEN_BRANCH
   dependencies:
     - build-front-end-job
   needs:

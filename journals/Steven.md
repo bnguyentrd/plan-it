@@ -161,3 +161,18 @@ using black commands in the terminal. After that test finally passed, I noticed 
 any unit tests yet. I hope that isn't a prerequisite for deployment because that's what we're trying to do today as a team. After getting everybody up to speed
 with the code, we did our first merge request to main today and learned how to approve it from gitlab. Since our main branch is now up to date, we started working on deployment and expect to run into many errors because of its seemingly long list of complex steps. So far our first issue is that we dont have an
 image to copy from the container registry. Bobby and I also brainstormed some footer designs for the frontend to implement if we manage to get our mvps done. Currently watching videos and reading documentation for deployment setup.
+
+## Jan 20
+
+Today, I worked on:
+
+- Deployment
+- CI/CD setup/configuration
+- unit test
+
+Today I worked on figuring out deployment and finally got my builds and to stop failing and also got pages to deploy after much trial and error. I now
+have a clean pipeline but now im running into another issue. When trying to make a request to anything regarding my specific microservice for accounts, I get
+a generic 500 Internal error. However, I'm still getting a 200 response when I request to get a token despite the token being null so I know that im able to get
+some kind of response. I think the issue is that my migrations isnt going through when I deploy since I cant see my tables anywhere when accessing pgAdmin.
+I suspect that somewhere in my configuration, I'm not linking up my database correctly. This has been a huge blocker for the past two days so on my off time, I
+started working on a unit test to test an endpoint to get an account.

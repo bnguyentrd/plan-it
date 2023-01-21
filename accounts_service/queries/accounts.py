@@ -56,12 +56,16 @@ class AccountQueries:
             """
                 )
 
-                results = []
-                for row in cur.fetchall():
-                    record = {}
-                    for i, column in enumerate(cur.description):
-                        record[column.name] = row[i]
-                    results.append(record)
+                # results = []
+                # for row in cur.fetchall():
+                #     record = {}
+                #     for i, column in enumerate(cur.description):
+                #         record[column.name] = row[i]
+                #     results.append(record)
+                results = [
+                    AccountOut(id=row[0], username=row[1], email=row[2])
+                    for row in cur.fetchall()
+                ]
 
                 return results
 
@@ -100,9 +104,7 @@ class AccountQueries:
                     return None
                 return self.record_to_user_out(record)
 
-    def create(
-        self, info: AccountIn, hashed_password: str
-    ) -> AccountOutWithPassword:
+    def create(self, info: AccountIn, hashed_password: str) -> AccountOutWithPassword:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
