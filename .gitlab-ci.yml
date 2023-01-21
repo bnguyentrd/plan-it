@@ -3,6 +3,9 @@ stages:
   - build
   - deploy
 
+variables:
+  DATABASE_URL: postgres://postgres:bbd2ca03616b2bcf@srv-captain--postgres-accounts/postgres
+
 # Run flake8 to check for code quality
 lint-test-job:
   image: python:3-bullseye
@@ -50,7 +53,6 @@ build-accounts-image-job:
     - echo $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
     - echo "Deploying on CapRover..."
     - docker run caprover/cli-caprover:v2.1.1 caprover deploy --caproverUrl $CAPROVER_URL --caproverPassword $CAPROVER_PASSWORD --caproverApp $CAPROVER_APP_ACCOUNTS --imageName $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
-
 
   # Build the React/JavaScript front-end
 build-front-end-job:
