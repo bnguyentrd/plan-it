@@ -11,11 +11,13 @@ class ChoiceBase(BaseModel):
 	votes: int = 0
 
 
+
 class ChoiceCreate(ChoiceBase):
 	pass
 
 class ChoiceList(ChoiceBase):
 	id: int
+	voted: List[int] = None
 	class Config:
 		orm_mode = True
 
