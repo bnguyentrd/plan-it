@@ -2,6 +2,8 @@ import json
 import requests
 import os
 
+# OPEN_WEATHER_API_KEY = os.environ["OPEN_WEATHER_API_KEY"]
+
 
 def get_lat_lon(city, state):
     url = "http://api.openweathermap.org/geo/1.0/direct"
