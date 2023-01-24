@@ -3,7 +3,8 @@ import React, { useState, useEffect, useContext } from "react";
 // import React, { useState, useEffect, useContext, useReducer } from "react";1
 import { useNavigate } from "react-router-dom";
 import MainPage from "../MainPage";
-import { getToken, getTokenInternal, useToken } from "./AuthenticationTEST";
+import { getToken, getTokenInternal } from "./AuthenticationTEST";
+import { useToken } from "./Authentication";
 import { logout } from "../MainPage";
 import Nav from "../Nav";
 
