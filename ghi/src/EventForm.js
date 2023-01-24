@@ -32,7 +32,8 @@ const EventForm = () => {
       // "weather": weather
     };
 
-    const eventUrl = "http://localhost:8001/events/";
+    // const eventUrl = "http://localhost:8001/events/";
+    const eventUrl = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/events`;
     const fetchConfig = {
       method: "post",
       body: JSON.stringify(data),
