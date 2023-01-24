@@ -1,8 +1,10 @@
 import unittest
 from routers.accounts import AccountQueries, AccountOut
 
+
 class TestAccountQueries(unittest.TestCase):
     def test_get_all_accounts(self):
+
         # Arrange
         account_queries = AccountQueries()
 
@@ -17,5 +19,6 @@ class TestAccountQueries(unittest.TestCase):
             self.assertIsInstance(account.username, str)
             self.assertIsInstance(account.email, str)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

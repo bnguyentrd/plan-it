@@ -170,9 +170,5 @@ Today, I worked on:
 - CI/CD setup/configuration
 - unit test
 
-Today I worked on figuring out deployment and finally got my builds and to stop failing and also got pages to deploy after much trial and error. I now
-have a clean pipeline but now im running into another issue. When trying to make a request to anything regarding my specific microservice for accounts, I get
-a generic 500 Internal error. However, I'm still getting a 200 response when I request to get a token despite the token being null so I know that im able to get
-some kind of response. I think the issue is that my migrations isnt going through when I deploy since I cant see my tables anywhere when accessing pgAdmin.
-I suspect that somewhere in my configuration, I'm not linking up my database correctly. This has been a huge blocker for the past two days so on my off time, I
-started working on a unit test to test an endpoint to get an account.
+Today I worked on figuring out deployment and finally got my builds and to stop failing and also got pages to deploy after much trial and error. I now have a clean pipeline but now im running into another issue. When trying to make a request to anything regarding my specific microservice for accounts, I get a generic 500 Internal error. However, I'm still getting a 200 response when I request to get a token despite the token being null so I know that im able to get some kind of response. I think the issue is that my migrations isnt going through when I deploy since I cant see my tables anywhere when accessing pgAdmin. I suspect that somewhere in my configuration, I'm not linking up my database correctly. This has been a huge blocker for the past two days so on my off time, I started working on a unit test to test an endpoint to get an account. I suppose my first "ah-ha!" moment was that I realized these journals needed an "ah-ha" moment at the end of each entry. Another one for today would probably be the unit test.
+It was nice to see the unit test behave the way I expected it to, and then purposefully breaking my code to see the unit test fail.

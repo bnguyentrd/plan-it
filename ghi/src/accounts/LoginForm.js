@@ -1,16 +1,16 @@
 import React, { useState, useEffect, navigate } from "react";
-import { useAuthContext } from "./Authentication";
+// import { useAuthContext } from "./Authentication";
 import { Container, Box, TextField, Button } from "@mui/material";
-import { useToken } from "./Authentication";
+import { useAuthContext } from "./AuthenticationTEST";
 import "../css/LoginForm.css";
 import App from "../App";
 
 export const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [token, login] = useToken();
+  const { login, isLoggedIn } = useAuthContext();
   const [error, setError] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,11 +19,11 @@ export const LoginForm = () => {
 
   // issue: when logged out, the logged in message still displays
   // unless I hard refresh the page
-  useEffect(() => {
-    if (token) {
-      setIsLoggedIn(true);
-    }
-  }, [token]);
+  // useEffect(() => {
+  //   if (token) {
+  //     setIsLoggedIn(true);
+  //   }
+  // }, [token]);
 
   return (
     <>

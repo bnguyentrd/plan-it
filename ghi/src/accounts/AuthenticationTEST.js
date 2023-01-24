@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToken } from "../zustand_store/store";
 // import axios from "axios";
 let internalToken = null;
 
@@ -11,6 +12,7 @@ export async function getTokenInternal() {
   // original
   // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/me/token/`;
   const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token/`;
+  let data;
   // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/{id}/token/`;
   // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/id/token/`;
   try {
@@ -18,14 +20,18 @@ export async function getTokenInternal() {
       credentials: "include",
     });
     if (response.ok) {
-      const data = await response.json();
+      data = await response.json();
+      addToken(data.access_token);
       // internalToken = data.access_token;
       // return internalToken;
-      console.log(data, "getTokenInternal", "RECEIVING TOKEN HERE");
-      return data;
+      console.log(
+        data.access_token,
+        "getTokenInternal",
+        "RECEIVING TOKEN HERE"
+      );
     }
   } catch (e) {}
-  return false;
+  return data;
 }
 
 function handleErrorMessage(error) {
@@ -55,38 +61,40 @@ function handleErrorMessage(error) {
 //   setToken: () => null,
 // });
 
-export const AuthContext = createContext({
-  token: null,
-  setToken: () => null,
-});
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(null);
-
-  return (
-    <AuthContext.Provider value={{ token, setToken }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
-
-export const useAuthContext = () => useContext(AuthContext);
-
-export function useToken() {
-  const { token, setToken } = useAuthContext();
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const addToken = useToken((state) => state.addToken);
+  const removeToken = useToken((state) => state.removeToken);
+  const token1 = useToken((state) => state.token);
+
+  //   useEffect(() => {
+  //   async function fetchToken() {
+  //     const token = await getTokenInternal();
+  //     return token;
+  //   }
 
   useEffect(() => {
     async function fetchToken() {
       const token = await getTokenInternal();
-      setToken(token);
+      //   setToken(token);
     }
-    if (!token) {
+    if (!token1) {
       fetchToken();
-      console.log(token, "TOKEN HAS BEEN FETCHED HERE");
+      console.log(token1, "TOKEN1 HAS BEEN FETCHED HERE");
     }
-  }, [setToken, token]);
+    console.log(token1, "USE EFFECT");
+  }, [token1]);
+
+  // if (!token) {
+  //   fetchToken();
+  //   console.log(token, "TOKEN HAS BEEN FETCHED HERE");
+  // }
+  //   }, [setToken, token]);
+  //   }, [setToken]);
+  //   }, [token]);
 
   // ORIGINAL LOGOUT WORKING on backend. but not frontend
   // async function logout() {
@@ -101,16 +109,17 @@ export function useToken() {
   // }
 
   async function logout() {
-    if (token) {
+    if (token1) {
       // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/token/refresh/logout/`;
       const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`;
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
-      setIsLoggedIn(() => {
-        false;
-      });
+      //   setIsLoggedIn(() => {
+      //     false;
+      //   });
       console.log(isLoggedIn, "IS LOGGED IN");
-      setToken(null);
+      removeToken(null);
+      console.log(token1, "THIS IS WHERE WE REMOVED TOKEN");
       navigate("/");
     }
   }
@@ -140,7 +149,8 @@ export function useToken() {
     });
     if (response.ok) {
       const token = await getTokenInternal();
-      setToken(token);
+      addToken(() => token);
+      console.log("THIS IS TOKEN1: ", token);
       setIsLoggedIn(true);
       setTimeout(() => {
         navigate("/");
@@ -191,7 +201,15 @@ export function useToken() {
     return false;
   }
 
-  return [token, login, logout, signup, update, isLoggedIn, setIsLoggedIn];
-}
+  return (
+    <AuthContext.Provider value={{ login, logout, signup, isLoggedIn, token1 }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuthContext = () => {
+  return useContext(AuthContext);
+};
 
 // export default logout;
