@@ -172,3 +172,13 @@ Today, I worked on:
 
 Today I worked on figuring out deployment and finally got my builds and to stop failing and also got pages to deploy after much trial and error. I now have a clean pipeline but now im running into another issue. When trying to make a request to anything regarding my specific microservice for accounts, I get a generic 500 Internal error. However, I'm still getting a 200 response when I request to get a token despite the token being null so I know that im able to get some kind of response. I think the issue is that my migrations isnt going through when I deploy since I cant see my tables anywhere when accessing pgAdmin. I suspect that somewhere in my configuration, I'm not linking up my database correctly. This has been a huge blocker for the past two days so on my off time, I started working on a unit test to test an endpoint to get an account. I suppose my first "ah-ha!" moment was that I realized these journals needed an "ah-ha" moment at the end of each entry. Another one for today would probably be the unit test.
 It was nice to see the unit test behave the way I expected it to, and then purposefully breaking my code to see the unit test fail.
+
+## Jan 23
+
+Today, I worked on:
+
+- Deployment
+
+Today I did not have as much time to write much code since I attended the optional lectures on deployment. After changing a few lines of code in my Dockerfile
+and my docker-compose-yml file, I was finally able to connect my database to accounts. On the deployed backend docs page, Im no longer getting a 500 error and can successfully create an account and view all acounts. I did some extra research on implementing zustand which is an alternative to react redux. Currently, the logout, login, and signup links in the nav menu is behaving properly based on the client's logged in state. The only issue now is that upon initial loading of the app, the login link is not appearing, I have to go to account detail which will redirect me to the login page to test it. Since I dont have enough
+knowledge on using zustand or redux just yet, I have to spend time on more research and will hopefully be able to help my teammates on their issues.
