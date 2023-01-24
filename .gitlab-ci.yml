@@ -29,8 +29,8 @@ lint-test-job:
 #     - python -m pytest
 
 build-accounts-image-job:
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_STEVEN_BRANCH
+  only:
+    - main
   image: docker:19.03.1
   stage: build
   services:
@@ -57,8 +57,8 @@ build-accounts-image-job:
   # Build the React/JavaScript front-end
 build-front-end-job:
   # rules added per learn. lines 30-32
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_STEVEN_BRANCH
+  only:
+    - main
   stage: build
   image: node:lts-bullseye
   needs:
@@ -84,8 +84,8 @@ build-front-end-job:
 # Deploy the React/JavaScript front-end to GitLab pages
 pages:
   stage: deploy
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_STEVEN_BRANCH
+  only:
+    - main
   dependencies:
     - build-front-end-job
   needs:
