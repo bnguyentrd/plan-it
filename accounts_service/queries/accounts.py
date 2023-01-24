@@ -104,7 +104,9 @@ class AccountQueries:
                     return None
                 return self.record_to_user_out(record)
 
-    def create(self, info: AccountIn, hashed_password: str) -> AccountOutWithPassword:
+    def create(
+        self, info: AccountIn, hashed_password: str
+    ) -> AccountOutWithPassword:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
