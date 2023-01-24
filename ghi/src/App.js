@@ -1,75 +1,48 @@
+import "./App.css";
 import { useEffect, useState } from "react";
 import MainPage from "./MainPage.js";
-// import ErrorNotification from "./ErrorNotification";
-import "./App.css";
 import SignUpForm from "./accounts/SignUpForm";
 import { LoginForm } from "./accounts/LoginForm.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AccountDetails from "./accounts/AccountDetail.js";
 import { About } from "./accounts/About.js";
 import { AuthProvider } from "./accounts/AuthenticationTEST";
-// import { AuthProvider, AuthContext } from "./accounts/AuthenticationTEST";
 import EventForm from "./events/eventForm";
 import EventList from "./events/eventList";
 import EventDetails from "./events/eventDetails.js";
+import { useToken } from "./accounts/Authentication.js";
+
+function getToken() {
+  useToken();
+  return null;
+}
 
 function App(props) {
   const [launch_info, setLaunchInfo] = useState([]);
   const [error, setError] = useState(null);
   const [account_id, setAccountId] = useState(0);
-
-  async function getAccount() {
-    const url = `http://localhost:8000/token`;
-    const response = await fetch(url, {
-      credentials: "include",
-    });
-    if (response.ok) {
-      const data = await response.json();
-      let id = data.account.id;
-      setAccountId(id);
-      return id;
-    }
-  }
-
-  useEffect(() => {
-    getAccount();
-  }, []);
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
 
   return (
     <>
-      {/* <AuthContext.Consumer> */}
-      {/* {(context) => ( */}
-      //{" "}
       <div>
-        <BrowserRouter>
+        <BrowserRouter basename={basename}>
           <AuthProvider>
-            {/* <BrowserRouter basename={basename}></BrowserRouter> */}
             <Routes>
               <Route path="/" element={<MainPage accountid={account_id} />} />
               <Route path="/signup" element={<SignUpForm />} />
               <Route path="/login" element={<LoginForm />} />
-              {/* <Route path="/about" /> */}
               <Route path="/about" element={<About />} />
               <Route path="/api/protected" />
-              <Route
-                path="/api/accounts/:id"
-                // path="/api/accounts/me/token"
-                element={<AccountDetails />}
-                // element={<AccountDetails token={context.token} />}
-              />
+              <Route path="/api/accounts/:id" element={<AccountDetails />} />
               <Route path="/events" element={<EventList />} />
               <Route path="/create" element={<EventForm />} />
               <Route path="/details/:id" element={<EventDetails />} />
-              {/* <ErrorNotification error={error} /> */}
-              {/* <Construct info={launch_info} /> */}
-              {/* <MainPage info={launch_info} /> */}
             </Routes>
           </AuthProvider>
         </BrowserRouter>
-        //{" "}
       </div>
-      {/* )} */}
-      {/* </AuthContext.Consumer> */}
     </>
   );
 }
