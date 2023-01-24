@@ -10,7 +10,7 @@ export function getToken() {
 export async function getTokenInternal() {
   // original
   // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/me/token/`;
-  const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token/`;
+  const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`;
   // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/{id}/token/`;
   // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/id/token/`;
   try {
