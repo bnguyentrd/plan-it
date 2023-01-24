@@ -1,7 +1,8 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, ARRAY
+from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, ARRAY, Boolean
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql import func
 
 from database import Base
 
@@ -9,9 +10,10 @@ from database import Base
 class Question(Base):
 	__tablename__ = "question"
 	id = Column(Integer, primary_key=True)
-	question_text = Column(String(200))
-	pub_date = Column(DateTime)
-	belongs_to = Column(Integer)
+	title = Column(String(200))
+	question_text = Column(String(400))
+	belongs_to = Column(Integer, nullable=True)
+	is_active = Column(Boolean, default=True)
 
 	choices = relationship('Choice', back_populates="question")
 

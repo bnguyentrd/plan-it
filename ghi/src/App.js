@@ -11,6 +11,8 @@ import { AuthProvider, AuthContext } from "./accounts/Authentication";
 import EventForm from './events/eventForm';
 import EventList from './events/eventList';
 import EventDetails from "./events/eventDetails.js";
+import PollForm from "./polls/PollForm.js";
+import PollList from "./polls/PollList.js";
 
 function App(props) {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -64,6 +66,8 @@ function App(props) {
                   {/* <ErrorNotification error={error} /> */}
                   {/* <Construct info={launch_info} /> */}
                   {/* <MainPage info={launch_info} /> */}
+                  <Route path="/questions/new" element={<PollForm/>} />
+                  <Route path="/questions" element={<PollList/>} />
                 </Routes>
               </BrowserRouter>
             </div>

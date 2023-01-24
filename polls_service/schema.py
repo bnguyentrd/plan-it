@@ -25,11 +25,14 @@ class ChoiceList(ChoiceBase):
 # Question schema
 
 class QuestionBase(BaseModel):
+	title: str
 	question_text: str
-	pub_date: datetime
 
 class QuestionCreate(QuestionBase):
 	pass
+
+class QuestionEdit(QuestionBase):
+	is_active: bool
 
 class Question(QuestionBase):
 	id: int
