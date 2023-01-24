@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Container, Box, TextField, Button } from "@mui/material";
 import "../css/SignUp.css";
 import Nav from "../Nav";
+import { useAuthContext } from "./AuthenticationTEST";
 
 // import "../css/SignUp.css";
 
@@ -9,42 +10,17 @@ function SignUpForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const { signup } = useAuthContext();
 
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const url = "http://localhost:8000/api/accounts/new";
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-        email,
-      }),
-    });
-
-    // if (!response.ok) {
-    //   // Handle error response
-    //   const error = await response.json();
-    //   console.log(error);
-    // } else {
-    //   const data = await response.json();
-    //   console.log(data);
-    // }
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-      // Handle error response
-    } else {
-      const error = await response.json();
-      console.log(error);
+    try {
+      await signup(username, password, email);
+      console.log("Signup Successful!");
+    } catch (error) {
+      console.log("Signup Error: ", error);
     }
-
-    // Handle successful response
   }
 
   return (

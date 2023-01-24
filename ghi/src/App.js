@@ -36,6 +36,10 @@ function App(props) {
               <Route path="/about" element={<About />} />
               <Route path="/api/protected" />
               <Route path="/api/accounts/:id" element={<AccountDetails />} />
+              {/* <Route
+                path="/api/accounts/profile"
+                element={<AccountDetails />}
+              /> */}
               <Route path="/events" element={<EventList />} />
               <Route path="/create" element={<EventForm />} />
               <Route path="/details/:id" element={<EventDetails />} />
