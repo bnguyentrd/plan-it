@@ -12,10 +12,10 @@ import EventList from "./events/eventList";
 import EventDetails from "./events/eventDetails.js";
 import { useToken } from "./accounts/Authentication.js";
 
-function getToken() {
-  useToken();
-  return null;
-}
+// function getToken() {
+//   useToken();
+//   return null;
+// }
 
 function App(props) {
   const [launch_info, setLaunchInfo] = useState([]);
