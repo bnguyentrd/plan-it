@@ -12,7 +12,7 @@ const EventForm = () => {
   const [description, setDescription] = useState("");
   // const [url, setUrl] = useState("")
   // const [weather, setWeather] = useState("")
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,8 +27,8 @@ const EventForm = () => {
       // "weather": weather
     };
 
-    // const eventUrl = "http://localhost:8001/events/"
-    const eventUrl = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/events`;
+    const eventUrl = "http://localhost:8001/events/";
+    // const eventUrl = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/events`;
     const fetchConfig = {
       method: "post",
       body: JSON.stringify(data),
@@ -39,7 +39,7 @@ const EventForm = () => {
     const response = await fetch(eventUrl, fetchConfig);
     if (response.ok) {
       const newEvent = await response.json();
-      // navigate(`/events/${newEvent.id}`)
+      navigate("/details/" + newEvent.id);
     }
   };
 

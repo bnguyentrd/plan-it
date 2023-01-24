@@ -31,6 +31,7 @@ def create_event(
         event.weather = get_weather(event.city, event.state)["description"]
         # print("::::::::::", event)
         return repo.create(event)
+        # print("testing weather bypass")
     except Exception:
         response.status_code = 400
 

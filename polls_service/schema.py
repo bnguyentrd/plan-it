@@ -11,11 +11,13 @@ class ChoiceBase(BaseModel):
 	votes: int = 0
 
 
+
 class ChoiceCreate(ChoiceBase):
 	pass
 
 class ChoiceList(ChoiceBase):
 	id: int
+	voted: List[int] = None
 	class Config:
 		orm_mode = True
 
@@ -23,11 +25,14 @@ class ChoiceList(ChoiceBase):
 # Question schema
 
 class QuestionBase(BaseModel):
+	title: str
 	question_text: str
-	pub_date: datetime
 
 class QuestionCreate(QuestionBase):
 	pass
+
+class QuestionEdit(QuestionBase):
+	is_active: bool
 
 class Question(QuestionBase):
 	id: int

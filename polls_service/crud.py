@@ -1,4 +1,9 @@
 from sqlalchemy.orm import Session
+from fastapi import FastAPI
+from fastapi.encoders import jsonable_encoder
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel
+
 
 from models import Base, Question, Choice
 import schema
@@ -12,15 +17,18 @@ def create_question(db: Session, question: schema.QuestionCreate):
 	return obj
 
 def get_all_questions(db: Session):
-	return db.query(Question).all()
+	questions = db.query(Question).all()
+	questions = jsonable_encoder(questions)
+	return JSONResponse(questions)
 
 def get_question(db:Session, qid):
 	return db.query(Question).filter(Question.id == qid).first()
 
-def edit_question(db: Session, qid, question: schema.QuestionCreate):
+def edit_question(db: Session, qid, question: schema.QuestionEdit):
 	obj = db.query(Question).filter(Question.id == qid).first()
 	obj.question_text = question.question_text
-	obj.pub_date = question.pub_date
+	obj.title = question.title
+	obj.is_active = question.is_active
 	db.commit()
 	return obj
 

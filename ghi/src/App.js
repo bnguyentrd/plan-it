@@ -11,6 +11,8 @@ import EventForm from "./events/eventForm";
 import EventList from "./events/eventList";
 import EventDetails from "./events/eventDetails.js";
 import { useToken } from "./accounts/Authentication.js";
+import PollForm from "./polls/PollForm.js";
+import PollList from "./polls/PollList.js";
 
 // function getToken() {
 //   useToken();
@@ -36,17 +38,17 @@ function App(props) {
               <Route path="/about" element={<About />} />
               <Route path="/api/protected" />
               <Route path="/api/accounts/:id" element={<AccountDetails />} />
-              {/* <Route
-                path="/api/accounts/profile"
-                element={<AccountDetails />}
-              /> */}
               <Route path="/events" element={<EventList />} />
               <Route path="/create" element={<EventForm />} />
               <Route path="/details/:id" element={<EventDetails />} />
+              <Route path="/questions/new" element={<PollForm/>} />
+              <Route path="/questions" element={<PollList/>} />
             </Routes>
           </AuthProvider>
         </BrowserRouter>
       </div>
+
+
     </>
   );
 }
