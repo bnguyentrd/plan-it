@@ -5,6 +5,7 @@ stages:
 
 variables:
   DATABASE_URL: postgres://postgres:bbd2ca03616b2bcf@srv-captain--postgres-accounts/postgres
+  OPEN_WEATHER_API_KEY: 3e1eb45a606106a2ec6fed8a4ccfe16a
 
 # Run flake8 to check for code quality
 lint-test-job:
