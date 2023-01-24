@@ -56,12 +56,16 @@ class AccountQueries:
             """
                 )
 
-                results = []
-                for row in cur.fetchall():
-                    record = {}
-                    for i, column in enumerate(cur.description):
-                        record[column.name] = row[i]
-                    results.append(record)
+                # results = []
+                # for row in cur.fetchall():
+                #     record = {}
+                #     for i, column in enumerate(cur.description):
+                #         record[column.name] = row[i]
+                #     results.append(record)
+                results = [
+                    AccountOut(id=row[0], username=row[1], email=row[2])
+                    for row in cur.fetchall()
+                ]
 
                 return results
 
