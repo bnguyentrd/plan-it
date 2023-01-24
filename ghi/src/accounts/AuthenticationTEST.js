@@ -11,7 +11,7 @@ export function getToken() {
 export async function getTokenInternal() {
   // original
   // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/me/token/`;
-  const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token/`;
+  const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`;
   let data;
   // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/{id}/token/`;
   // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/id/token/`;
@@ -124,7 +124,6 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-
   async function login(username, password) {
     const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`;
     const form = new FormData();
@@ -169,7 +168,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   async function update(username, password, email) {
-    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/`;
+    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts`;
     const response = await fetch(url, {
       method: "put",
       body: JSON.stringify({
