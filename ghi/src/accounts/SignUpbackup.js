@@ -1,3 +1,4 @@
+// 1/24
 // import { useState } from "react";
 // import { Container, Box, TextField, Button } from "@mui/material";
 // import "../css/SignUp.css";
@@ -26,15 +27,6 @@
 //       }),
 //     });
 
-//     // if (!response.ok) {
-//     //   // Handle error response
-//     //   const error = await response.json();
-//     //   console.log(error);
-//     // } else {
-//     //   const data = await response.json();
-//     //   console.log(data);
-//     // }
-
 //     if (response.ok) {
 //       const data = await response.json();
 //       console.log(data);
@@ -43,8 +35,6 @@
 //       const error = await response.json();
 //       console.log(error);
 //     }
-
-//     // Handle successful response
 //   }
 
 //   return (
