@@ -1,16 +1,12 @@
 from fastapi import APIRouter, Depends, Response
 from typing import List, Optional, Union
-from queries.events import (
-    Error,
-    EventIn,
-    EventRepository,
-    EventOut
-)
+from queries.events import Error, EventIn, EventRepository, EventOut
 
 from queries.acls import get_weather
 
 
 router = APIRouter()
+
 
 @router.get("/events/{event_id}", response_model=Optional[EventOut])
 def get_one_event(

@@ -1,7 +1,5 @@
 from .keys import OPEN_WEATHER_API_KEY
-import json
 import requests
-
 
 
 def get_lat_lon(city, state):
@@ -12,8 +10,8 @@ def get_lat_lon(city, state):
     }
     res = requests.get(url, params=params)
     json = res.json()
-    lat = json[0]['lat']
-    lon = json[0]['lon']
+    lat = json[0]["lat"]
+    lon = json[0]["lon"]
     return lat, lon
 
 
@@ -32,5 +30,3 @@ def get_weather(city, state):
         "temp": json["main"]["temp"],
         "description": json["weather"][0]["description"],
     }
-
-

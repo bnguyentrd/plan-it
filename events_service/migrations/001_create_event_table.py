@@ -24,6 +24,6 @@ steps = [
         """
         DROP TABLE checklists;
         DROP TABLE events;
-        """
+        """,
     ]
 ]
