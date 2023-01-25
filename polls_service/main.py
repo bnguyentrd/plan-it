@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, Response, Depends
 from fastapi.middleware.cors import CORSMiddleware
 import os
-from .poll_schema import (
+from poll_schema import (
     QuestionInfo,
     Question,
     QuestionEdit,
