@@ -1,22 +1,18 @@
-import React from 'react';
-import logo from './logo/logo.png';
-import Nav from './Nav';
-import Slideshow from './Slideshow';
-import { useState } from 'react';
-import './css/DarkMode.css';
+import React from "react";
+import logo from "./logo/logo.png";
+import Nav from "./Nav";
+import Slideshow from "./Slideshow";
+import { useState } from "react";
+import "./css/DarkMode.css";
 // import ProfilePicture from './ProfilePicture';
-import EventForm from './EventForm';
-import ProfilePicture from './ProfilePicture';
-import { useSlotProps } from '@mui/base';
-
-
+import EventForm from "./EventForm";
+import ProfilePicture from "./ProfilePicture";
+import { useSlotProps } from "@mui/base";
 
 function MainPage(props) {
+  const [darkMode, setDarkMode] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
-    const [darkMode, setDarkMode] = useState(false);
-    const [currentUser, setCurrentUser] = useState(null);
-
-    
   const logout = () => {
     fetch(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`, {
       method: "DELETE",
@@ -26,10 +22,9 @@ function MainPage(props) {
     });
   };
 
-
-    const toggleDarkMode = () => {
+  const toggleDarkMode = () => {
     setDarkMode(!darkMode);
-    }
+  };
 
     return (
         <div className={darkMode ? "dark-mode" : "" }>

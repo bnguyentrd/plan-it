@@ -3,7 +3,8 @@ import React, { useState, useEffect, useContext } from "react";
 // import React, { useState, useEffect, useContext, useReducer } from "react";1
 import { useNavigate } from "react-router-dom";
 import MainPage from "../MainPage";
-import { getToken, getTokenInternal, useToken } from "./Authentication";
+import { getToken, getTokenInternal } from "./AuthenticationTEST";
+import { useToken } from "./Authentication";
 import { logout } from "../MainPage";
 import Nav from "../Nav";
 
@@ -30,7 +31,8 @@ function AccountDetails() {
         console.log("PASSED TOKEN CHECK");
         // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/me/`;
         // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/{id}/`;
-        const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}/`;
+        const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}`;
+        console.log("HERE IS THE TOKEN ID:", token.account.id);
         try {
           const response = await fetch(url, {
             headers: {
@@ -57,9 +59,7 @@ function AccountDetails() {
     // }, [updateUsername, updateEmail]);
   }, [updateEmail]);
 
-  useEffect(() => {
-    // ...
-  }, []);
+
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -85,36 +85,7 @@ function AccountDetails() {
   //   setProfilePicture(e.target.files[0]);
   // };
 
-  // const handleEmailUpdate = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   const token = await getTokenInternal();
-  //   const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}/email`;
-  //   try {
-  //     const response = await fetch(url, {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${token.access_token}`,
-  //       },
-  //       body: JSON.stringify({ email }),
-  //     });
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       // switch test. details was first. result: didnt change anything
-  //       setAccountDetails(data);
-  //       // window.location.reload();
-  //       // setUpdateEmail(true);
-  //     } else {
-  //       const error = await response.json();
-  //       setError(error.message);
-  //     }
-  //   } catch (e) {
-  //     console.log(e);
-  //     setError(e.message);
-  //   }
-  //   setLoading(false);
-  // };
+
 
   const handleEmailUpdate = async (e) => {
     e.preventDefault();

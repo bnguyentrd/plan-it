@@ -4,18 +4,21 @@ import { NavLink } from "react-router-dom";
 import SignUpForm from "./accounts/SignUpForm";
 import "./css/Nav.css";
 // import { useToken } from "./Authentication";
-import { useToken } from "./accounts/Authentication";
+import { useAuthContext } from "./accounts/AuthenticationTEST";
 import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 
-
 function Nav(props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [token, useToken] = useState();
   const [currentUser, setCurrentUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   // const [token, logout] = useToken();
-  const [token, login] = useToken();
+  // const [token, login] = useToken();
+  // const [token, useToken] = useState();
+  // const { token, isLoggedIn, logout } = useAuthContext();
+  const { isLoggedIn } = useAuthContext();
+  const { logout } = useAuthContext();
+  const { token1 } = useAuthContext();
   const navigate = useNavigate();
 
   const handleLogout = async (e) => {
@@ -27,14 +30,17 @@ function Nav(props) {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  useEffect(() => {
-    // const token = localStorage.getItem("token");
-    if (token) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, [token]);
+  // useEffect(() => {
+  //   console.log("UseEffect token", token);
+  //   // const token = localStorage.getItem("token");
+  //   if (token) {
+  //     setIsLoggedIn(true);
+  //   } else {
+  //     setIsLoggedIn(false);
+  //     console.log("SET_LOGGED IN IS SET TO FALSE");
+  //   }
+  //   // }, [isLoggedIn]);
+  // }, [isLoggedIn]);
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -43,38 +49,31 @@ function Nav(props) {
   //   e.preventDefault();
   // };
 
-  const logout = () => {
-    fetch(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`, {
-      method: "DELETE",
-      credentials: "include", // include cookies in the request
-    }).then(() => {
-      setCurrentUser(null);
-      setIsLoggedIn(false);
-      localStorage.removeItem("token");
-      navigate("/");
-    });
-  };
+  // const logout = () => {
+  //   fetch(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`, {
+  //     method: "DELETE",
+  //     credentials: "include", // include cookies in the request
+  //   }).then(() => {
+  //     setCurrentUser(null);
+  //     setIsLoggedIn(false);
+  //     localStorage.removeItem("token");
+  //     navigate("/");
+  //   });
+  // };
 
-//   const logout = async () => {
-//     try {
-//         await axios.delete(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`, {
-//             withCredentials: true,
-//         });
-//         setCurrentUser(null);
-//         setIsLoggedIn(false);
-//         localStorage.removeItem("token");
-//         navigate("/");
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
-
-
-
-
-
-
-
+  //   const logout = async () => {
+  //     try {
+  //         await axios.delete(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`, {
+  //             withCredentials: true,
+  //         });
+  //         setCurrentUser(null);
+  //         setIsLoggedIn(false);
+  //         localStorage.removeItem("token");
+  //         navigate("/");
+  //     } catch (error) {
+  //         console.error(error);
+  //     }
+  // }
 
   // const login = () => {}
 
@@ -105,15 +104,15 @@ function Nav(props) {
             {/* <li className="nav-li">About</li> */}
             <li className="item-1">Contact</li>
             {/* <li className="item-2"> <NavLink to="/signup">Sign Up</NavLink> </li> */}
-            {!isLoggedIn ? (
-              <li className="item-2">
+            {!token1 ? (
+              <li>
                 {" "}
                 <NavLink to="/signup">Sign Up</NavLink>{" "}
               </li>
             ) : null}
 
             {/* <li> <NavLink to="/login">Log in</NavLink> </li> */}
-            {!isLoggedIn ? (
+            {!token1 ? (
               <li className="item-1">
                 {" "}
                 <NavLink to="/login">Log in</NavLink>{" "}
@@ -124,7 +123,7 @@ function Nav(props) {
               {/* <NavLink to="/accountdetails">Account Details</NavLink> */}
               {/* <NavLink to="/api/accounts/me/token/">Account Details</NavLink> */}
               {/* <NavLink to="/api/accounts/me/id/">Account Details</NavLink> */}
-              <NavLink to={`/api/accounts/${props.accountid}/`}>
+              <NavLink to={`/api/accounts/${props.accountid}`}>
                 Account Details
               </NavLink>
             </li>
@@ -138,10 +137,10 @@ function Nav(props) {
               <NavLink to="/details">Event Details</NavLink>
             </li>
 
-            {isLoggedIn ? (
+            {token1 ? (
               <li>
                 {" "}
-                <NavLink onClick={handleLogout}>Logout</NavLink>
+                <NavLink onClick={handleLogout}>Logout</NavLink>{" "}
               </li>
             ) : null}
           </ul>

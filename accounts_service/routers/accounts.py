@@ -1,6 +1,5 @@
 from fastapi import (
     # Body,
-    Query,
     Depends,
     HTTPException,
     status,
@@ -17,7 +16,6 @@ from queries.accounts import (
     Error,
     EmailIn,
     UsernameIn,
-    # Username,
     AccountIn,
     AccountOut,
     AccountsOut,
@@ -72,10 +70,7 @@ def account_detail(
     #   account: dict = Depends(authenticator.get_current_account_data),
     repo: AccountQueries = Depends(),
 ) -> AccountOut:
-    print(
-        "this is the repooooooooooooooooooooooooooooooooooooooooooooooooo",
-        repo,
-    )
+    print(repo)
     user = repo.get_one(id)
     if user is None:
         response.status_code = 404

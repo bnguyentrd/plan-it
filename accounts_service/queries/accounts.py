@@ -1,23 +1,14 @@
-import os
 from queries.pool import pool
-from fastapi import HTTPException, FastAPI
 from pydantic import BaseModel
 # import psycopg2
 
-# from pydantic import BaseModel, EmailStr
-from typing import Optional, Union
+from typing import Optional
 
 
-# pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
 class AccountIn(BaseModel):
     username: str
     email: str
     password: str
-
-
-# class Account(AccountIn):
-#     id = PydanticObjectId
-#     roles: List[str]
 
 
 class Username(BaseModel):
@@ -43,7 +34,6 @@ class AccountsOut(BaseModel):
 
 
 class EmailIn(BaseModel):
-    # username: str
     email: str
 
 
@@ -74,12 +64,16 @@ class AccountQueries:
             """
                 )
 
-                results = []
-                for row in cur.fetchall():
-                    record = {}
-                    for i, column in enumerate(cur.description):
-                        record[column.name] = row[i]
-                    results.append(record)
+                # results = []
+                # for row in cur.fetchall():
+                #     record = {}
+                #     for i, column in enumerate(cur.description):
+                #         record[column.name] = row[i]
+                #     results.append(record)
+                results = [
+                    AccountOut(id=row[0], username=row[1], email=row[2])
+                    for row in cur.fetchall()
+                ]
 
                 return results
 
@@ -117,26 +111,6 @@ class AccountQueries:
                 if record is None:
                     return None
                 return self.record_to_user_out(record)
-
-    #   def create(self, info: AccountIn, hashed_password: str) -> AccountOutWithPassword:
-    #     with pool.connection() as conn:
-    #         with conn.cursor() as cur:
-    #             params = [info.username, info.email, hashed_password]
-    #             cur.execute(
-    #                 """
-    #                 INSERT INTO accounts (username, email, hashed_password)
-    #                 VALUES (%s, %s, %s)
-    #                 RETURNING id, username, email, hashed_password
-    #                 """,
-    #                 params,
-    #             )
-    #             record = None
-    #             row = cur.fetchone()
-    #             if row is not None:
-    #                 record = {}
-    #                 for i, column in enumerate(cur.description):
-    #                     record[column.name] = row[i]
-    #             return record
 
     def create(
         self, info: AccountIn, hashed_password: str
@@ -180,28 +154,6 @@ class AccountQueries:
             print(e)
             return False
 
-    #   def update(self, id: int, user: AccountIn) -> Union[AccountOut, Error]:
-    #         try:
-    #             with pool.connection() as conn:
-    #                 with conn.cursor() as db:
-    #                     db.execute(
-    #                         """
-    #                         UPDATE accounts
-    #                         SET username = %s, email = %s
-    #                         WHERE id = %s
-    #                         """,
-    #                         [
-    #                             user.username,
-    #                             user.email,
-    #                             id
-    #                         ]
-    #                     )
-    #                     return self.user_in_to_out(id, user)
-
-    #         except Exception as e:
-    #             print(e)
-    #             return {"message": "Could not update user data"}
-
     def updateEmail(self, id: int, user: dict):
         try:
             with pool.connection() as conn:
@@ -214,7 +166,6 @@ class AccountQueries:
                         """,
                         [
                             user["email"],
-                            # user["username"],
                             id,
                         ],
                     )
@@ -235,7 +186,6 @@ class AccountQueries:
                         WHERE id = %s
                         """,
                         [
-                            # user["email"],
                             user["username"],
                             id,
                         ],
