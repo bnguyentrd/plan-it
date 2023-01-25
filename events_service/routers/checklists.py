@@ -27,6 +27,17 @@ def get_all(
     return repo.get_all()
 
 
+@router.get("/event/checklists/{event_id}", response_model=list[ChecklistOut])
+def get_by_event(
+    event_id: int, response: Response, repo: ChecklistRepository = Depends()
+) -> list[ChecklistOut]:
+    checklist = repo.get_by_event(event_id)
+    if checklist is None:
+        response.status_code = 404
+    else:
+        return checklist
+
+
 @router.post("/checklists", response_model=ChecklistOut)
 def create_checklist(
     checklist: ChecklistIn, repo: ChecklistRepository = Depends()
