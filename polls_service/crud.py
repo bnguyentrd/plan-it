@@ -6,7 +6,7 @@ from pydantic import BaseModel
 
 
 from models import Base, Question, Choice
-from poll_schema import (
+from .poll_schema import (
     QuestionInfo,
     Question,
     QuestionEdit,
