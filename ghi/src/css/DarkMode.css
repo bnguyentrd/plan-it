@@ -1,16 +1,38 @@
 
 body {
-  background-image: linear-gradient(140deg, rgb(253, 253, 253) 0%, rgb(107, 166, 235) 50%, rgba(146, 112, 238, 0.63) 75%);
+  /* background-image: linear-gradient(#233329, #63D471) */
+  /* background-image: linear-gradient(140deg, rgba(2, 100, 8, 0.747) 0%, rgba(20, 110, 47, 0.842) 50%, rgba(88, 65, 22, 0.753) 75%); */
   /* color: black; */
+  /* background: #5A3F37;  fallback for old browsers */
+  /* background: -webkit-linear-gradient(to top, #e3f1e7, #7aac75); */
+  background: linear-gradient(140deg, #6de3e7, #218513); 
+  /* background: linear-gradient(to right, #27badf, #e41b1b); */
   text-align: center;
+  background-size: 400% 400%;
+  animation: animate-background 10s infinite ease-in-out;
 }
+
+@keyframes animate-background {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
 
 /* Dark mode styles */
 .dark-mode {
-  background-color: rgb(65, 59, 59);
-  color: white;
+  /* background-color: rgb(65, 59, 59); */
+  background: linear-gradient(140deg, #404242, #030303); 
+  background-size: 400% 400%;
+  animation: animate-background 10s infinite ease-in-out;
+  color: rgba(66, 226, 247, 0.582);
   /* text-align: center; */
-  opacity: 1;
 }
 
 .toggle-switch {
@@ -117,8 +139,11 @@ body {
 
 .footer1 {
   background-color: rgba(4, 243, 231, 0.26);
-  height: 200px;
-  /* background-image: url('https://img.freepik.com/free-vector/abstract-elegant-paper-cut-banner-modern-template_1055-6400.jpg?w=2000') */
+  height: 400px;
+  background-image: url('https://images.pexels.com/photos/1761282/pexels-photo-1761282.jpeg?cs=srgb&dl=pexels-jacob-colvin-1761282.jpg&fm=jpg');
+  background-size: cover;
+  margin-top: 10%;
+  top: 10%;
 }
 
 .aside1 {
@@ -129,4 +154,95 @@ body {
   height: 200px;
   width: 200px;
   /* background-image: url('https://static.thenounproject.com/png/739210-200.png') */
+}
+
+.event-margin {
+  margin-bottom: 40%;
+}
+
+.footer-quote1 {
+  font-size: 70px;
+  /* text-align: center; */
+  bottom: 10%;
+  height: 80px;
+  color:rgb(107, 166, 235);
+}
+
+.footer-quote2 {
+  font-size: 30px;
+  color:rgb(107, 166, 235);
+}
+
+@import url('https://fonts.googleapis.com/css?family=Coiny');
+
+.cloud-text {
+	font-family: 'Coiny', cursive;
+	-webkit-background-clip: text;
+  	-webkit-text-fill-color: transparent;	
+	background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/769286/clouds.jpg);
+	background-size: auto;
+	background-attachment: unset;
+	background-position: 0%;
+	width: 80%;
+	margin: 10%;
+	font-size: 134px;
+	animation: clouds-moving infinite 220s;
+	animation-fill-mode: forwards;
+	animation-play-state: running;
+	animation-timing-function: linear;
+	text-align: center;
+}
+@keyframes clouds-moving {
+	0% {
+		background-position: 0%;	
+	}
+	50% {
+		background-position: 100%;	
+	}
+	100% {
+		background-position: 0%;
+	}
+}
+.attribute {
+	position: relative;
+	font-size: 26px;
+	text-align: center;
+}
+
+.logo-position {
+  top: 20%;
+}
+
+.cloud-text2 {
+	font-family: 'Coiny', cursive;
+	-webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;	
+	background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/769286/clouds.jpg);
+	background-size: auto;
+	background-attachment: unset;
+	background-position: 0%;
+	width: 80%;
+	margin: 10%;
+	font-size: 75px;
+	animation: clouds-moving infinite 220s;
+	animation-fill-mode: forwards;
+	animation-play-state: running;
+	animation-timing-function: linear;
+	text-align: center;
+}
+@keyframes clouds-moving {
+	0% {
+		background-position: 0%;	
+	}
+	50% {
+		background-position: 100%;	
+	}
+	100% {
+		background-position: 0%;
+	}
+}
+.attribute {
+	position: relative;
+	font-size: 26px;
+	text-align: center;
 }

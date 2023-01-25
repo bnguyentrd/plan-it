@@ -12,28 +12,11 @@ import EventForm from './events/eventForm';
 import EventList from './events/eventList';
 import EventDetails from "./events/eventDetails.js";
 
+
+
+
+
 function App(props) {
-  const [launch_info, setLaunchInfo] = useState([]);
-  const [error, setError] = useState(null);
-  const [account_id, setAccountId] = useState(0);
-
-  async function getAccount() {
-    const url = `http://localhost:8000/token`;
-    const response = await fetch(url, {
-      credentials: "include",
-    });
-    if (response.ok) {
-      const data = await response.json();
-      let id = data.account.id;
-      setAccountId(id);
-      return id;
-    }
-  }
-
-
-  useEffect(() => {
-    getAccount();
-  }, []);
 
   return (
     <>
@@ -46,7 +29,7 @@ function App(props) {
                 <Routes>
                   <Route
                     path="/"
-                    element={<MainPage accountid={account_id} />}
+                    element={<MainPage  />}
                   />
                   <Route path="/signup" element={<SignUpForm />} />
                   <Route path="/login" element={<LoginForm />} />

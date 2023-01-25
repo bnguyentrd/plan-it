@@ -91,8 +91,8 @@ function Nav(props) {
         </button>
         {isMenuOpen && (
           <ul className="drpdwn">
-            <header className="neonText">Plan it</header>
-            <div className="breakbar"></div>
+            {/* <header className="neonText">Plan it</header> */}
+            {/* <div className="breakbar"></div> */}
             <li className="item-1">
               <NavLink to="/">Home</NavLink>
             </li>
@@ -106,7 +106,7 @@ function Nav(props) {
             <li className="item-1">Contact</li>
             {/* <li className="item-2"> <NavLink to="/signup">Sign Up</NavLink> </li> */}
             {!isLoggedIn ? (
-              <li>
+              <li className="item-2">
                 {" "}
                 <NavLink to="/signup">Sign Up</NavLink>{" "}
               </li>
@@ -131,7 +131,7 @@ function Nav(props) {
             <li className="item-1">
               <NavLink to="/create">Create Event Form</NavLink>
             </li>
-            <li className="item-1">
+            <li className="item-2">
               <NavLink to="/events">Events</NavLink>
             </li>
             <li className="item-1">

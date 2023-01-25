@@ -47,17 +47,18 @@
 }
 
 .carousel-control-prev {
-    position: absolute;
-    left: 10%;
-    top: 35%;
+    position: sticky;
+    /* left: 500px; */
+    float: left;
+    top: 75%;
     height: 75px !important;
     width: 50px !important;
 }
 
 
 .carousel-control-next{
-    position: absolute;
-    top: 35%;
+    position: sticky;
+    top: 72%;
     right: 10%;
     height: 75px !important;
     width: 50px !important;

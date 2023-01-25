@@ -1,7 +1,8 @@
 import os
 from queries.pool import pool
-from fastapi import HTTPException
+from fastapi import HTTPException, FastAPI
 from pydantic import BaseModel
+# import psycopg2
 
 # from pydantic import BaseModel, EmailStr
 from typing import Optional, Union
@@ -53,6 +54,13 @@ class UsernameIn(BaseModel):
 class DuplicateAccountError(ValueError):
     pass
 
+
+# connection = psycopg2.connect(
+#     host="host",
+#     database="database",
+#     user="username",
+#     password="password"
+# )
 
 class AccountQueries:
     def get_all_accounts(self) -> list[AccountOut]:
@@ -244,3 +252,4 @@ class AccountQueries:
 
     def record_to_user_out(self, record):
         return AccountOut(id=record[0], username=record[1], email=record[2])
+

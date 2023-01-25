@@ -123,19 +123,12 @@ function Slideshow({ images, size, duration }) {
       <img className="slidepic" src={images[leftIndex]} alt="slideshow" style={{ width: size, height: size }} />
       <img className="slidepic" src={images[middleIndex]} alt="slideshow" style={{ width: size, height: size }} />
       <img className="slidepic" src={images[rightIndex]} alt="slideshow" style={{ width: size, height: size }} />
-      <button className="carousel-control-prev" onClick={goToPrevSlide}>
+      {/* <button className="carousel-control-prev" onClick={goToPrevSlide}>
         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        {/* <span className="visually-hidden">Previous</span> */}
       </button>
-      <div>
-        <div>
       <button className="carousel-control-next" onClick={goToNextSlide}>
         <span className="carousel-control-next-icon" ></span>
-        {/* <span className="visually-hidden">Next</span> */}
-      </button>
-      </div>
-      </div>
-        <br></br>
+      </button> */}
     </div>
   );
 }

@@ -42,16 +42,12 @@ function MainPage(props) {
                 <input className="input" type="checkbox"/>
                 <label htmlFor="checkbox"></label>
             </button>
+            <div>
+                <h1 className="cloud-text cloud-title logo-position"> Plan it </h1>
+            </div>
                 {/* {darkMode ? <p></p> : <p></p>} */}
             </div>
             <header className="App-header">
-                {/*
-                <h1>
-                    <img className="logo-radius" src={logo} width="500" />
-                    <text className="logotxt" style={{ fontSize: 200}}>
-                        ∞
-                    </text> 
-                </h1> */}
             </header>
             <div>
                 <Slideshow images={[
@@ -67,7 +63,7 @@ function MainPage(props) {
                 
             ]} 
             size={400}
-            duration={10000}
+            duration={5000}
             />
             </div>
             <div>
@@ -78,12 +74,9 @@ function MainPage(props) {
           )}
         </div>
             <EventForm />
-            <div>
-                <h1 className="footer-1">Plan it</h1>
-            </div>
-            <footer className="footer1">
-                <h1> Hello </h1>
-            </footer>
+            {/* <footer className="footer1">
+                <h1 className="cloud-text2 cloud-title">Life never stops...so neither should you.</h1>
+            </footer> */}
         </div>
     )
         }

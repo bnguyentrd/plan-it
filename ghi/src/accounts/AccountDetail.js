@@ -81,9 +81,9 @@ function AccountDetails() {
     }
   };
 
-  const handleUpload = (e) => {
-    setProfilePicture(e.target.files[0]);
-  };
+  // const handleUpload = (e) => {
+  //   setProfilePicture(e.target.files[0]);
+  // };
 
   // const handleEmailUpdate = async (e) => {
   //   e.preventDefault();
@@ -135,7 +135,8 @@ function AccountDetails() {
         // switch test. details was first. result: didnt change anything
         setAccountDetails(data);
         // forceUpdate();
-        window.location.reload();
+        // window.location.reload();
+        setEmail(email);
         setUpdateEmail(true);
       } else {
         const error = await response.json();
@@ -165,6 +166,7 @@ function AccountDetails() {
       if (response.ok) {
         const data = await response.json();
         setAccountDetails(data);
+        setUsername(username);
       } else {
         const error = await response.json();
         setError(error.message);
@@ -186,18 +188,19 @@ function AccountDetails() {
           <>
             <Nav />
             <h1>Account Detail</h1>
-            <div>
+            {/* <div>
               <h2>Profile Picture</h2>
               <input type="file" onChange={handleUpload} />
               <img
                 src={profilePicture ? URL.createObjectURL(profilePicture) : ""}
                 alt="profile"
               />
-            </div>
+            </div> */}
             <div>
               {/* <h2>Username: {accountDetails.username}</h2> */}
               <div>
-                <h2>Email: {accountDetails.email}</h2>
+                {/* <h2>Email: {accountDetails.email}</h2> */}
+                <h2>Email: {email}</h2>
                 <form onSubmit={handleEmailUpdate}>
                   <input
                     type="email"
@@ -208,7 +211,8 @@ function AccountDetails() {
                 </form>
               </div>
               <div>
-                <h2>Username: {accountDetails.username}</h2>
+                {/* <h2>Username: {accountDetails.username}</h2> */}
+                <h2>Username: {username}</h2>
                 {/* test */}
                 {/* <div>{updateUsername}</div> */}
                 <form onSubmit={handleUsernameUpdate}>

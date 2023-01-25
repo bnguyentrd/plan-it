@@ -22,7 +22,7 @@
 }
 
 .navbtn:hover {
-    background-color: rgb(228, 205, 233);
+    background-color: rgba(23, 139, 48, 0.747);
     color: rgb(137, 224, 240);
 }
 
@@ -82,7 +82,8 @@
 }
 
 .item-1 {
-    background-color: rgb(221, 184, 190);
+    /* background-color: rgb(81, 165, 92); */
+    background-color: rgb(70, 206, 240);
     border-radius: 10px;
     opacity: 0.6;
     height: 30px;
@@ -92,7 +93,7 @@
 }
 
 .item-2 {
-    background-color: rgb(175, 203, 212);
+    background-color: rgb(78, 226, 103);
     border-radius: 10px;
     opacity: 0.6;
     height: 30px;
@@ -125,22 +126,22 @@
   cursor: pointer;
 }
 
-.neonText {
-  color: rgb(60, 200, 243);
+/* .neonText {
+  color: rgb(60, 243, 75);
   text-shadow:
-    0 0 7px rgb(58, 231, 243),
-    0 0 10px #fff,
-    0 0 21px #fff,
-    0 0 42px #0fa,
-    0 0 82px #0fa,
-    0 0 92px #0fa,
-    0 0 102px #0fa,
+    0 0 7px rgb(58, 243, 104),
+    0 0 10px rgb(49, 202, 75),
+    0 0 21px rgb(52, 168, 23),
+    0 0 42px rgb(33, 161, 76),
+    0 0 82px rgb(16, 194, 90),
+    0 0 92px rgb(12, 177, 53),
+    0 0 102px rgb(24, 196, 81),
     0 0 151px #0fa;
     font-size: 30px;
     font-weight: 350px;
-}
+} */
 
-.breakbar {
+/* .breakbar {
     width: 100%;
     height: 5px;
     background-color: rgb(92, 87, 87);
@@ -148,4 +149,4 @@
     margin-bottom: 50px;
     transition: 0.4s;
     border-radius: 5px;
-}
+} */

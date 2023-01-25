@@ -48,7 +48,7 @@ const EventForm = () => {
   };
 
   return (
-    <div className="box-size">
+    <div className="box-size event-margin">
       <div className="offset-3 col-6 radius">
         <div className="shadow p-4 mt-4 radius">
           <h1 className="neonText">Create An Event</h1>
@@ -70,24 +70,24 @@ const EventForm = () => {
               <input
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
-                placeholder="City"
+                placeholder=" City"
                 required
                 type="text"
                 name="city"
                 id="city"
-                className="form-control"
+                className="input-size"
               />
             </div>
             <div className="form-floating mb-3">
               <input
                 value={state}
                 onChange={(e) => setState(e.target.value)}
-                placeholder="State"
+                placeholder=" State"
                 required
                 type="text"
                 name="state"
                 id="state"
-                className="form-control"
+                className="input-size"
               />
             </div>
             {/* <div className='form-floating mb-3'>

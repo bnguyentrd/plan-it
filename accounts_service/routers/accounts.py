@@ -13,7 +13,6 @@ from jwtdown_fastapi.authentication import Token
 from .authenticator import authenticator
 from pydantic import BaseModel
 
-
 from queries.accounts import (
     Error,
     EmailIn,
