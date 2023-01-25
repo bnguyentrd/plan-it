@@ -182,3 +182,12 @@ Today, I worked on:
 Today I did not have as much time to write much code since I attended the optional lectures on deployment. After changing a few lines of code in my Dockerfile
 and my docker-compose-yml file, I was finally able to connect my database to accounts. On the deployed backend docs page, Im no longer getting a 500 error and can successfully create an account and view all acounts. I did some extra research on implementing zustand which is an alternative to react redux. Currently, the logout, login, and signup links in the nav menu is behaving properly based on the client's logged in state. The only issue now is that upon initial loading of the app, the login link is not appearing, I have to go to account detail which will redirect me to the login page to test it. Since I dont have enough
 knowledge on using zustand or redux just yet, I have to spend time on more research and will hopefully be able to help my teammates on their issues.
+
+
+## Jan 24
+
+Today, I worked on:
+
+- Deployment
+
+Today I spent all day working on deployment again. I was able to deploy Elija's events microservice but not without running into a "Mixed Content" Error. After Andrew's suggestion, I went into my code to remove all trailing backslashes and reran the pipeline but I was still getting the error. It wasn't until refreshing the webpage with the option to clear the cache did it finally work. The next hurdle was configuring Graham's microservice since his microservice was implementing SQLalchemy. Since his microservice's file structure was different, it was difficult to figure out which variables needed to be modified for his dockerfile. My "a-ha!" moment today was figuring out the refresh/cache clearing issue and my second "a-ha" moment was figuring out that the dockerfile for Graham's code needed to have COPY commands for every python file in his code. I only have one more microservice to implement and moving forward, we can finally start troubleshooting the functionality of the deployed apps since im sure there will be differences in functionality compared to running things locally.
