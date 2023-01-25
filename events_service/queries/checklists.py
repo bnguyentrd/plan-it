@@ -30,6 +30,20 @@ class ChecklistRepository:
                     return [self.record_to_checklist_out(record) for record in result]
 
 
+    def get_by_event(self, event_id: int) -> List[ChecklistOut]:
+        with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT id, event_id, items, status
+                        FROM checklists
+                        WHERE event_id = %s
+                        """,
+                        [event_id]
+                    )
+                    return [self.record_to_checklist_out(record) for record in result]
+
+
 
 
     def get_one(self, checklist_id: int) -> Optional[ChecklistOut]:
