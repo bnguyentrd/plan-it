@@ -1,10 +1,9 @@
-// last updated 1/18  3:24 PM
+// last updated 1/25
 import React, { useState, useEffect, useContext } from "react";
-// import React, { useState, useEffect, useContext, useReducer } from "react";1
 import { useNavigate } from "react-router-dom";
 import MainPage from "../MainPage";
-import { getToken, getTokenInternal } from "./AuthenticationTEST";
-import { useToken } from "./Authentication";
+// import { getToken, getTokenInternal } from "./AuthenticationTEST";
+import { useToken, getTokenInternal } from "./Authentication";
 import { logout } from "../MainPage";
 import Nav from "../Nav";
 
@@ -13,13 +12,12 @@ function AccountDetails() {
   const [accountDetails, setAccountDetails] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [token, update] = useToken();
+  // const [token, update] = useToken();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [updateUsername, setUpdateUsername] = useState();
   const [updateEmail, setUpdateEmail] = useState();
-  // const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
 
   useEffect(() => {
     async function fetchAccountDetails() {
@@ -54,9 +52,6 @@ function AccountDetails() {
       }
     }
     fetchAccountDetails();
-    // issue: page is reloading instead of rerendering
-    // when updating form for a second time, page is empty unless I hard refresh
-    // }, [updateUsername, updateEmail]);
   }, [updateEmail, updateUsername]);
 
   const handleDelete = async (e) => {
@@ -150,16 +145,15 @@ function AccountDetails() {
           <>
             <Nav />
             <h1>Account Detail</h1>
-            <div>
+            {/* <div>
               <h2>Profile Picture</h2>
               <input type="file" onChange={handleUpload} />
               <img
                 src={profilePicture ? URL.createObjectURL(profilePicture) : ""}
                 alt="profile"
               />
-            </div>
+            </div> */}
             <div>
-              {/* <h2>Username: {accountDetails.username}</h2> */}
               <div>
                 <h2>Email: {accountDetails.email}</h2>
                 <form onSubmit={handleEmailUpdate}>
@@ -173,8 +167,6 @@ function AccountDetails() {
               </div>
               <div>
                 <h2>Username: {accountDetails.username}</h2>
-                {/* test */}
-                {/* <div>{updateUsername}</div> */}
                 <form onSubmit={handleUsernameUpdate}>
                   <input
                     type="text"

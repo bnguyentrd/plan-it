@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export const useToken = create((set) => ({
+export const useZtoken = create((set) => ({
   token: [],
   addToken: (token) =>
     set(() => ({

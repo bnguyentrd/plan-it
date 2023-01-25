@@ -6,11 +6,11 @@ import { LoginForm } from "./accounts/LoginForm.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AccountDetails from "./accounts/AccountDetail.js";
 import { About } from "./accounts/About.js";
-import { AuthProvider } from "./accounts/AuthenticationTEST";
+import { AuthProvider } from "./accounts/Authentication";
 import EventForm from "./events/eventForm";
 import EventList from "./events/eventList";
 import EventDetails from "./events/eventDetails.js";
-import { useToken } from "./accounts/Authentication.js";
+// import { useToken } from "./accounts/Authentication.js";
 import PollForm from "./polls/PollForm.js";
 import PollList from "./polls/PollList.js";
 

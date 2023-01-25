@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useToken } from "../zustand_store/store";
-// import axios from "axios";
+import { useZtoken } from "../zustand_store/store";
 let internalToken = null;
 
 export function getToken() {
@@ -9,12 +8,8 @@ export function getToken() {
 }
 
 export async function getTokenInternal() {
-  // original
-  // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/me/token/`;
   const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`;
   let data;
-  // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/{id}/token/`;
-  // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/id/token/`;
   try {
     const response = await fetch(url, {
       credentials: "include",
@@ -22,8 +17,6 @@ export async function getTokenInternal() {
     if (response.ok) {
       data = await response.json();
       addToken(data.access_token);
-      // internalToken = data.access_token;
-      // return internalToken;
       console.log(
         data.access_token,
         "getTokenInternal",
@@ -55,31 +48,18 @@ function handleErrorMessage(error) {
   return error;
 }
 
-// original
-// export const AuthContext = createContext({
-//   token: null,
-//   setToken: () => null,
-// });
-
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const addToken = useToken((state) => state.addToken);
-  const removeToken = useToken((state) => state.removeToken);
-  const token1 = useToken((state) => state.token);
-
-  //   useEffect(() => {
-  //   async function fetchToken() {
-  //     const token = await getTokenInternal();
-  //     return token;
-  //   }
+  const addToken = useZtoken((state) => state.addToken);
+  const removeToken = useZtoken((state) => state.removeToken);
+  const token1 = useZtoken((state) => state.token);
 
   useEffect(() => {
     async function fetchToken() {
       const token = await getTokenInternal();
-      //   setToken(token);
     }
     if (!token1) {
       fetchToken();
@@ -88,35 +68,11 @@ export const AuthProvider = ({ children }) => {
     console.log(token1, "USE EFFECT");
   }, [token1]);
 
-  // if (!token) {
-  //   fetchToken();
-  //   console.log(token, "TOKEN HAS BEEN FETCHED HERE");
-  // }
-  //   }, [setToken, token]);
-  //   }, [setToken]);
-  //   }, [token]);
-
-  // ORIGINAL LOGOUT WORKING on backend. but not frontend
-  // async function logout() {
-  //   if (token) {
-  //     // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/token/refresh/logout/`;
-  //     const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`;
-  //     await fetch(url, { method: "delete", credentials: "include" });
-  //     internalToken = null;
-  //     setToken(null);
-  //     navigate("/");
-  //   }
-  // }
-
   async function logout() {
     if (token1) {
-      // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/token/refresh/logout/`;
       const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`;
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
-      //   setIsLoggedIn(() => {
-      //     false;
-      //   });
       console.log(isLoggedIn, "IS LOGGED IN");
       removeToken(null);
       console.log(token1, "THIS IS WHERE WE REMOVED TOKEN");
@@ -198,5 +154,3 @@ export const AuthProvider = ({ children }) => {
 export const useAuthContext = () => {
   return useContext(AuthContext);
 };
-
-// export default logout;
