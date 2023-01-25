@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Optional, Union
+from typing import List, Optional
 from queries.pool import pool
 
 
@@ -26,6 +26,21 @@ class ChecklistRepository:
                         FROM checklists
                         ORDER BY id
                         """
+                )
+                return [
+                    self.record_to_checklist_out(record) for record in result
+                ]
+
+    def get_by_event(self, event_id: int) -> List[ChecklistOut]:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                        SELECT id, event_id, items, status
+                        FROM checklists
+                        WHERE event_id = %s
+                        """,
+                    [event_id],
                 )
                 return [
                     self.record_to_checklist_out(record) for record in result

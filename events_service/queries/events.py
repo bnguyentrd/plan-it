@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import List, Optional, Union
 from datetime import date
 from queries.pool import pool
-from queries.acls import get_weather
+# from queries.acls import get_weather
 
 # from queries.locations import locations
 
