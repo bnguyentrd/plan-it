@@ -17,8 +17,8 @@ function AccountDetails() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [updateUsername, setUpdateUsername] = useState(false);
-  const [updateEmail, setUpdateEmail] = useState(false);
+  const [updateUsername, setUpdateUsername] = useState();
+  const [updateEmail, setUpdateEmail] = useState();
   // const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
 
   useEffect(() => {
@@ -57,9 +57,7 @@ function AccountDetails() {
     // issue: page is reloading instead of rerendering
     // when updating form for a second time, page is empty unless I hard refresh
     // }, [updateUsername, updateEmail]);
-  }, [updateEmail]);
-
-
+  }, [updateEmail, updateUsername]);
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -85,8 +83,6 @@ function AccountDetails() {
     setProfilePicture(e.target.files[0]);
   };
 
-
-
   const handleEmailUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -103,11 +99,8 @@ function AccountDetails() {
       });
       if (response.ok) {
         const data = await response.json();
-        // switch test. details was first. result: didnt change anything
         setAccountDetails(data);
-        // forceUpdate();
-        window.location.reload();
-        setUpdateEmail(true);
+        setUpdateEmail(email);
       } else {
         const error = await response.json();
         setError(error.message);
@@ -136,6 +129,7 @@ function AccountDetails() {
       if (response.ok) {
         const data = await response.json();
         setAccountDetails(data);
+        setUpdateUsername(username);
       } else {
         const error = await response.json();
         setError(error.message);
@@ -145,7 +139,6 @@ function AccountDetails() {
       setError(e.message);
     }
     setLoading(false);
-    // setUpdateUsername(true);
   };
 
   return (

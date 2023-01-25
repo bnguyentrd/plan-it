@@ -1,23 +1,47 @@
-## Journals
+# Plan-it
 
-Please keep all of your individual journals in this directory.
+Created by:
+- Bobby Nguyen
+- Elijah
+- Connor
+- Graham
+- Steven Tran
 
-Each team member is required to keep a development journal, which should be a single markdown file with an entry for each day the project was worked on.
 
-Recommended naming convention is `first_last.md`.
+## Project Description
+Plan-it is a comprehensive, user-friendly web-application that streamlines the event planning process by providing a one-stop-shop for managing all aspects of an event, from creating and customizing invitations to tracking RSVPs and managing guest lists.
 
-<!--
-Petra and I had a hard time figuring out the logic
-for what happens when a customer signs up. We
-finally came to the conclusion that not only did we
-have to create the `User` record, but we also needed
-to create associated preference records **and** had
-to log them in.
+- Plan-it is a web-application that allows users to manage events and invite their friends
+- Users can sign up, log in, and delete an account.
+- Logged in users can edit their username, profile picture, and email.
+- Logged in users can create events to participate in and invite their friends via email.
+- Logged in users can create a general checklist for events
+- Logged in users can vote on a poll for events they're participating in.
 
-Today, database transactions finally clicked. It
-happened while we were trying to insert the
-preferences for the customer. We had a bug in the
-code, so the `User` record got created, but none
-of the preferences. All of the inserts should
-succeed or fail together. So, we used a transaction
-to do that. -->
+
+Front-end deployed via Gitlab Pages.
+Back-end deployed via Caprover.
+
+
+## Initializing the Project
+
+1. Fork and clone this project using this link: https://gitlab.com/plan-it1/module3-project-gamma
+2. Copy and clone HTTPS link into a directory of your choice
+3. Open a command terminal and cd into your chosen directory
+4. Run `docker volume create postgres-data`
+5. Run `docker-compose build`
+6. Run `docker-compose up`
+7. Ensure all containers are running properly in your Docker Desktop
+8. To view app in your browser, navigate to : http://localhost:3000
+
+
+## Functionality
+
+
+
+## Testing
+
+To verify that this application works on your computer, follow these steps after Initializing the Project.
+
+1. Open accounts_service container
+2. Run `python -m pytest`
