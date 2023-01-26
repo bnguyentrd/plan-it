@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 
 
 
@@ -33,7 +34,11 @@ const PollList = () => {
                 }
                 return (
                 <tr key={q.id}>
-                    <td>{q.title }</td>
+                    <td>
+                        <nav>
+                            <Link to={`/questions/${q.id}`}>{q.title }</Link>
+                        </nav>
+                        </td>
                     <td>{q.is_active}</td>
                 </tr>
                 );

@@ -6,11 +6,11 @@ from pydantic import BaseModel
 
 
 from models import Base, Question, Choice
-import schema
+import poll_schema
 
 # Question
 
-def create_question(db: Session, question: schema.QuestionCreate):
+def create_question(db: Session, question: poll_schema.QuestionCreate):
 	obj = Question(**question.dict())
 	db.add(obj)
 	db.commit()
@@ -22,9 +22,11 @@ def get_all_questions(db: Session):
 	return JSONResponse(questions)
 
 def get_question(db:Session, qid):
-	return db.query(Question).filter(Question.id == qid).first()
+	question = db.query(Question).filter(Question.id == qid).first()
+	question = jsonable_encoder(question)
+	return JSONResponse(question)
 
-def edit_question(db: Session, qid, question: schema.QuestionEdit):
+def edit_question(db: Session, qid, question: poll_schema.QuestionEdit):
 	obj = db.query(Question).filter(Question.id == qid).first()
 	obj.question_text = question.question_text
 	obj.title = question.title
@@ -37,8 +39,12 @@ def delete_question(db: Session, qid):
 	db.commit()
 
 # Choice
+def get_choices(db:Session):
+	obj = db.query(Choice).all()
+	obj = jsonable_encoder(obj)
+	return JSONResponse(obj)
 
-def create_choice(db:Session, qid: int, choice: schema.ChoiceCreate):
+def create_choice(db:Session, qid: int, choice: poll_schema.ChoiceCreate):
 	obj = Choice(**choice.dict(), question_id=qid)
 	db.add(obj)
 	db.commit()

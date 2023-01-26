@@ -2,12 +2,14 @@ import { useState } from "react";
 import { Container, Box, TextField, Button } from "@mui/material";
 import "../css/SignUp.css";
 import Nav from "../Nav";
+import { Navigate, useNavigate } from "react-router-dom";
 
 // import "../css/SignUp.css";
 
 function PollForm() {
   const [question_text, setQuestion] = useState("");
   const [title, setTitle] = useState("");
+   let navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -38,6 +40,7 @@ function PollForm() {
     if (response.ok) {
       const data = await response.json();
       console.log(data);
+      navigate("/questions")
 
       // Handle error response
     } else {

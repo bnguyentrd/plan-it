@@ -13,6 +13,8 @@ import EventList from './events/eventList';
 import EventDetails from "./events/eventDetails.js";
 import PollForm from "./polls/PollForm.js";
 import PollList from "./polls/PollList.js";
+import PollDetail from "./polls/PollDetail.js";
+import ChoiceForm from "./polls/ChoiceCreate.js";
 
 function App(props) {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -68,6 +70,8 @@ function App(props) {
                   {/* <MainPage info={launch_info} /> */}
                   <Route path="/questions/new" element={<PollForm/>} />
                   <Route path="/questions" element={<PollList/>} />
+                  <Route path="/questions/:id" element={<PollDetail/>} />
+                  <Route path="/questions/:id/choice" element={<ChoiceForm/>} />
                 </Routes>
               </BrowserRouter>
             </div>
