@@ -1,32 +1,29 @@
 import React, { useState, useEffect, navigate } from "react";
 // import { useAuthContext } from "./Authentication";
 import { Container, Box, TextField, Button } from "@mui/material";
-import { useAuthContext } from "./Authentication";
+// import { useAuthContext, useToken } from "./Authentication";
+import { useToken } from "./Authentication";
 import "../css/LoginForm.css";
 import App from "../App";
+import Nav from '../Nav';
 
 export const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { login, isLoggedIn } = useAuthContext();
   const [error, setError] = useState("");
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, login] = useToken();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     login(username, password);
+    if (token) {
+      console.log("Got token");
+    }
   };
-
-  // issue: when logged out, the logged in message still displays
-  // unless I hard refresh the page
-  // useEffect(() => {
-  //   if (token) {
-  //     setIsLoggedIn(true);
-  //   }
-  // }, [token]);
 
   return (
     <>
+      <Nav />
       <Container className="login-form" component="main" maxWidth="xs">
         <Box
           sx={{
@@ -69,7 +66,7 @@ export const LoginForm = () => {
             Login
           </Button>
           <div>{error}</div>
-          {isLoggedIn ? <div>You are logged in</div> : null}
+          {/* {isLoggedIn ? <div>You are logged in</div> : null} */}
         </Box>
       </Container>
     </>

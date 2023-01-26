@@ -65,13 +65,7 @@ function MainPage(props) {
           duration={10000}
         />
       </div>
-      <div>
-        {currentUser ? (
-          <button onClick={logout}>Logout</button>
-        ) : (
-          <div>You are not logged in</div>
-        )}
-      </div>
+      <div>{currentUser ? <button onClick={logout}>Logout</button> : ""}</div>
       {/* <EventForm /> */}
       <div>
         <h1 className="footer-1">Plan it</h1>

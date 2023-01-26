@@ -1,13 +1,17 @@
 from fastapi import APIRouter, Depends, Response
 from typing import List, Optional, Union
 from queries.events import Error, EventIn, EventRepository, EventOut
+from authenticator import authenticator
+
+# test
+# from ...accounts_service.queries.accounts import AccountQueries
 
 from queries.acls import get_weather
 
 
 router = APIRouter()
 
-
+# TEST
 @router.get("/events/{event_id}", response_model=Optional[EventOut])
 def get_one_event(
     event_id: int,
@@ -25,13 +29,14 @@ def get_one_event(
 def create_event(
     event: EventIn,
     response: Response,
+    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: EventRepository = Depends(),
 ):
     try:
-        event.weather = get_weather(event.city, event.state)["description"]
-        # print("::::::::::", event)
-        return repo.create(event)
-        # print("testing weather bypass")
+        # event.weather = get_weather(event.city, event.state)["description"]
+        user_id = account_data["id"]
+        if account_data["email"]:
+            return repo.create(event, user_id)
     except Exception:
         response.status_code = 400
 

@@ -40,6 +40,7 @@ services:
       - ./events_service:/app
     environment:
       DATABASE_URL: postgresql://admin:test-databases@postgres/eventsdb
+      SIGNING_KEY: ${SIGNING_KEY}
       WAIT_HOSTS: postgres:5432
       WAIT_BEFORE: 5
       WAIT_TIMEOUT: 60

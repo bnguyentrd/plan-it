@@ -123,7 +123,7 @@ function Nav(props) {
               {/* <NavLink to="/accountdetails">Account Details</NavLink> */}
               {/* <NavLink to="/api/accounts/me/token/">Account Details</NavLink> */}
               {/* <NavLink to="/api/accounts/me/id/">Account Details</NavLink> */}
-              <NavLink to={`/api/accounts/${props.accountid}`}>
+              <NavLink to={`/api/accounts/:id`}>
                 Account Details
               </NavLink>
             </li>

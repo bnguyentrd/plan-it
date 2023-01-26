@@ -37,11 +37,11 @@ def is_valid_email(email: str) -> bool:
 router = APIRouter()
 
 
-@router.get("/api/protected", response_model=bool)
-async def get_protected(
-    account_data: dict = Depends(authenticator.get_current_account_data),
-):
-    return True
+# @router.get("/api/protected", response_model=bool)
+# async def get_protected(
+#     account_data: dict = Depends(authenticator.get_current_account_data),
+# ):
+#     return True
 
 
 class AccountToken(Token):
@@ -63,12 +63,12 @@ def accounts_list(queries: AccountQueries = Depends()):
     return {"accounts": queries.get_all_accounts()}
 
 
-@router.get("/api/accounts/{id}", response_model=Optional[AccountOut])
+@router.get("/api/accounts/detail", response_model=Optional[AccountOut])
 def account_detail(
     id: int,
     response: Response,
     # repo: AccountQueries = Depends(authenticator.get_current_account_data),
-    #   account: dict = Depends(authenticator.get_current_account_data),
+    account: dict = Depends(authenticator.get_current_account_data),
     repo: AccountQueries = Depends(),
 ) -> AccountOut:
     print(repo)
@@ -106,9 +106,7 @@ async def create_account(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot create an account with those credentials",
         )
-    form = AccountForm(
-        username=info.username, email=info.email, password=info.password
-    )
+    form = AccountForm(username=info.username, email=info.email, password=info.password)
     token = await authenticator.login(response, request, form, accounts)
     return AccountToken(account=account, **token.dict())
 
@@ -118,6 +116,7 @@ def delete_account(
     id: int,
     response: Response,
     repo: AccountQueries = Depends(),
+    user_data: dict = Depends(authenticator.get_current_account_data),
 ) -> bool:
     return repo.delete(id)
 
@@ -133,20 +132,7 @@ def update_account(
     return repo.update(id, user)
 
 
-# test
-# @router.put("/api/accounts/{id}", response_model=bool)
-# def update_account(
-#     id: int,
-#     formData: EmailIn,
-#     account: dict = Depends(authenticator.get_current_account_data),
-#     repo: AccountQueries = Depends(),
-# ) -> bool:
-#     print(account)
-#     user_id = account["id"]
-#     return repo.update(user_id, formData)
-
-
-@router.put("/api/accounts/{id}/email", response_model=bool)
+@router.put("/api/accounts/email/{id}", response_model=bool)
 def update_email(
     formData: EmailIn,
     user_data: dict = Depends(authenticator.get_current_account_data),
@@ -158,7 +144,7 @@ def update_email(
     return repo.updateEmail(user_id, user_data)
 
 
-@router.put("/api/accounts/{id}/username", response_model=bool)
+@router.put("/api/accounts/username/{id}", response_model=bool)
 def update_username(
     formData: UsernameIn,
     user_data: dict = Depends(authenticator.get_current_account_data),

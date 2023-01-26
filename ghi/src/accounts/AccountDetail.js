@@ -3,34 +3,33 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import MainPage from "../MainPage";
 // import { getToken, getTokenInternal } from "./AuthenticationTEST";
-import { useToken, getTokenInternal } from "./Authentication";
+import { useToken, getTokenInternal, useAuthContext } from "./Authentication";
 import { logout } from "../MainPage";
 import Nav from "../Nav";
+import { useParams } from "react-router-dom";
 
 function AccountDetails() {
   const [profilePicture, setProfilePicture] = useState(null);
   const [accountDetails, setAccountDetails] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  // const [token, update] = useToken();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [updateUsername, setUpdateUsername] = useState();
   const [updateEmail, setUpdateEmail] = useState();
+  const { token } = useAuthContext;
+  // const accountId = useParams();
+  // const id = Number(accountId.id);
 
   useEffect(() => {
     async function fetchAccountDetails() {
       const token = await getTokenInternal();
-      // if (!token.access_token) {
       if (!token) {
         navigate("/login");
       } else {
-        console.log("PASSED TOKEN CHECK");
-        // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/me/`;
-        // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/{id}/`;
         const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}`;
-        console.log("HERE IS THE TOKEN ID:", token.account.id);
+        // const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/accounts/${token.account.id}`;
         try {
           const response = await fetch(url, {
             headers: {
@@ -47,7 +46,6 @@ function AccountDetails() {
           }
         } catch (e) {
           console.log(e);
-          // navigate("/login");
         }
       }
     }
@@ -81,14 +79,13 @@ function AccountDetails() {
   const handleEmailUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const token = await getTokenInternal();
     const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}/email`;
     try {
       const response = await fetch(url, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token.access_token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ email }),
       });
@@ -111,7 +108,8 @@ function AccountDetails() {
     e.preventDefault();
     setLoading(true);
     const token = await getTokenInternal();
-    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}/username`;
+    // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}/username`;
+    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/username${id}`;
     try {
       const response = await fetch(url, {
         method: "PUT",

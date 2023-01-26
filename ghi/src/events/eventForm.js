@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+// import { useToken } from "../accounts/Authentication";
+// import { getTokenInternal } from "../accounts/Authentication";
+
 import "../css/EventForm.css";
 import Nav from "../Nav";
+
+import { useAuthContext } from "../accounts/Authentication";
 
 const EventForm = () => {
   const [title, setTitle] = useState("");
@@ -10,6 +15,9 @@ const EventForm = () => {
   const [from_date, setFromDate] = useState("");
   const [to_date, setToDate] = useState("");
   const [description, setDescription] = useState("");
+  const { token } = useAuthContext();
+  // const token1 = useToken();
+  console.log("this is the token:  ", token1);
   // const [url, setUrl] = useState("")
   // const [weather, setWeather] = useState("")
   const navigate = useNavigate();
@@ -33,11 +41,14 @@ const EventForm = () => {
       method: "post",
       body: JSON.stringify(data),
       headers: {
+        Authorization: `Bearer ${token1}`,
+        credentials: "include",
         "Content-Type": "application/json",
       },
     };
     const response = await fetch(eventUrl, fetchConfig);
     if (response.ok) {
+      addToken(() => token);
       const newEvent = await response.json();
       navigate("/details/" + newEvent.id);
     }

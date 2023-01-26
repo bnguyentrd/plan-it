@@ -1,9 +1,8 @@
-// // last updated 1/21  3:24 PM
+// // last updated 1/25
 // import React, { useState, useEffect, useContext } from "react";
-// // import React, { useState, useEffect, useContext, useReducer } from "react";1
 // import { useNavigate } from "react-router-dom";
 // import MainPage from "../MainPage";
-// import { getToken, getTokenInternal, useToken } from "./Authentication";
+// import { useToken, getTokenInternal } from "./Authentication";
 // import { logout } from "../MainPage";
 // import Nav from "../Nav";
 
@@ -12,17 +11,17 @@
 //   const [accountDetails, setAccountDetails] = useState({});
 //   const [loading, setLoading] = useState(false);
 //   const [error, setError] = useState(null);
-//   const [token, update] = useToken();
+//   // const [token, update] = useToken();
 //   const navigate = useNavigate();
 //   const [username, setUsername] = useState("");
 //   const [email, setEmail] = useState("");
-//   const [updateUsername, setUpdateUsername] = useState(false);
-//   const [updateEmail, setUpdateEmail] = useState(false);
-//   // const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
+//   const [updateUsername, setUpdateUsername] = useState();
+//   const [updateEmail, setUpdateEmail] = useState();
 
 //   useEffect(() => {
 //     async function fetchAccountDetails() {
 //       const token = await getTokenInternal();
+//       console.log("ACCOUNT DETAIL USE EFFECT TOKEN: ", token);
 //       // if (!token.access_token) {
 //       if (!token) {
 //         navigate("/login");
@@ -30,7 +29,7 @@
 //         console.log("PASSED TOKEN CHECK");
 //         // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/me/`;
 //         // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/{id}/`;
-//         const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}/`;
+//         const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}`;
 //         console.log("HERE IS THE TOKEN ID:", token.account.id);
 //         try {
 //           const response = await fetch(url, {
@@ -53,14 +52,7 @@
 //       }
 //     }
 //     fetchAccountDetails();
-//     // issue: page is reloading instead of rerendering
-//     // when updating form for a second time, page is empty unless I hard refresh
-//     // }, [updateUsername, updateEmail]);
-//   }, [updateEmail]);
-
-//   useEffect(() => {
-//     // ...
-//   }, []);
+//   }, [updateEmail, updateUsername]);
 
 //   const handleDelete = async (e) => {
 //     e.preventDefault();
@@ -86,37 +78,6 @@
 //     setProfilePicture(e.target.files[0]);
 //   };
 
-//   // const handleEmailUpdate = async (e) => {
-//   //   e.preventDefault();
-//   //   setLoading(true);
-//   //   const token = await getTokenInternal();
-//   //   const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}/email`;
-//   //   try {
-//   //     const response = await fetch(url, {
-//   //       method: "PUT",
-//   //       headers: {
-//   //         "Content-Type": "application/json",
-//   //         Authorization: `Bearer ${token.access_token}`,
-//   //       },
-//   //       body: JSON.stringify({ email }),
-//   //     });
-//   //     if (response.ok) {
-//   //       const data = await response.json();
-//   //       // switch test. details was first. result: didnt change anything
-//   //       setAccountDetails(data);
-//   //       // window.location.reload();
-//   //       // setUpdateEmail(true);
-//   //     } else {
-//   //       const error = await response.json();
-//   //       setError(error.message);
-//   //     }
-//   //   } catch (e) {
-//   //     console.log(e);
-//   //     setError(e.message);
-//   //   }
-//   //   setLoading(false);
-//   // };
-
 //   const handleEmailUpdate = async (e) => {
 //     e.preventDefault();
 //     setLoading(true);
@@ -133,11 +94,8 @@
 //       });
 //       if (response.ok) {
 //         const data = await response.json();
-//         // switch test. details was first. result: didnt change anything
 //         setAccountDetails(data);
-//         // forceUpdate();
-//         window.location.reload();
-//         setUpdateEmail(true);
+//         setUpdateEmail(email);
 //       } else {
 //         const error = await response.json();
 //         setError(error.message);
@@ -166,6 +124,7 @@
 //       if (response.ok) {
 //         const data = await response.json();
 //         setAccountDetails(data);
+//         setUpdateUsername(username);
 //       } else {
 //         const error = await response.json();
 //         setError(error.message);
@@ -175,7 +134,6 @@
 //       setError(e.message);
 //     }
 //     setLoading(false);
-//     // setUpdateUsername(true);
 //   };
 
 //   return (
@@ -187,16 +145,15 @@
 //           <>
 //             <Nav />
 //             <h1>Account Detail</h1>
-//             <div>
+//             {/* <div>
 //               <h2>Profile Picture</h2>
 //               <input type="file" onChange={handleUpload} />
 //               <img
 //                 src={profilePicture ? URL.createObjectURL(profilePicture) : ""}
 //                 alt="profile"
 //               />
-//             </div>
+//             </div> */}
 //             <div>
-//               {/* <h2>Username: {accountDetails.username}</h2> */}
 //               <div>
 //                 <h2>Email: {accountDetails.email}</h2>
 //                 <form onSubmit={handleEmailUpdate}>
@@ -210,8 +167,6 @@
 //               </div>
 //               <div>
 //                 <h2>Username: {accountDetails.username}</h2>
-//                 {/* test */}
-//                 {/* <div>{updateUsername}</div> */}
 //                 <form onSubmit={handleUsernameUpdate}>
 //                   <input
 //                     type="text"
