@@ -51,6 +51,11 @@ function ChoiceForm() {
   }
 
   return (
+    <>
+    <header><div>
+            <button onClick={() => window.location.href="http://localhost:3000/questions"}>Back to Poll List</button>
+        </div></header>
+
     <div className="signup-form-size">
       <div className="signup-form-location" component="main" maxWidth="xs">
         <Nav />
@@ -91,6 +96,7 @@ function ChoiceForm() {
         </Box>
       </div>
     </div>
+    </>
   );
 }
 

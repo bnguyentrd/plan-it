@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
+import "../css/SignUp.css";
 
 
 
@@ -17,6 +18,11 @@ const PollList = () => {
 
     return (
       <>
+      <header>
+        <div>
+            <button onClick={() => window.location.href="http://localhost:3000/"}>Back to Home</button>
+        </div>
+      </header>
         <h1>Current Polls</h1>
         <table className="table table-striped">
             <thead>
@@ -46,6 +52,13 @@ const PollList = () => {
             </tbody>
         </table>
         <button onClick={() => window.location.href="http://localhost:3000/questions/new"}>Create New Poll</button>
+        <div>
+
+        </div>
+        <div>
+
+        </div>
+
       </>
     );
   }

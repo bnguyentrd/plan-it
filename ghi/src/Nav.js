@@ -137,6 +137,9 @@ function Nav(props) {
             <li className="item-1">
               <NavLink to="/details">Event Details</NavLink>
             </li>
+            <li className="item-2">
+              <NavLink to="/questions">Polls</NavLink>
+            </li>
 
             {isLoggedIn ? (
               <li>

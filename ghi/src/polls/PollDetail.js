@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import "../css/SignUp.css";
 
 const PollDetail = () => {
     const [question, setQuestion] = useState([]);
@@ -64,6 +65,12 @@ for (let choice in choices) {
 }
 
     return (
+        <>
+        <header>
+            <div>
+            <button onClick={() => window.location.href="http://localhost:3000/questions"}>Back Poll List</button>
+        </div>
+        </header>
         <div>
         <h1>
             {question.title}
@@ -102,6 +109,7 @@ for (let choice in choices) {
         </div>
         <button onClick={() => window.location.href=`http://localhost:3000/questions/${id}/choice`}>Create a Choice for this Poll</button>
         </div>
+        </>
     )
 }
 export default PollDetail;
