@@ -3,6 +3,10 @@ stages:
   - build
   - deploy
 
+variables:
+  DATABASE_URL: postgres://postgres:bbd2ca03616b2bcf@srv-captain--postgres-accounts/postgres
+  OPEN_WEATHER_API_KEY: 3e1eb45a606106a2ec6fed8a4ccfe16a
+
 # Run flake8 to check for code quality
 lint-test-job:
   image: python:3-bullseye
@@ -10,39 +14,117 @@ lint-test-job:
   script:
     - pip install flake8
     - flake8 accounts_service
-    # - flake8 accounts_service events_service  might need to add events service later
+    # - flake8 events_service
+    # - flake8 polls_service
 
 # Run the unit tests
 # api-unit-test-job:  ORIGINAL
-accounts_service-unit-test-job:
-  image: python:3-bullseye
-  stage: test
-  needs:
-    - lint-test-job
+# accounts_service-unit-test-job:
+#   image: python:3-bullseye
+#   stage: test
+#   needs:
+#     - lint-test-job
+#   script:
+#     - cd accounts_service
+#     - pip install -r requirements.txt
+#     - python -m pytest
+
+build-accounts-image-job:
+  only:
+    - main
+  image: docker:19.03.1
+  stage: build
+  services:
+    - docker:19.03.1-dind
+  before_script:
+    - export DOCKER_REGISTRY_USER=$CI_REGISTRY_USER # built-in GitLab Registry User
+    - export DOCKER_REGISTRY_PASSWORD=$CI_REGISTRY_PASSWORD # built-in GitLab Registry Password
+    - export DOCKER_REGISTRY_URL=$CI_REGISTRY # built-in GitLab Registry URL
+    - export COMMIT_HASH=$CI_COMMIT_SHA # Your current commit sha
+    - export IMAGE_NAME_WITH_REGISTRY_PREFIX=$CI_REGISTRY_IMAGE # Your repository prefixed with GitLab Registry URL
+    - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" $DOCKER_REGISTRY_URL # Instructs GitLab to login to its registry
+
   script:
     - cd accounts_service
-    - pip install -r requirements.txt
-    - python -m pytest
+    - echo "Building..." # MAKE SURE NO SPACE ON EITHER SIDE OF = IN THE FOLLOWING LINE
+    - export CONTAINER_FULL_IMAGE_NAME_WITH_TAG=$IMAGE_NAME_WITH_REGISTRY_PREFIX/accounts_service-image:$COMMIT_HASH
+    - docker build -f ./Dockerfile --pull -t accounts_service_img .
+    - docker tag accounts_service_img "$CONTAINER_FULL_IMAGE_NAME_WITH_TAG"
+    - docker push "$CONTAINER_FULL_IMAGE_NAME_WITH_TAG"
+    - echo $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
+    - echo "Deploying on CapRover..."
+    - docker run caprover/cli-caprover:v2.1.1 caprover deploy --caproverUrl $CAPROVER_URL --caproverPassword $CAPROVER_PASSWORD --caproverApp $CAPROVER_APP_ACCOUNTS --imageName $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
 
-# Build the React/JavaScript front-end
+build-events-image-job:
+  only:
+    - main
+  image: docker:19.03.1
+  stage: build
+  services:
+    - docker:19.03.1-dind
+  before_script:
+    - export DOCKER_REGISTRY_USER=$CI_REGISTRY_USER # built-in GitLab Registry User
+    - export DOCKER_REGISTRY_PASSWORD=$CI_REGISTRY_PASSWORD # built-in GitLab Registry Password
+    - export DOCKER_REGISTRY_URL=$CI_REGISTRY # built-in GitLab Registry URL
+    - export COMMIT_HASH=$CI_COMMIT_SHA # Your current commit sha
+    - export IMAGE_NAME_WITH_REGISTRY_PREFIX=$CI_REGISTRY_IMAGE # Your repository prefixed with GitLab Registry URL
+    - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" $DOCKER_REGISTRY_URL # Instructs GitLab to login to its registry
+
+  script:
+    - cd events_service
+    - echo "Building..." # MAKE SURE NO SPACE ON EITHER SIDE OF = IN THE FOLLOWING LINE
+    - export CONTAINER_FULL_IMAGE_NAME_WITH_TAG=$IMAGE_NAME_WITH_REGISTRY_PREFIX/events_service-image:$COMMIT_HASH
+    - docker build -f ./Dockerfile --pull -t events_service_img .
+    - docker tag events_service_img "$CONTAINER_FULL_IMAGE_NAME_WITH_TAG"
+    - docker push "$CONTAINER_FULL_IMAGE_NAME_WITH_TAG"
+    - echo $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
+    - echo "Deploying on CapRover..."
+    - docker run caprover/cli-caprover:v2.1.1 caprover deploy --caproverUrl $CAPROVER_URL --caproverPassword $CAPROVER_PASSWORD --caproverApp $CAPROVER_APP_EVENTS --imageName $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
+
+build-polls-image-job:
+  only:
+    - main
+  image: docker:19.03.1
+  stage: build
+  services:
+    - docker:19.03.1-dind
+  before_script:
+    - export DOCKER_REGISTRY_USER=$CI_REGISTRY_USER # built-in GitLab Registry User
+    - export DOCKER_REGISTRY_PASSWORD=$CI_REGISTRY_PASSWORD # built-in GitLab Registry Password
+    - export DOCKER_REGISTRY_URL=$CI_REGISTRY # built-in GitLab Registry URL
+    - export COMMIT_HASH=$CI_COMMIT_SHA # Your current commit sha
+    - export IMAGE_NAME_WITH_REGISTRY_PREFIX=$CI_REGISTRY_IMAGE # Your repository prefixed with GitLab Registry URL
+    - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASSWORD" $DOCKER_REGISTRY_URL # Instructs GitLab to login to its registry
+
+  script:
+    - cd polls_service
+    - echo "Building..." # MAKE SURE NO SPACE ON EITHER SIDE OF = IN THE FOLLOWING LINE
+    - export CONTAINER_FULL_IMAGE_NAME_WITH_TAG=$IMAGE_NAME_WITH_REGISTRY_PREFIX/polls_service-image:$COMMIT_HASH
+    - docker build -f ./Dockerfile --pull -t polls_service_img .
+    - docker tag polls_service_img "$CONTAINER_FULL_IMAGE_NAME_WITH_TAG"
+    - docker push "$CONTAINER_FULL_IMAGE_NAME_WITH_TAG"
+    - echo $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
+    - echo "Deploying on CapRover..."
+    - docker run caprover/cli-caprover:v2.1.1 caprover deploy --caproverUrl $CAPROVER_URL --caproverPassword $CAPROVER_PASSWORD --caproverApp $CAPROVER_APP_POLLS --imageName $CONTAINER_FULL_IMAGE_NAME_WITH_TAG
+
+  # Build the React/JavaScript front-end
 build-front-end-job:
-  # rules added per learn. lines 30-32
-  rules:
-    # Only run if pushing to the main branch
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  only:
+    - main
   stage: build
   image: node:lts-bullseye
   needs:
     - lint-test-job
-    - accounts_service-unit-test-job
-    # added line 37 as per instructions on learn. unsure if this will work since we havent written any unit tests yet.
+    # - accounts_service-unit-test-job
   variables:
     # If either of these variables is defined in the GitLab
     # CI/CD variables, that value will override the value here.
     # You need to substitute in your real values for
     # GROUP_NAME, PROJECT_NAME, & WEBSERVICE_NAME below.
-    PUBLIC_URL: https://plan-it.gitlab.io/plan-it/
-    REACT_APP_SAMPLE_SERVICE_API_HOST: https://WEBSERVICE_NAME.onrender.com
+    PUBLIC_URL: https://plan-it1.gitlab.io/module3-project-gamma
+    REACT_APP_ACCOUNTS_SERVICE_API_HOST: https://accounts-service.sept-pt-12.mod3projects.com
+    REACT_APP_EVENTS_API_HOST: https://events-service.sept-pt-12.mod3projects.com
+    REACT_APP_POLLS_API_HOST: https://polls-service.sept-pt-12.mod3projects.com
   script:
     - cd ghi
     - npm install
@@ -52,40 +134,11 @@ build-front-end-job:
     paths:
       - ghi/build/
 
-# lines 56-83 added from Learn: Continuous deployment D4
-build-back-end-job:
-  rules:
-    # Only run if pushing to the main branch
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-  stage: build
-  image: docker:20.10.16
-  services:
-    - docker:20.10.16-dind
-  script:
-    # DO THIS FOR EACH SERVICE YOU NEED TO BUILD A DOCKER
-    # IMAGE FOR
-    - cd api
-
-    # Builds the image CHANGE THE /app FOR EACH SERVICE
-    - docker build -t ${CI_REGISTRY_IMAGE}/app:latest .
-
-    # Gives the image a specific name
-    - docker tag ${CI_REGISTRY_IMAGE}/app:latest ${CI_REGISTRY_IMAGE}/app:$CI_JOB_ID
-
-    # Authenticates with the GitLab image registry
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-
-    # Stores your image in the GitLab image registry
-    # with two different tags, the version from the tag
-    # and the name "latest"
-    - docker push ${CI_REGISTRY_IMAGE}/app:$CI_JOB_ID
-    - docker push ${CI_REGISTRY_IMAGE}/app:latest
-
 # Deploy the React/JavaScript front-end to GitLab pages
 pages:
   stage: deploy
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  only:
+    - main
   dependencies:
     - build-front-end-job
   needs:

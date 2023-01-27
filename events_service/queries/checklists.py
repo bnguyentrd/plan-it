@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Optional, Union
+from typing import List, Optional
 from queries.pool import pool
 
 
@@ -19,39 +19,48 @@ class ChecklistOut(BaseModel):
 class ChecklistRepository:
     def get_all(self) -> List[ChecklistOut]:
         with pool.connection() as conn:
-                with conn.cursor() as db:
-                    result = db.execute(
-                        """
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
                         SELECT id, event_id, items, status
                         FROM checklists
                         ORDER BY id
                         """
-                    )
-                    return [self.record_to_checklist_out(record) for record in result]
+                )
+                return [
+                    self.record_to_checklist_out(record) for record in result
+                ]
 
-
-
+    def get_by_event(self, event_id: int) -> List[ChecklistOut]:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                        SELECT id, event_id, items, status
+                        FROM checklists
+                        WHERE event_id = %s
+                        """,
+                    [event_id],
+                )
+                return [
+                    self.record_to_checklist_out(record) for record in result
+                ]
 
     def get_one(self, checklist_id: int) -> Optional[ChecklistOut]:
         with pool.connection() as conn:
-                with conn.cursor() as db:
-                    result = db.execute(
-                        """
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
                         SELECT id, event_id, items, status
                         FROM checklists
                         WHERE id = %s
                         """,
-                        [checklist_id]
-                    )
-                    record = result.fetchone()
-                    if record is None:
-                        return None
-                    return self.record_to_checklist_out(record)
-
-
-
-
-
+                    [checklist_id],
+                )
+                record = result.fetchone()
+                if record is None:
+                    return None
+                return self.record_to_checklist_out(record)
 
     def create(self, checklist: ChecklistIn) -> ChecklistOut:
         with pool.connection() as conn:
@@ -64,22 +73,14 @@ class ChecklistRepository:
                         (%s, %s, %s)
                     RETURNING id
                     """,
-                    [
-                        checklist.event_id,
-                        checklist.items,
-                        checklist.status
-                    ]
+                    [checklist.event_id, checklist.items, checklist.status],
                 )
                 id = result.fetchone()[0]
                 return self.checklist_in_to_out(id, checklist)
 
-
-
-
-
-
-
-    def update(self, checklist_id: int, checklist: ChecklistIn) -> ChecklistOut:
+    def update(
+        self, checklist_id: int, checklist: ChecklistIn
+    ) -> ChecklistOut:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 db.execute(
@@ -92,46 +93,30 @@ class ChecklistRepository:
                         checklist.event_id,
                         checklist.items,
                         checklist.status,
-                        checklist_id
-                    ]
+                        checklist_id,
+                    ],
                 )
                 return self.checklist_in_to_out(checklist_id, checklist)
-
-
-
-
-
-
-
-
 
     def delete(self, checklist_id: int) -> bool:
         try:
             with pool.connection() as conn:
-                    with conn.cursor() as db:
-                        db.execute(
-                            """
+                with conn.cursor() as db:
+                    db.execute(
+                        """
                             DELETE FROM checklists
                             WHERE id = %s
                             """,
-                            [checklist_id]
-                        )
-                        return True
+                        [checklist_id],
+                    )
+                    return True
         except Exception as e:
             print(e)
             return False
 
-
-
-
-
-
     def record_to_checklist_out(self, record):
         return ChecklistOut(
-            id = record[0],
-            event_id = record[1],
-            items = record[2],
-            status = record[3]
+            id=record[0], event_id=record[1], items=record[2], status=record[3]
         )
 
     def checklist_in_to_out(self, id: int, checklist: ChecklistIn):

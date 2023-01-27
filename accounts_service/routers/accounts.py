@@ -1,6 +1,6 @@
 from fastapi import (
+    UploadFile,
     # Body,
-    Query,
     Depends,
     HTTPException,
     status,
@@ -9,16 +9,15 @@ from fastapi import (
     Request,
 )
 
+
 from jwtdown_fastapi.authentication import Token
 from .authenticator import authenticator
 from pydantic import BaseModel
-
 
 from queries.accounts import (
     Error,
     EmailIn,
     UsernameIn,
-    # Username,
     AccountIn,
     AccountOut,
     AccountsOut,
@@ -37,6 +36,19 @@ def is_valid_email(email: str) -> bool:
 
 
 router = APIRouter()
+
+
+@router.post("/api/accounts/{id}/profilepicture")
+async def profile_picture(id: int, upload_file: UploadFile, accounts: AccountQueries = Depends()):
+    image = await upload_file.read()
+    result = accounts.uploadProfilePicture(id, image)
+    if result:
+        return {"message": "Profile picture uploaded"}
+    else:
+        return HTTPException(
+            status_code = status.HTTP_400_BAD_REQUEST,
+            detail="Could not update user's profile picture",
+        )
 
 
 @router.get("/api/protected", response_model=bool)
@@ -73,10 +85,7 @@ def account_detail(
     #   account: dict = Depends(authenticator.get_current_account_data),
     repo: AccountQueries = Depends(),
 ) -> AccountOut:
-    print(
-        "this is the repooooooooooooooooooooooooooooooooooooooooooooooooo",
-        repo,
-    )
+    print(repo)
     user = repo.get_one(id)
     if user is None:
         response.status_code = 404
@@ -127,7 +136,6 @@ def delete_account(
     return repo.delete(id)
 
 
-# working but includes all attributes for input
 @router.put("/api/accounts/{id}", response_model=Union[AccountOut, Error])
 def update_account(
     id: int,
@@ -138,19 +146,6 @@ def update_account(
     return repo.update(id, user)
 
 
-# test
-# @router.put("/api/accounts/{id}", response_model=bool)
-# def update_account(
-#     id: int,
-#     formData: EmailIn,
-#     account: dict = Depends(authenticator.get_current_account_data),
-#     repo: AccountQueries = Depends(),
-# ) -> bool:
-#     print(account)
-#     user_id = account["id"]
-#     return repo.update(user_id, formData)
-
-
 @router.put("/api/accounts/{id}/email", response_model=bool)
 def update_email(
     formData: EmailIn,
@@ -158,7 +153,6 @@ def update_email(
     repo: AccountQueries = Depends(),
 ) -> bool:
     user_id = user_data["id"]
-    # user_data["username"] = formData.username
     user_data["email"] = formData.email
     return repo.updateEmail(user_id, user_data)
 
@@ -169,7 +163,12 @@ def update_username(
     user_data: dict = Depends(authenticator.get_current_account_data),
     repo: AccountQueries = Depends(),
 ) -> bool:
-    user_id = user_data["id"]
-    # user_data["username"] = formData.username
-    user_data["username"] = formData.username
-    return repo.updateUsername(user_id, user_data)
+    if user_data and "id" in user_data:
+        user_id = user_data["id"]
+        user_data["username"] = formData.username
+        print(user_id)
+        return repo.updateUsername(user_id, user_data)
+    else:
+        raise ValueError(
+            "user_data object not defined | does not have 'id' property."
+        )

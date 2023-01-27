@@ -1,16 +1,13 @@
 from fastapi import APIRouter, Depends, Response
 from typing import List, Optional, Union
-from queries.events import (
-    Error,
-    EventIn,
-    EventRepository,
-    EventOut
-)
+from queries.events import Error, EventIn, EventRepository, EventOut
+
 
 from queries.acls import get_weather
 
 
 router = APIRouter()
+
 
 @router.get("/events/{event_id}", response_model=Optional[EventOut])
 def get_one_event(
@@ -32,9 +29,10 @@ def create_event(
     repo: EventRepository = Depends(),
 ):
     try:
-        event.weather = get_weather(event.city, event.state)["description"]
+        # event.weather = get_weather(event.city, event.state)["description"]
         # print("::::::::::", event)
         return repo.create(event)
+        # print("testing weather bypass")
     except Exception:
         response.status_code = 400
 
