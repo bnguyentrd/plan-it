@@ -13,7 +13,8 @@ const UpdateEvent = () => {
     const [isUpdated, setIsUpdated] = useState(false)
 
     const {id} = useParams()
-    const url = `http://localhost:8001/events/${id}?event_id=${id}`
+    // const url = `http://localhost:8001/events/${id}?event_id=${id}`
+    const url = `${process.env.REACT_APP_EVENTS_SERVICE}/events/${id}?event_id=${id}`
 
     useEffect(() => {
         async function fetchEvents() {
