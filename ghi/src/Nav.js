@@ -8,7 +8,10 @@ function Nav(props) {
   const logout = useToken()[2];
   const token = useToken()[0];
 
-
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    logout();
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -37,7 +40,7 @@ function Nav(props) {
             </li>
             <li className="item-1">Contact</li>
             {!token ? (
-              <li>
+              <li className="item-2">
                 {" "}
                 <NavLink to="/signup">Sign Up</NavLink>{" "}
               </li>
@@ -65,17 +68,8 @@ function Nav(props) {
             <li className="item-2">
               <NavLink to="/questions">Polls</NavLink>
             </li>
-            {token && (
-              <li
-                onClick={() => {
-                  logout();
-                }}
-                role={"button"}
-                className="item-2"
-              >
-                Logout
-              </li>
-            )}
+            <div className="nav-sep"></div>
+            {token ? ( <button className="item-logout" onClick={handleLogout} >Log Out</button> ) : null}
           </ul>
         )}
       </div>

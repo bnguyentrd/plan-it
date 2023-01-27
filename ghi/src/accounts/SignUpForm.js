@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Box, TextField } from "@mui/material";
 import "../css/SignUp.css";
 import Nav from "../Nav";
-import { useAuthContext } from "./Authentication";
+// import { useAuthContext } from "./Authentication";
+import { useToken } from './Authentication';
 
 
 
@@ -10,13 +11,13 @@ function SignUpForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const { signup } = useAuthContext();
+  const signup = useToken()[3];
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
-      await signup(username, password, email);
+      await signup(username, email, password);
       console.log("Signup Successful!");
     } catch (error) {
       console.log("Signup Error: ", error);
@@ -33,6 +34,7 @@ function SignUpForm() {
             flexDirection: "column",
           }}
         >
+          <form className="signup-form">
           <h1>Sign Up</h1>
           <TextField
             margin="normal"
@@ -76,6 +78,7 @@ function SignUpForm() {
               Sign Up
             </button>
           </div>
+          </form>
         </Box>
       </div>
     </div>

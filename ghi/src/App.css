@@ -96,3 +96,7 @@ body {
   border-radius: 55px;
   display: inline-block;
 }
+
+.page-size {
+  height: 100vh;
+}

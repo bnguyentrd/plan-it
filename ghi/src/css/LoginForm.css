@@ -83,3 +83,11 @@
     background-position: 0 0;
   }
 }
+
+.login-form {
+  height: 500px;
+  width: 200%;
+  position: relative;
+  top: 50%;
+  left: 1%;
+}
