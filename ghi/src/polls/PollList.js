@@ -22,7 +22,7 @@ const PollList = () => {
     const [question, setQuestions] = useState([]);
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/questions`)
+        fetch(`${process.env.REACT_APP_POLLS_SERVICE_API_HOST}/questions`)
             .then(response => response.json())
             .then(data => {
                 setQuestions(data);

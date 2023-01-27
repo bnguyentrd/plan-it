@@ -13,9 +13,14 @@ function ChoiceForm() {
   const [choice_text, setChoice] = useState("");
   let navigate = useNavigate();
 
+
+    async function handleNav(event) {
+    event.preventDefault();
+    navigate("/questions")
+    }
   async function handleSubmit(event) {
     event.preventDefault();
-    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/questions/${ id }/choice`;
+    const url = `${process.env.REACT_APP_POLLS_SERVICE_API_HOST}/questions/${ id }/choice`;
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -53,7 +58,7 @@ function ChoiceForm() {
   return (
     <>
     <header><div>
-            <button onClick={() => window.location.href=`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/questions`}>Back to Poll List</button>
+            <button onClick={handleNav}>Back to Poll List</button>
         </div></header>
 
     <div className="signup-form-size">

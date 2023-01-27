@@ -13,10 +13,14 @@ const PollDetail = () => {
     event.preventDefault();
     navigate("/questions")
     }
+    async function handleNavChoices(event) {
+    event.preventDefault();
+    navigate(`/questions/${ id }/choice`)
+    }
 
     async function handleVote(choice_id) {
 
-    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/choices/${choice_id}/vote`;
+    const url = `${process.env.REACT_APP_POLLS_SERVICE_API_HOST}/choices/${choice_id}/vote`;
     const response = await fetch(url, {
       method: "PUT",
       headers: {
@@ -47,11 +51,11 @@ const PollDetail = () => {
     // Handle successful response
   }
   const fetchData = async () => {
-    const questionResponse = await fetch(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/questions/${id}`);
+    const questionResponse = await fetch(`${process.env.REACT_APP_POLLS_SERVICE_API_HOST}/questions/${id}`);
     const questionData = await questionResponse.json();
     setQuestion(questionData);
 
-    const choicesResponse = await fetch(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/choices`);
+    const choicesResponse = await fetch(`${process.env.REACT_APP_POLLS_SERVICE_API_HOST}/choices`);
     const choicesData = await choicesResponse.json();
     setChoices(choicesData);
 }
@@ -114,7 +118,7 @@ for (let choice in choices) {
         </tbody>
         </table>
         </div>
-        <button onClick={() => window.location.href=`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/questions/${id}/choice`}>Create a Choice for this Poll</button>
+        <button onClick={handleNavChoices}>Create a Choice for this Poll</button>
         </div>
         </>
     )
