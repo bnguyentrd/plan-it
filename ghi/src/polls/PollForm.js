@@ -19,7 +19,7 @@ function PollForm() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const url = `${process.env.REACT_APP_POLLS_SERVICE_API_HOST}/questions`;
+    const url = `${process.env.REACT_APP_POLLS_API_HOST}/questions`;
     // const url = `http://localhost:8003/questions`;
     const response = await fetch(url, {
       method: "POST",
