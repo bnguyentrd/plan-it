@@ -75,8 +75,8 @@ class EventRepository:
                         [event_id],
                     )
                     return True
+
         except Exception as e:
-            print(e)
             return False
 
     def update(self, event_id: int, event: EventIn) -> Union[EventOut, Error]:
