@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { getToken } from '../accounts/Authentication';
 import '../css/EventForm.css';
-import Nav from '../Nav';
 
 
 
@@ -16,9 +14,8 @@ const EventForm = () => {
     // const [url, setUrl] = useState("")
     // const [weather, setWeather] = useState("")
     const navigate = useNavigate()
-    const token = getToken()
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (Event) => {
         event.preventDefault()
         const data = {
             "title": title,
@@ -37,7 +34,6 @@ const EventForm = () => {
             body: JSON.stringify(data),
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
             }
         }
         const response = await fetch(eventUrl, fetchConfig)
@@ -49,7 +45,7 @@ const EventForm = () => {
 
     return (
         <div className='container evntfrm'>
-            <Nav />
+            {/* <Nav /> */}
             <div className='offset-3 col-6 evntform'>
                 <div className='shadow p-4 mt-4 event-curve'>
                     <h1>Create An Event</h1>

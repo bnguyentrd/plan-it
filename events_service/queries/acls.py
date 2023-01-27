@@ -9,7 +9,7 @@ def get_lat_lon(city, state):
     url = "http://api.openweathermap.org/geo/1.0/direct"
     params = {
         "q": f"{city}, {state}, USA",
-        "appid": os.environ.get("OPEN_WEATHER_API_KEY"),
+        "appid": OPEN_WEATHER_API_KEY,
     }
     res = requests.get(url, params=params)
     json = res.json()
@@ -24,7 +24,7 @@ def get_weather(city, state):
     params = {
         "lat": lat,
         "lon": lon,
-        "appid": os.environ.get("OPEN_WEATHER_API_KEY"),
+        "appid": OPEN_WEATHER_API_KEY,
         "units": "imperial",
     }
     res = requests.get(url, params=params)
