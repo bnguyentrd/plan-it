@@ -18,7 +18,7 @@ const ChecklistDetail = () => {
   useEffect(() => {
     const fetchChecklists = async () => {
       // const url = `http://localhost:8001/event/checklists/${id}`;
-      const url = `${process.env.REACT_APP_EVENTS_SERVICE}/event/checklists/${id}`;
+      const url = `${process.env.REACT_APP_EVENTS_API_HOST}/event/checklists/${id}`;
       const res = await fetch(url);
       const data = await res.json();
       setChecklistDetail(data);
@@ -29,7 +29,7 @@ const ChecklistDetail = () => {
   const handleDelete = async (list_id) => {
     //    const response = await fetch(`http://localhost:8001/checklists/${list_id}`, {
     const response = await fetch(
-      `${process.env.REACT_APP_EVENTS_SERVICE}/checklists/${list_id}`,
+      `${process.env.REACT_APP_EVENTS_API_HOST}/checklists/${list_id}`,
       {
         method: "DELETE",
       }
