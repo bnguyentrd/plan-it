@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./css/Nav.css";
-import { useAuthContext } from "./accounts/AuthenticationTEST";
-import { useToken } from './accounts/Authentication';
-
+import { useToken } from "./accounts/Authentication";
 
 function Nav(props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { logout } = useAuthContext();
-  const [ token ] = useToken();
-  console.log(token, "000000000000000000000000000000000000")
+  const logout = useToken()[2];
+  const token = useToken()[0];
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -19,7 +16,6 @@ function Nav(props) {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
 
   return (
     <nav>
@@ -39,9 +35,10 @@ function Nav(props) {
             </li>
              <li className="item-2">
               <NavLink to="/about">About</NavLink>
-            </li> 
+            </li>
+
             <li className="item-1">Contact</li>
-             {!token ? (
+            {!token ? (
               <li>
                 {" "}
                 <NavLink to="/signup">Sign Up</NavLink>{" "}

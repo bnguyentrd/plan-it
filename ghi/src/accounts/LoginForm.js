@@ -1,24 +1,33 @@
 import React, { useState } from "react";
 import { Container, Box, TextField, Button } from "@mui/material";
-import { useAuthContext } from "./AuthenticationTEST";
+import { useToken } from "./Authentication";
+import { useNavigate } from "react-router-dom";
 import "../css/LoginForm.css";
-
+import Nav from "../Nav";
 
 export const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { login, isLoggedIn } = useAuthContext();
   const [error, setError] = useState("");
-
+  const navigate = useNavigate();
+  const login = useToken()[1];
+  console.log("THIS IS LOGIN: ", login);
 
   const handleSubmit = async (e) => {
+    console.log("IN HANDLE SUBMIT");
     e.preventDefault();
-    login(username, password);
+    try {
+      console.log("BEFORE LOGIN");
+      login(username, password);
+      navigate("/");
+    } catch (error) {
+      navigate("/error", { state: { message: "Failed to submit form" } });
+    }
   };
-
 
   return (
     <>
+      <Nav />
       <Container className="login-form" component="main" maxWidth="xs">
         <Box
           sx={{
@@ -61,7 +70,6 @@ export const LoginForm = () => {
             Login
           </Button>
           <div>{error}</div>
-          {isLoggedIn ? <div>You are logged in</div> : null}
         </Box>
       </Container>
     </>

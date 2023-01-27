@@ -7,6 +7,7 @@ export function getToken() {
 }
 
 export async function getTokenInternal() {
+  // const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/accounts/me/token/`;
   const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`;
   try {
     const response = await fetch(url, {
@@ -14,8 +15,8 @@ export async function getTokenInternal() {
     });
     if (response.ok) {
       const data = await response.json();
-      // console.log(data, "getTokenInternal", "RECEIVING TOKEN HERE");
-      return data;
+      internalToken = data.access_token;
+      return internalToken;
     }
   } catch (e) {}
   return false;
@@ -62,7 +63,6 @@ export const useAuthContext = () => useContext(AuthContext);
 export function useToken() {
   const { token, setToken } = useAuthContext();
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     async function fetchToken() {
@@ -72,25 +72,23 @@ export function useToken() {
     }
     if (!token) {
       fetchToken();
-      console.log(token, "TOKEN HAS BEEN FETCHED HERE");
     }
-  }, [useToken, token]);
+  }, [setToken, token]);
 
   async function logout() {
     if (token) {
+      // const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/token/refresh/logout/`;
       const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`;
+      console.log(url);
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
-      setIsLoggedIn(() => {
-        false;
-      });
-      console.log(isLoggedIn, "IS LOGGED IN");
       setToken(null);
       navigate("/");
     }
   }
 
   async function login(username, password) {
+    // const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/login/`;
     const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`;
     const form = new FormData();
     form.append("username", username);
@@ -103,10 +101,7 @@ export function useToken() {
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
-      setIsLoggedIn(true);
-      setTimeout(() => {
-        navigate("/");
-      }, 1000);
+      console.log("THIS IS THE TOKEN: ", token);
       return;
     }
     let error = await response.json();
@@ -114,7 +109,7 @@ export function useToken() {
   }
 
   async function signup(username, password, email) {
-    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/new`;
+    const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/accounts/`;
     const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({
@@ -132,27 +127,23 @@ export function useToken() {
     return false;
   }
 
-  async function update(username, password, email) {
-    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/`;
+  async function update(username, email) {
+    const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/accounts/`;
     const response = await fetch(url, {
       method: "put",
       body: JSON.stringify({
         username,
-        password,
         email,
       }),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token.access_token}`,
       },
     });
     if (response.ok) {
-      const data = await response.json();
-      return data;
+      await login(username, password);
     }
     return false;
   }
 
-  return [token, login, logout, signup, update, isLoggedIn, setIsLoggedIn];
+  return [token, login, logout, signup, update];
 }
-
