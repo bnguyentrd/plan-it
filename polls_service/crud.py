@@ -1,26 +1,15 @@
 from sqlalchemy.orm import Session
-from fastapi import FastAPI
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel
 
 
-from models import Base, Question, Choice
-from poll_schema import (
-    QuestionInfo,
-    Question as PollSchemaQuestion,
-    QuestionEdit,
-    QuestionCreate,
-    ChoiceCreate,
-    ChoiceList,
-    ChoiceBase,
-    QuestionBase,
-)
+from models import Question, Choice
+import poll_schema
 
 # Question
 
 
-def create_question(db: Session, question: QuestionCreate):
+def create_question(db: Session, question: poll_schema.QuestionCreate):
     obj = Question(**question.dict())
     db.add(obj)
     db.commit()
@@ -34,10 +23,12 @@ def get_all_questions(db: Session):
 
 
 def get_question(db: Session, qid):
-    return db.query(Question).filter(Question.id == qid).first()
+    question = db.query(Question).filter(Question.id == qid).first()
+    question = jsonable_encoder(question)
+    return JSONResponse(question)
 
 
-def edit_question(db: Session, qid, question: QuestionEdit):
+def edit_question(db: Session, qid, question: poll_schema.QuestionEdit):
     obj = db.query(Question).filter(Question.id == qid).first()
     obj.question_text = question.question_text
     obj.title = question.title
@@ -52,9 +43,13 @@ def delete_question(db: Session, qid):
 
 
 # Choice
+def get_choices(db: Session):
+    obj = db.query(Choice).all()
+    obj = jsonable_encoder(obj)
+    return JSONResponse(obj)
 
 
-def create_choice(db: Session, qid: int, choice: ChoiceCreate):
+def create_choice(db: Session, qid: int, choice: poll_schema.ChoiceCreate):
     obj = Choice(**choice.dict(), question_id=qid)
     db.add(obj)
     db.commit()

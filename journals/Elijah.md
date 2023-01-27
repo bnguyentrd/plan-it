@@ -169,3 +169,46 @@ Got the event detail page to function using the id number from
 existing events. Tested URL to verify that inputted URLS would display an
 image. Working on implementing delete and put methods for the event
 detail page
+
+
+## January 23rd, 2023 - Monday
+
+Today, I worked on:
+
+* Solving some minor issues on the event service.
+
+Worked on getting information to display correctly on the list forms, also worked on
+main page elements ensuring that they would successfully route to the correct forms,
+when trying to access them from other pages. Cleaned up minor errors that occured in the console.
+
+
+## January 24th, 2023 - Tuesday
+
+Today, I worked on:
+
+* Reconfigured the front end list page from to and added links to direct the user to a page with the event details, for a particular event
+
+Reworked the event list page, to add less complexity when trying to add Authorization, trouble shooted
+how the token was being called in when trying to ensure that only users that are logged in can see
+events listed. As well as trying to add Authorization to the event form as well.
+
+
+## January 24th, 2023 - Wednesday
+
+Today, I worked on:
+
+* Debugging and started working on the update event form
+
+Tried to reconfigure the function used to delete an event on the front end, still recieved a 422 after
+reworking the function. Found no success. Started working on an update event form. The form in its current form does not post or display data in the fields correctly, but renders correctly.
+
+
+## January 26th, 2023 - Thursday
+
+Today, I worked on:
+
+* Fixed issue revolving around the delete event function, finalized update event form
+
+Solved issue with recieving 422 when trying to delete an event on the front end,
+was an issue with the url being called wrongly, it displayed differently in the back end so
+just needed to replaced the URL. Completed the update event form, got it to correctly input data from the existing event.

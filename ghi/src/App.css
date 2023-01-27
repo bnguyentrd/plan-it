@@ -16,7 +16,7 @@ body {
   height: 100%;
 } */
 
-body {
+/* body {
   background: linear-gradient(
     140deg,
     rgb(253, 253, 253) 0%,
@@ -26,7 +26,7 @@ body {
   color: black;
   text-align: center;
   background-position: 0em;
-}
+} */
 
 .App-header {
   /* background-color: #02bef7; */
@@ -84,5 +84,19 @@ body {
 }
 
 .account-detail-size {
+  height: 100vh;
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  background-image: url('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 55px;
+  display: inline-block;
+}
+
+.page-size {
   height: 100vh;
 }

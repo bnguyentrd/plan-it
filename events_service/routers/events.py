@@ -2,7 +2,8 @@ from fastapi import APIRouter, Depends, Response
 from typing import List, Optional, Union
 from queries.events import Error, EventIn, EventRepository, EventOut
 
-from queries.acls import get_weather
+
+from queries.acls import get_weather, get_photo
 
 
 router = APIRouter()
@@ -29,9 +30,8 @@ def create_event(
 ):
     try:
         event.weather = get_weather(event.city, event.state)["description"]
-        # print("::::::::::", event)
+        event.url = get_photo(event.city, event.state)["picture_url"]
         return repo.create(event)
-        # print("testing weather bypass")
     except Exception:
         response.status_code = 400
 

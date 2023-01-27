@@ -3,26 +3,18 @@
     width: 62px;
     position: fixed;
     top: 2%;
-    /* left: 10%; */
     right: 1%;
     border-radius: 15px;
-    /* background-color: white; */
     font-weight: 900;
     font-size: 30px;
     border: 3px;
-    /* background-image: url('https://m.media-amazon.com/images/I/51EKl+p+Q7L.jpg');
-    background-repeat: no-repeat; 
-    background-position: 0px 0px 50px 30px;
-    background-size: cover;
-    background-position: 0px -45px; */
     background-color: transparent;
     color: rgb(122, 119, 119);
     box-shadow: 2px 2px 2px 2px;
-    /* font-family: bradley hand, cursive; */
 }
 
 .navbtn:hover {
-    background-color: rgb(228, 205, 233);
+    background-color: rgba(23, 139, 48, 0.747);
     color: rgb(137, 224, 240);
 }
 
@@ -70,7 +62,6 @@
     margin: 60px;
     padding: 25px;
     border-radius: 15px;
-    /* background-color: white; */
     background-image: url('https://ih1.redbubble.net/image.854420408.5128/flat,750x,075,f-pad,750x1000,f8f8f8.jpg');
     position: fixed;
     background-size: stretch;
@@ -82,7 +73,7 @@
 }
 
 .item-1 {
-    background-color: rgb(221, 184, 190);
+    background-color: rgb(70, 206, 240);
     border-radius: 10px;
     opacity: 0.6;
     height: 30px;
@@ -92,7 +83,7 @@
 }
 
 .item-2 {
-    background-color: rgb(175, 203, 212);
+    background-color: rgb(78, 226, 103);
     border-radius: 10px;
     opacity: 0.6;
     height: 30px;
@@ -125,27 +116,26 @@
   cursor: pointer;
 }
 
-.neonText {
-  color: rgb(60, 200, 243);
-  text-shadow:
-    0 0 7px rgb(58, 231, 243),
-    0 0 10px #fff,
-    0 0 21px #fff,
-    0 0 42px #0fa,
-    0 0 82px #0fa,
-    0 0 92px #0fa,
-    0 0 102px #0fa,
-    0 0 151px #0fa;
-    font-size: 30px;
-    font-weight: 350px;
+.item-logout {
+    background-color: rgb(70, 206, 240);
+    border-radius: 10px;
+    opacity: 0.6;
+    height: 30px;
+    width: 100px;
+    font-weight: 700;
+    position: flex;
+    margin: 1px;
+    border: transparent;
+    margin-top: 60px;
+}
+.item-logout:hover {
+    background: red;
 }
 
-.breakbar {
-    width: 100%;
+.nav-sep {
+    width: 140px;
     height: 5px;
-    background-color: rgb(92, 87, 87);
-    margin-top: 5px 0;
-    margin-bottom: 50px;
-    transition: 0.4s;
+    background-color: #333;
     border-radius: 5px;
+    margin-top: 10px;
 }

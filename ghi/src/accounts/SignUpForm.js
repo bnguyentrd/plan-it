@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { Container, Box, TextField, Button } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import "../css/SignUp.css";
 import Nav from "../Nav";
 import { useToken } from "./Authentication";
 import { useNavigate } from "react-router-dom";
 
-// import "../css/SignUp.css";
 
 function SignUpForm() {
   const [username, setUsername] = useState("");
@@ -32,13 +31,11 @@ function SignUpForm() {
         <Nav />
         <Box
           sx={{
-            // marginTop: 8,
             display: "flex",
             flexDirection: "column",
-            // alignItems: "center",
-            // marginBottom: 27
           }}
         >
+          <form className="signup-form">
           <h1>Sign Up</h1>
           <TextField
             margin="normal"
@@ -51,7 +48,6 @@ function SignUpForm() {
             variant="outlined"
             autoFocus
           />
-
           <TextField
             margin="normal"
             required
@@ -63,7 +59,6 @@ function SignUpForm() {
             variant="outlined"
             autoFocus
           />
-
           <TextField
             margin="normal"
             required
@@ -76,9 +71,6 @@ function SignUpForm() {
             variant="outlined"
             autoFocus
           />
-          {/* <Button variant="contained" onClick={handleSubmit}>
-          Sign Up
-        </Button> */}
           <br></br>
           <div>
             <button
@@ -88,6 +80,7 @@ function SignUpForm() {
               Sign Up
             </button>
           </div>
+          </form>
         </Box>
       </div>
     </div>

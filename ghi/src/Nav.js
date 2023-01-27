@@ -40,7 +40,7 @@ function Nav(props) {
             </li>
             <li className="item-1">Contact</li>
             {!token ? (
-              <li>
+              <li className="item-2">
                 {" "}
                 <NavLink to="/signup">Sign Up</NavLink>{" "}
               </li>
@@ -65,17 +65,11 @@ function Nav(props) {
             <li className="item-1">
               <NavLink to="/details">Event Details</NavLink>
             </li>
-            {token && (
-              <li
-                onClick={() => {
-                  logout();
-                }}
-                role={"button"}
-                className="item-2"
-              >
-                Logout
-              </li>
-            )}
+            <li className="item-2">
+              <NavLink to="/questions">Polls</NavLink>
+            </li>
+            <div className="nav-sep"></div>
+            {token ? ( <button className="item-logout" onClick={handleLogout} >Log Out</button> ) : null}
           </ul>
         )}
       </div>
