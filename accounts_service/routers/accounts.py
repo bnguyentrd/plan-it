@@ -1,5 +1,4 @@
 from fastapi import (
-    # Body,
     Depends,
     HTTPException,
     status,
@@ -122,7 +121,6 @@ def delete_account(
     return repo.delete(id)
 
 
-# working but includes all attributes for input
 @router.put("/api/accounts/{id}", response_model=Union[AccountOut, Error])
 def update_account(
     id: int,
@@ -133,19 +131,6 @@ def update_account(
     return repo.update(id, user)
 
 
-# test
-# @router.put("/api/accounts/{id}", response_model=bool)
-# def update_account(
-#     id: int,
-#     formData: EmailIn,
-#     account: dict = Depends(authenticator.get_current_account_data),
-#     repo: AccountQueries = Depends(),
-# ) -> bool:
-#     print(account)
-#     user_id = account["id"]
-#     return repo.update(user_id, formData)
-
-
 @router.put("/api/accounts/{id}/email", response_model=bool)
 def update_email(
     formData: EmailIn,
@@ -153,7 +138,6 @@ def update_email(
     repo: AccountQueries = Depends(),
 ) -> bool:
     user_id = user_data["id"]
-    # user_data["username"] = formData.username
     user_data["email"] = formData.email
     return repo.updateEmail(user_id, user_data)
 
@@ -164,7 +148,12 @@ def update_username(
     user_data: dict = Depends(authenticator.get_current_account_data),
     repo: AccountQueries = Depends(),
 ) -> bool:
-    user_id = user_data["id"]
-    # user_data["username"] = formData.username
-    user_data["username"] = formData.username
-    return repo.updateUsername(user_id, user_data)
+    if user_data and "id" in user_data:
+        user_id = user_data["id"]
+        user_data["username"] = formData.username
+        print(user_id)
+        return repo.updateUsername(user_id, user_data)
+    else:
+        raise ValueError(
+            "user_data object not defined | does not have 'id' property."
+        )

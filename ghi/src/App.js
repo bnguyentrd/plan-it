@@ -1,12 +1,12 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MainPage from "./MainPage.js";
 import SignUpForm from "./accounts/SignUpForm";
 import { LoginForm } from "./accounts/LoginForm.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AccountDetails from "./accounts/AccountDetail.js";
 import { About } from "./accounts/About.js";
-import { AuthProvider } from "./accounts/AuthenticationTEST";
+import { AuthProvider } from "./accounts/Authentication";
 import EventForm from "./events/eventForm";
 import EventList from "./events/eventList";
 import EventDetails from "./events/eventDetails.js";
@@ -14,10 +14,10 @@ import { useToken } from "./accounts/Authentication.js";
 import PollForm from "./polls/PollForm.js";
 import PollList from "./polls/PollList.js";
 
-// function getToken() {
-//   useToken();
-//   return null;
-// }
+function GetToken() {
+  useToken();
+  return null;
+}
 
 function App(props) {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -31,6 +31,7 @@ function App(props) {
       <div>
         <BrowserRouter basename={basename}>
           <AuthProvider>
+            <GetToken />
             <Routes>
               <Route path="/" element={<MainPage accountid={account_id} />} />
               <Route path="/signup" element={<SignUpForm />} />
@@ -41,14 +42,12 @@ function App(props) {
               <Route path="/events" element={<EventList />} />
               <Route path="/create" element={<EventForm />} />
               <Route path="/details/:id" element={<EventDetails />} />
-              <Route path="/questions/new" element={<PollForm/>} />
-              <Route path="/questions" element={<PollList/>} />
+              <Route path="/questions/new" element={<PollForm />} />
+              <Route path="/questions" element={<PollList />} />
             </Routes>
           </AuthProvider>
         </BrowserRouter>
       </div>
-
-
     </>
   );
 }
