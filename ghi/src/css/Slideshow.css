@@ -24,14 +24,10 @@
 }
 
 .slidebg {
-    /* background: #02bef7; */
     padding: 20px;
     margin: 200px;
-    /* background-color: rgb(58, 55, 55); */
-    /* border-radius: 145px; */
 }
 .slidepic {
-    /* padding: 10px; */
     margin: 10px;
     border-radius: 25px;
     box-shadow: 3px 4px 3px 0px rgb(58, 57, 57);
@@ -48,7 +44,6 @@
 
 .carousel-control-prev {
     position: sticky;
-    /* left: 500px; */
     float: left;
     top: 75%;
     height: 75px !important;

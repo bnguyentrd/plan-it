@@ -1,12 +1,6 @@
 
 body {
-  /* background-image: linear-gradient(#233329, #63D471) */
-  /* background-image: linear-gradient(140deg, rgba(2, 100, 8, 0.747) 0%, rgba(20, 110, 47, 0.842) 50%, rgba(88, 65, 22, 0.753) 75%); */
-  /* color: black; */
-  /* background: #5A3F37;  fallback for old browsers */
-  /* background: -webkit-linear-gradient(to top, #e3f1e7, #7aac75); */
   background: linear-gradient(140deg, #6de3e7, #218513); 
-  /* background: linear-gradient(to right, #27badf, #e41b1b); */
   text-align: center;
   background-size: 400% 400%;
   animation: animate-background 10s infinite ease-in-out;
@@ -25,23 +19,21 @@ body {
 }
 
 
-/* Dark mode styles */
+
 .dark-mode {
-  /* background-color: rgb(65, 59, 59); */
   background: linear-gradient(140deg, #404242, #030303); 
   background-size: 400% 400%;
   animation: animate-background 10s infinite ease-in-out;
   color: rgba(66, 226, 247, 0.582);
-  /* text-align: center; */
 }
 
 .toggle-switch {
-  position: relative; /* The circle elements will be absolutely positioned relative to this element */
-  width: 50px; /* The width of the toggle switch */
-  height: 32px; /* The height of the toggle switch */
-  background: grey; /* The background color of the toggle switch */
-  border-radius: 30px; /* The border radius of the toggle switch */
-  cursor: pointer; /* The cursor changes to a pointer when hovering over the toggle switch */
+  position: relative;
+  width: 50px; 
+  height: 32px; 
+  background: grey;
+  border-radius: 30px; 
+  cursor: pointer;
 }
 
 .toggle-switch:before {
@@ -54,15 +46,9 @@ body {
   left: 5px;
   transition: left 0.2s ease;
   background-image: url(https://cdn3.vectorstock.com/i/1000x1000/40/02/crescent-moon-symbol-icon-design-vector-22314002.jpg);
-  /* Add a background image of a moon */
-  background-size: cover; /* Scale the background image to cover the entire element */
-  background-position: center; /* Position the background image in the center of the element */
+  background-size: cover;
+  background-position: center;
 }
-
-/* Change the position of the moon when the toggle switch is turned on */
-/* .toggle-switch.on:before {
-    left: 25px;
-}  */
 
 .input {
   margin: 10px;
@@ -86,10 +72,8 @@ body {
   left: 0;
   height: 50px;
   width: 50px;
-  /* background-color: navy; */
   border-radius: 50px;
   transition: all .9s;
-  /* background-color: #F7CA33; */
   background-size: cover;
   background-image: url('https://www.iconpacks.net/icons/2/free-sun-icon-1846-thumb.png');
 }
@@ -102,7 +86,6 @@ body {
 .input:checked:before {
   transform: translate(100%);
   transition: all .9s;
-  /* background-color: #ECF0F3; */
   background-size: cover;
   box-shadow: 0.5px 0.5px 0.5px 0.5px rgb(138, 135, 135);
   background-image: url('https://i.pinimg.com/564x/1c/22/43/1c22433b8d3aec799fd8187ca3030193.jpg');
@@ -110,7 +93,6 @@ body {
 
 .button-transpar {
   background-color: transparent;
-  /* outline: 0; */
   outline-color: transparent;
   border: none;
 }
@@ -123,15 +105,6 @@ body {
   padding: 10rem;
   position: flex;
 }
-
-
-/* .logotxt {
-  color: linear-gradient(45deg, #7dcfbb, #00eeff);
-  font-family: bradley hand, cursive;
-  left: 1%;
-  top: 11%;
-  position: absolute;
-} */
 
 .eventform {
   border-radius: 20px;
@@ -153,7 +126,6 @@ body {
   position: flex;
   height: 200px;
   width: 200px;
-  /* background-image: url('https://static.thenounproject.com/png/739210-200.png') */
 }
 
 .event-margin {
@@ -162,7 +134,6 @@ body {
 
 .footer-quote1 {
   font-size: 70px;
-  /* text-align: center; */
   bottom: 10%;
   height: 80px;
   color:rgb(107, 166, 235);

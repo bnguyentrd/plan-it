@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import axios from "axios";
 let internalToken = null;
 
 export function getToken() {
@@ -8,20 +7,14 @@ export function getToken() {
 }
 
 export async function getTokenInternal() {
-  // original
-  // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/me/token/`;
   const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`;
-  // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/{id}/token/`;
-  // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/id/token/`;
   try {
     const response = await fetch(url, {
       credentials: "include",
     });
     if (response.ok) {
       const data = await response.json();
-      // internalToken = data.access_token;
-      // return internalToken;
-      console.log(data, "getTokenInternal", "RECEIVING TOKEN HERE");
+      // console.log(data, "getTokenInternal", "RECEIVING TOKEN HERE");
       return data;
     }
   } catch (e) {}
@@ -49,12 +42,6 @@ function handleErrorMessage(error) {
   return error;
 }
 
-// original
-// export const AuthContext = createContext({
-//   token: null,
-//   setToken: () => null,
-// });
-
 export const AuthContext = createContext({
   token: null,
   setToken: () => null,
@@ -80,29 +67,17 @@ export function useToken() {
   useEffect(() => {
     async function fetchToken() {
       const token = await getTokenInternal();
+      console.log(token, "THIS IS THE USE EFFECT");
       setToken(token);
     }
     if (!token) {
       fetchToken();
       console.log(token, "TOKEN HAS BEEN FETCHED HERE");
     }
-  }, [setToken, token]);
-
-  // ORIGINAL LOGOUT WORKING on backend. but not frontend
-  // async function logout() {
-  //   if (token) {
-  //     // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/token/refresh/logout/`;
-  //     const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`;
-  //     await fetch(url, { method: "delete", credentials: "include" });
-  //     internalToken = null;
-  //     setToken(null);
-  //     navigate("/");
-  //   }
-  // }
+  }, [useToken, token]);
 
   async function logout() {
     if (token) {
-      // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/token/refresh/logout/`;
       const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`;
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
@@ -114,19 +89,6 @@ export function useToken() {
       navigate("/");
     }
   }
-
-  //jo
-  // const logout = () => {
-  //   fetch(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`, {
-  //     method: "DELETE",
-  //     credentials: "include", // include cookies in the request
-  //   }).then(() => {
-  //     // setCurrentUser(null);
-  //     setIsLoggedIn(false);
-  //     localStorage.removeItem("token");
-  //     navigate("/");
-  //   });
-  // };
 
   async function login(username, password) {
     const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`;
@@ -194,4 +156,3 @@ export function useToken() {
   return [token, login, logout, signup, update, isLoggedIn, setIsLoggedIn];
 }
 
-// export default logout;

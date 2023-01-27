@@ -32,6 +32,8 @@ class AccountOutWithPassword(AccountOut):
 class AccountsOut(BaseModel):
     accounts: list[AccountOut]
 
+class ProfilePictureIn(BaseModel):
+    image: bytes
 
 class EmailIn(BaseModel):
     email: str
@@ -195,6 +197,28 @@ class AccountQueries:
         except Exception as e:
             print(e)
             return {"message": "Could not update user data"}
+
+    def uploadProfilePicture(self, id: int, image: bytes):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE accounts
+                        SET profile_picture = %s
+                        WHERE id = %s
+                        """,
+                        [
+                            id,
+                            image,
+                        ],
+                    )
+                    return True
+
+        except Exception as e:
+            print(e)
+            return {"message": "Could not update user's profile picture"}
+
 
     def user_in_to_out(self, id: int, user: AccountOut):
         old_data = user.dict()

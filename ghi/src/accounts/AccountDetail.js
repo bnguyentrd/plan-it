@@ -2,14 +2,11 @@
 import React, { useState, useEffect, useContext } from "react";
 // import React, { useState, useEffect, useContext, useReducer } from "react";1
 import { useNavigate } from "react-router-dom";
-import MainPage from "../MainPage";
 import { getToken, getTokenInternal } from "./AuthenticationTEST";
 import { useToken } from "./Authentication";
-import { logout } from "../MainPage";
 import Nav from "../Nav";
 
 function AccountDetails() {
-  const [profilePicture, setProfilePicture] = useState(null);
   const [accountDetails, setAccountDetails] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -19,18 +16,16 @@ function AccountDetails() {
   const [email, setEmail] = useState("");
   const [updateUsername, setUpdateUsername] = useState(false);
   const [updateEmail, setUpdateEmail] = useState(false);
-  // const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
+  // const [file, setFile] = useState(null);
+  // const [fileUrl, setFileUrl] = useState(null);
 
   useEffect(() => {
     async function fetchAccountDetails() {
       const token = await getTokenInternal();
-      // if (!token.access_token) {
       if (!token) {
         navigate("/login");
       } else {
         console.log("PASSED TOKEN CHECK");
-        // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/me/`;
-        // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/{id}/`;
         const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}`;
         console.log("HERE IS THE TOKEN ID:", token.account.id);
         try {
@@ -49,14 +44,10 @@ function AccountDetails() {
           }
         } catch (e) {
           console.log(e);
-          // navigate("/login");
         }
       }
     }
     fetchAccountDetails();
-    // issue: page is reloading instead of rerendering
-    // when updating form for a second time, page is empty unless I hard refresh
-    // }, [updateUsername, updateEmail]);
   }, [updateEmail]);
 
 
@@ -71,7 +62,7 @@ function AccountDetails() {
     if (response.ok) {
       fetch(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`, {
         method: "DELETE",
-        credentials: "include", // include cookies in the request
+        credentials: "include",
       });
       navigate("/");
     } else {
@@ -80,10 +71,6 @@ function AccountDetails() {
       setError(error.message);
     }
   };
-
-  // const handleUpload = (e) => {
-  //   setProfilePicture(e.target.files[0]);
-  // };
 
 
 
@@ -103,10 +90,7 @@ function AccountDetails() {
       });
       if (response.ok) {
         const data = await response.json();
-        // switch test. details was first. result: didnt change anything
         setAccountDetails(data);
-        // forceUpdate();
-        // window.location.reload();
         setEmail(email);
         setUpdateEmail(true);
       } else {
@@ -147,8 +131,34 @@ function AccountDetails() {
       setError(e.message);
     }
     setLoading(false);
-    // setUpdateUsername(true);
   };
+
+
+//   async function handleUpload() {
+//     const formData = new FormData();
+//     formData.append('upload_file', file);
+
+//     try {
+//       const response = await fetch(`/api/accounts/${props.account.id}/profilepicture`, {
+//         method: 'POST',
+//         body: formData,
+//       });
+
+//       if (!response.ok) {
+//         throw new Error('Upload failed');
+//       }
+
+//       const data = await response.json();
+//       setProfilePicUrl(`/api/accounts/${props.account.id}/profilepicture`);
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   }
+
+//   const handleFileChange = e => {
+//   const file = e.target.files[0];
+//   setFileUrl(URL.createObjectURL(file));
+// }
 
   return (
     <>
@@ -159,18 +169,8 @@ function AccountDetails() {
           <>
             <Nav />
             <h1>Account Detail</h1>
-            {/* <div>
-              <h2>Profile Picture</h2>
-              <input type="file" onChange={handleUpload} />
-              <img
-                src={profilePicture ? URL.createObjectURL(profilePicture) : ""}
-                alt="profile"
-              />
-            </div> */}
             <div>
-              {/* <h2>Username: {accountDetails.username}</h2> */}
               <div>
-                {/* <h2>Email: {accountDetails.email}</h2> */}
                 <h2>Email: {email}</h2>
                 <form onSubmit={handleEmailUpdate}>
                   <input
@@ -182,10 +182,7 @@ function AccountDetails() {
                 </form>
               </div>
               <div>
-                {/* <h2>Username: {accountDetails.username}</h2> */}
                 <h2>Username: {username}</h2>
-                {/* test */}
-                {/* <div>{updateUsername}</div> */}
                 <form onSubmit={handleUsernameUpdate}>
                   <input
                     type="text"
@@ -194,6 +191,11 @@ function AccountDetails() {
                   />
                   <button type="submit">Update Username</button>
                 </form>
+                {/* <div>
+                  <input type="file" accept="image/*" onChange={handleFileChange} />
+                  <button onClick={handleUpload}>Upload Profile Picture</button>
+                  <img src={fileUrl} />
+                </div> */}
               </div>
             </div>
           </>

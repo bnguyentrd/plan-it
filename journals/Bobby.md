@@ -144,3 +144,24 @@ I also worked on getting the profile picture to not display when user isnt logge
 
 I'm now working on figuring out how to let a user set a profile picture from the account detail page and also have it view the uploaded profile picture in the main page.
 Towards the night I drifted away from the profile picture issues and did some paired programming with steven to figure out how to get events_service deployed on caprover.
+
+
+## Jan 24: 
+
+Today I worked on:
+
+We worked as a team on deployment, figuring out what was causing the issues that were popping up. While doing that, I went off and tried to get a profile picture feature up so users can upload an image file through the front end and have it saved into the DB so when the user logs out/logs back in, the picture would be there. Unfortunately I kept hitting road blocks and couldnt figure out how to fix it. I ended up trying to tackle our 3rd party email api service but also hit a road block. I met with rosheen in attempts to get that to work but wasnt able to figure it out.
+
+
+## Jan 25:
+
+Today I worked on:
+
+I tried going at the email api service at different angles, originally I was trying to use the api in the front end but was hitting a weird 'fs' error and after deleting my node_modules folder along with my package-lock.json file, I was still getting the error. I then tried using a python code from sendgrid docs to see if that would work but that also wasnt working. I ended up back-tracking to see if I could get the profile picture feature to work using youtube videos but after hours of trying different ways to add a profile picture that gets saved into the DB, I couldnt find one that worked. I took a break from that and did some pair programming with steven and was able to get the displayed email and username to change every time after successfully submitting an email/username change request. We then got some other random bugs to stop showing up and now i'm splitting off again to work on the app's aesthetics. Due to me hitting so many roadblocks the past two days, I feel like I need to at least make the app look better to get some progress in. 
+
+
+## Jan 26:
+
+Today I worked on:
+
+I worked on the upload profile picture to account feature on the backend. I got the code to work and was returning a 200 success message then I started working on the front end code to get the profile picture feature to allow users to upload an image file and have it save it to the account using the token but about halfway through, the app crashed on me. After a couple hours of debugging, I pin pointed the issue to the nav bar with mimi's help. We found out the app/nav bar was crashing because of some auth code and we spent all day trying to debug that with mimi and rosheen. Towards the end of the night, we were able to get the auth code fixed and now I'm gonna pull the working code and merge to main. 

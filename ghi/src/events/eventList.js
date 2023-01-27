@@ -1,58 +1,53 @@
-import { useState } from 'react';
-import { useGetEventsQuery } from '../store/eventsApi';
+import { useState,useEffect } from 'react';
+import { Link } from 'react-router-dom'
+import Nav from '../Nav';
+import '../css/EventList.css';
 
+function EventList() {
+    const [events, setEvents] = useState([])
+    // const { token } = useAuthContext()
+    // console.log("TOKENNNNNN", token)
+    // const navigate = useNavigate()
 
-export default function EventList() {
-    const { data: eventData, isLoading } = useGetEventsQuery()
-    const [events, setEvents] = useState()
-
-    if (isLoading) {
-        return (
-            <progress className='progress is-primary' max="100"></progress>
-        )
-    }
-
-    const cancelEvent = async (event_id) => {
-        const url = `http://localhost:8001/events/${event_id}/`
-        const fetchConfig = {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
+    useEffect(() => {
+            const url = "http://localhost:8001/events/"
+            const response =  fetch(url, {
+                method: 'get',
+                headers: {
+                    "Content-Type": "application/json",
+                    // 'Authorization': `Bearer ${token}`,
+                }
+            })
+            if (response.ok) {
+                const data =  response.json()
+                setEvents(data)
             }
-        }
 
-        const response = await fetch(url, fetchConfig)
-        if (response.ok) {
-            await response.json()
-            const deleteEvent = events.filter(
-                (event) => event.id !== event_id
-            )
-            setEvents(deleteEvent)
-        }
-    }
-
+    })
 
     return (
-        <div className='columns is-centered'>
-            <table className='table is-striped'>
-                <thead>
-                    <tr>
-                        <th>title</th>
-                        <th>city</th>
-                        <th>state</th>
+        <div className='columns is-centered height'>
+            <Nav />
+            <table className='table is-striped th-divider'>
+                <thead className="event-table">
+                    <tr className="event-title-size">
+                        <th>Title</th>
+                        <th>City</th>
+                        <th>State</th>
                         <th>From</th>
                         <th>To</th>
                         <th>Details</th>
-                        <th>weather</th>
+                        <th>Weather</th>
                         <th>Images</th>
-                        <th>Cancel Event</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {eventData.map(event => (
+                    {events.map(event => (
                         <tr key={event.id}>
                             <td>
-                                {event.title}
+                                <Link to={`/details/${event.id}/`}>
+                                    {event.title}
+                                </Link>
                             </td>
                             <td>
                                 {event.city}
@@ -75,13 +70,6 @@ export default function EventList() {
                             <td>
                                 {event.url}
                             </td>
-                            {/* <td>
-                                <button type='button'
-                                 className='btn btn-secondary'
-                                 onClick={() => cancelEvent(event.id)}>
-                                 Cancel
-                                </button>
-                            </td> */}
                         </tr>
                     ))}
                 </tbody>
@@ -89,3 +77,5 @@ export default function EventList() {
         </div>
     )
 }
+
+export default EventList
