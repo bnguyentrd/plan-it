@@ -1,0 +1,16 @@
+The unit test is checking that the get_all_accounts method in the AccountQueries class is working correctly.
+Specifically, it tests that the method "get all accounts" in "AccountQueries" is working correctly by checking to see
+if it returns a list of AccountOut objects. (Where each account object should have the following properties: id, username, email.)
+
+
+The test starts by creating an instance of the AccountQueries class, then calls the get_all_accounts method.
+This assigns the the return value as the accounts variable.
+
+Then it asserts that the return value is a list and that each element of that list is an instance of AccountOut with
+its respective properties.
+
+The test checks that the method returns the correct type of object and has the correct properties.
+
+Key take-away: If get_all_accounts isn't working properly, it could cause other issues in my code that rely on this endpoint.
+At this point, there isnt a feature on our app that would need to make a request to this endpoint yet but could easily be one
+when dealing with other microservices.

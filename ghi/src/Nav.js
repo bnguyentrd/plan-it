@@ -1,76 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-// import { NavLink } from "react-router-dom";
-import SignUpForm from "./accounts/SignUpForm";
 import "./css/Nav.css";
-// import { useToken } from "./Authentication";
 import { useToken } from "./accounts/Authentication";
-import { useNavigate } from "react-router-dom";
-// import axios from "axios";
 
 function Nav(props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // const [token, logout] = useToken();
-  // const [token, login] = useToken();
-  // const [token, useToken] = useState();
-  // console.log("this is the token", token);
-  const [token] = useToken();
-  const navigate = useNavigate();
+  const logout = useToken()[2];
+  const token = useToken()[0];
 
-  const handleLogout = async (e) => {
-    e.preventDefault();
-    logout();
-  };
+
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
-  useEffect(() => {
-    // const token = localStorage.getItem("token");
-    if (token) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, [isLoggedIn]);
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   token();
-
-  //   e.preventDefault();
-  // };
-
-  const logout = () => {
-    fetch(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`, {
-      method: "DELETE",
-      credentials: "include", // include cookies in the request
-    }).then(() => {
-      setCurrentUser(null);
-      setIsLoggedIn(false);
-      localStorage.removeItem("token");
-      navigate("/");
-    });
-  };
-
-  //   const logout = async () => {
-  //     try {
-  //         await axios.delete(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`, {
-  //             withCredentials: true,
-  //         });
-  //         setCurrentUser(null);
-  //         setIsLoggedIn(false);
-  //         localStorage.removeItem("token");
-  //         navigate("/");
-  //     } catch (error) {
-  //         console.error(error);
-  //     }
-  // }
-
-  // const login = () => {}
 
   return (
     <nav>
@@ -93,32 +35,21 @@ function Nav(props) {
             <li className="item-2">
               <NavLink to="/about">About</NavLink>
             </li>
-            {/* <li>
-            <NavLink to="/api/protected">Protected</NavLink>
-          </li> */}
-            {/* <li className="nav-li">About</li> */}
             <li className="item-1">Contact</li>
-            {/* <li className="item-2"> <NavLink to="/signup">Sign Up</NavLink> </li> */}
-            {!isLoggedIn ? (
+            {!token ? (
               <li>
                 {" "}
                 <NavLink to="/signup">Sign Up</NavLink>{" "}
               </li>
             ) : null}
-
-            {/* <li> <NavLink to="/login">Log in</NavLink> </li> */}
-            {!isLoggedIn ? (
+            {!token ? (
               <li className="item-1">
                 {" "}
-                <NavLink to="/login">Log in</NavLink>{" "}
+                <NavLink to="/login">Log in</NavLink>
               </li>
             ) : null}
-
             <li className="item-2">
-              {/* <NavLink to="/accountdetails">Account Details</NavLink> */}
-              {/* <NavLink to="/api/accounts/me/token/">Account Details</NavLink> */}
-              {/* <NavLink to="/api/accounts/me/id/">Account Details</NavLink> */}
-              <NavLink to={`/api/accounts/${props.accountid}/`}>
+              <NavLink to={`/api/accounts/${props.accountid}`}>
                 Account Details
               </NavLink>
             </li>
@@ -131,13 +62,20 @@ function Nav(props) {
             <li className="item-1">
               <NavLink to="/details">Event Details</NavLink>
             </li>
-
-            {isLoggedIn ? (
-              <li>
-                {" "}
-                <NavLink onClick={handleLogout}>Logout</NavLink>{" "}
+            <li className="item-2">
+              <NavLink to="/questions">Polls</NavLink>
+            </li>
+            {token && (
+              <li
+                onClick={() => {
+                  logout();
+                }}
+                role={"button"}
+                className="item-2"
+              >
+                Logout
               </li>
-            ) : null}
+            )}
           </ul>
         )}
       </div>

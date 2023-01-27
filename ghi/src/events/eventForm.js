@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../css/EventForm.css';
-import Nav from '../Nav';
 
 
 
@@ -14,9 +13,9 @@ const EventForm = () => {
     const [description, setDescription] = useState("")
     // const [url, setUrl] = useState("")
     // const [weather, setWeather] = useState("")
-    const navigate = useNavigate
+    const navigate = useNavigate()
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (Event) => {
         event.preventDefault()
         const data = {
             "title": title,
@@ -29,7 +28,8 @@ const EventForm = () => {
             // "weather": weather
         }
 
-        const eventUrl = "http://localhost:8001/events/"
+        // const eventUrl = "http://localhost:8001/events"
+        const eventUrl = `${process.env.REACT_APP_EVENTS_SERVICE}/events`
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(data),
@@ -39,14 +39,14 @@ const EventForm = () => {
         }
         const response = await fetch(eventUrl, fetchConfig)
         if (response.ok) {
-            const newEvent = await response.json()
-            // navigate(`/events/${newEvent.id}`)
+            const newEvent = await response.json();
+            navigate('/details/' + newEvent.id);
         }
     }
 
     return (
         <div className='container evntfrm'>
-            <Nav />
+            {/* <Nav /> */}
             <div className='offset-3 col-6 evntform'>
                 <div className='shadow p-4 mt-4 event-curve'>
                     <h1>Create An Event</h1>
@@ -64,24 +64,24 @@ const EventForm = () => {
                         </div>
                         <div className='form-floating mb-3'>
                             <input
+                            className="event-size"
                              value={city}
                              onChange={(e) => setCity(e.target.value)}
                              placeholder='City'
                              required type='text'
                              name='city'
                              id='city'
-                             className='form-control'
                             />
                         </div>
                         <div className='form-floating mb-3'>
                             <input
+                            className="event-size"
                              value={state}
                              onChange={(e) => setState(e.target.value)}
                              placeholder='State'
                              required type='text'
                              name='state'
                              id='state'
-                             className='form-control'
                             />
                         </div>
                         <div className='form-floating mb-3'>

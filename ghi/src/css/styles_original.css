@@ -5,7 +5,7 @@
 
 .big-heading {
   font-family: "Montserrat", sans-serif;
-  font-weight: 900; /* black */
+  font-weight: 900;
   font-size: 3.5rem;
   color: white;
 }
@@ -13,7 +13,7 @@
 h1,
 h3 {
   font-family: "Montserrat", sans-serif;
-  font-weight: 900; /* black */
+  font-weight: 900;
 }
 
 h1 {
@@ -38,7 +38,6 @@ body {
   font-family: "Montserrat";
 }
 
-/* Navigation Bar */
 
 .navbar {
   padding: 0 0 4.5rem;

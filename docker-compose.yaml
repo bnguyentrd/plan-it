@@ -23,12 +23,12 @@ services:
       context: ./polls_service
       dockerfile: ./Dockerfile.dev
     ports:
-        - "8003:8000"
+      - "8003:8000"
     volumes:
       - ./polls_service:/app
     environment:
-        DATABASE_URL: postgresql://polls:password@postgres/polls
-        WAIT_HOSTS: postgres:5432
+      DATABASE_URL: postgresql://polls:password@postgres/polls
+      WAIT_HOSTS: postgres:5432
 
   events_service:
     build:
@@ -41,6 +41,8 @@ services:
     environment:
       DATABASE_URL: postgresql://admin:test-databases@postgres/eventsdb
       WAIT_HOSTS: postgres:5432
+      WAIT_BEFORE: 5
+      WAIT_TIMEOUT: 60
 
   ghi:
     image: node:lts-bullseye
@@ -55,10 +57,9 @@ services:
       NODE_ENV: development
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
-      # # REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
-      # REACT_APP_BLOG_SERVICE: http://localhost:8080
       REACT_APP_EVENTS_SERVICE: http://localhost:8090
       REACT_APP_ACCOUNTS_SERVICE_API_HOST: http://localhost:8000
+      REACT_APP_POLLS_SERVICE_API_HOST: http://localhost:8003
 
   accounts_service:
     build:
@@ -72,6 +73,8 @@ services:
       DATABASE_URL: postgresql://accounts:password@postgres/accounts
       WAIT_HOSTS: postgres:5432
       SIGNING_KEY: ${SIGNING_KEY}
+      WAIT_BEFORE: 5
+      WAIT_TIMEOUT: 60
 
   pg-admin:
     image: dpage/pgadmin4
