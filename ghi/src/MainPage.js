@@ -35,16 +35,9 @@ function MainPage(props) {
                 <input className="input" type="checkbox"/>
                 <label htmlFor="checkbox"></label>
             </button>
-                {/* {darkMode ? <p></p> : <p></p>} */}
             </div>
             <header className="App-header">
-                {/*
-                <h1>
-                    <img className="logo-radius" src={logo} width="500" />
-                    <text className="logotxt" style={{ fontSize: 200}}>
-                        ∞
-                    </text>
-                </h1> */}
+
             </header>
             <div>
                 <Slideshow images={[
@@ -70,13 +63,7 @@ function MainPage(props) {
             <div>You are not logged in</div>
           )}
         </div>
-            {/* <EventForm /> */}
-            <div>
-                <h1 className="footer-1">Plan it</h1>
-            </div>
-            <footer className="footer1">
-                <h1> Hello </h1>
-            </footer>
+
         </div>
     )
         }

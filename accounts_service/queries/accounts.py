@@ -1,5 +1,6 @@
 from queries.pool import pool
 from pydantic import BaseModel
+
 # import psycopg2
 
 from typing import Optional
@@ -32,8 +33,10 @@ class AccountOutWithPassword(AccountOut):
 class AccountsOut(BaseModel):
     accounts: list[AccountOut]
 
+
 class ProfilePictureIn(BaseModel):
     image: bytes
+
 
 class EmailIn(BaseModel):
     email: str
@@ -53,6 +56,7 @@ class DuplicateAccountError(ValueError):
 #     user="username",
 #     password="password"
 # )
+
 
 class AccountQueries:
     def get_all_accounts(self) -> list[AccountOut]:
@@ -219,11 +223,9 @@ class AccountQueries:
             print(e)
             return {"message": "Could not update user's profile picture"}
 
-
     def user_in_to_out(self, id: int, user: AccountOut):
         old_data = user.dict()
         return AccountOut(id=id, **old_data)
 
     def record_to_user_out(self, record):
         return AccountOut(id=record[0], username=record[1], email=record[2])
-

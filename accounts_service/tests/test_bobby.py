@@ -8,19 +8,16 @@ client = TestClient(app)
 
 dummyAcc = {
     "username": "bob",
-    "email": "bob@gmail.com", 
-    "password": "password"
- }
+    "email": "bob@gmail.com",
+    "password": "password",
+}
 
 expected_dummy_response = {
-    'access_token': '',
-    'account': {
-        'email': 'bob@gmail.com', 
-        'id': 1, 
-        'username': 'bob'
-        },
-    'token_type': 'Bearer'
+    "access_token": "",
+    "account": {"email": "bob@gmail.com", "id": 1, "username": "bob"},
+    "token_type": "Bearer",
 }
+
 
 def test_create_account():
     class dummyAccQuery:
@@ -29,7 +26,8 @@ def test_create_account():
                 "id": "1",
                 "username": "bob",
                 "email": "bob@gmail.com",
-                "hashed_password": "$2b$12$809yUgWByxrE0DZDWNcWE.vyviJ2/d1MnNrNv/kvAtdKN2Bcn5VZu",
+                "hashed_password": "$2b$12$809yUgWByxrE0DZDWNcWE.\
+                    vyviJ2/d1MnNrNv/kvAtdKN2Bcn5VZu",
             }
 
         def get(self, username):
@@ -37,7 +35,8 @@ def test_create_account():
                 "id": "1",
                 "username": "bob",
                 "email": "bob@gmail.com",
-                "hashed_password": "$2b$12$809yUgWByxrE0DZDWNcWE.vyviJ2/d1MnNrNv/kvAtdKN2Bcn5VZu",
+                "hashed_password": "$2b$12$809yUgWByxrE0DZDWNcWE.\
+                    vyviJ2/d1MnNrNv/kvAtdKN2Bcn5VZu",
             }
 
     app.dependency_overrides[AccountQueries] = dummyAccQuery
@@ -47,9 +46,10 @@ def test_create_account():
     assert response.status_code == 200
 
     test_response = response.json()
-    test_response["access_token"] = ''
+    test_response["access_token"] = ""
 
     assert test_response == expected_dummy_response
+
 
 def test_duplicate_account():
     class fakeDuplicateAccQuery:
@@ -59,7 +59,7 @@ def test_duplicate_account():
     app.dependency_overrides[AccountQueries] = fakeDuplicateAccQuery
 
     response = client.post("/api/accounts/new", json=dummyAcc)
-    
+
     assert response.status_code == 400
     assert response.json() == {
         "detail": "Cannot create an account with those credentials"

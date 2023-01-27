@@ -42,7 +42,8 @@ const ChecklistForm = () =>{
             "status": status
         }
 
-        const checklistUrl = "http://localhost:8001/checklists/"
+        // const checklistUrl = "http://localhost:8001/checklists/"
+        const checklistUrl = `${process.env.REACT_APP_EVENTS_SERVICE}/checklists`
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(data),

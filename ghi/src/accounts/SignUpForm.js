@@ -2,9 +2,8 @@ import { useState } from "react";
 import { Box, TextField } from "@mui/material";
 import "../css/SignUp.css";
 import Nav from "../Nav";
-// import { useAuthContext } from "./Authentication";
-import { useToken } from './Authentication';
-
+import { useToken } from "./Authentication";
+import { useNavigate } from "react-router-dom";
 
 
 function SignUpForm() {
@@ -12,13 +11,15 @@ function SignUpForm() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const signup = useToken()[3];
+  const navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
-      await signup(username, email, password);
+      signup(username, email, password);
       console.log("Signup Successful!");
+      navigate("/");
     } catch (error) {
       console.log("Signup Error: ", error);
     }
@@ -62,6 +63,7 @@ function SignUpForm() {
             margin="normal"
             required
             fullWidth
+            type="password"
             name="password"
             label="Password"
             value={password}
