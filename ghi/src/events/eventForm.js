@@ -67,24 +67,24 @@ const EventForm = () => {
                         </div>
                         <div className='form-floating mb-3'>
                             <input
+                            className="event-size"
                              value={city}
                              onChange={(e) => setCity(e.target.value)}
                              placeholder='City'
                              required type='text'
                              name='city'
                              id='city'
-                             className='form-control'
                             />
                         </div>
                         <div className='form-floating mb-3'>
                             <input
+                            className="event-size"
                              value={state}
                              onChange={(e) => setState(e.target.value)}
                              placeholder='State'
                              required type='text'
                              name='state'
                              id='state'
-                             className='form-control'
                             />
                         </div>
                         <div className='form-floating mb-3'>

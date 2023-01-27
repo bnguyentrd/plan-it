@@ -3,7 +3,7 @@ from typing import List, Optional, Union
 from queries.events import Error, EventIn, EventRepository, EventOut
 
 
-from queries.acls import get_weather
+from queries.acls import get_weather, get_photo
 
 
 router = APIRouter()
@@ -29,7 +29,8 @@ def create_event(
     repo: EventRepository = Depends(),
 ):
     try:
-        # event.weather = get_weather(event.city, event.state)["description"]
+        event.weather = get_weather(event.city, event.state)["description"]
+        event.url = get_photo(event.city, event.state)["picture_url"]
         # print("::::::::::", event)
         return repo.create(event)
         # print("testing weather bypass")
