@@ -1,12 +1,14 @@
-from .keys import OPEN_WEATHER_API_KEY
+import json
 import requests
+import os
 
+# OPEN_WEATHER_API_KEY = os.environ["OPEN_WEATHER_API_KEY"]
 
 def get_lat_lon(city, state):
     url = "http://api.openweathermap.org/geo/1.0/direct"
     params = {
         "q": f"{city}, {state}, USA",
-        "appid": OPEN_WEATHER_API_KEY,
+        "appid": os.environ.get("OPEN_WEATHER_API_KEY"),
     }
     res = requests.get(url, params=params)
     json = res.json()
@@ -21,7 +23,7 @@ def get_weather(city, state):
     params = {
         "lat": lat,
         "lon": lon,
-        "appid": OPEN_WEATHER_API_KEY,
+        "appid": os.environ.get("OPEN_WEATHER_API_KEY"),
         "units": "imperial",
     }
     res = requests.get(url, params=params)
