@@ -17,7 +17,8 @@ const EventDetail = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const url = `${process.env.REACT_APP_EVENTS_SERVICE}/events/${id}`;
+      // const url = `${process.env.REACT_APP_EVENTS_SERVICE}/events/${id}`;
+      const url = `${process.env.REACT_APP_EVENTS_API_HOST}/events/${id}`;
       const response = await fetch(url);
       const data = await response.json();
       setEventDetail(data);
@@ -27,7 +28,8 @@ const EventDetail = () => {
 
   const deleteEvent = async (e) => {
     // const url = `http://localhost:8001/events/${id}?event_id=${id}`
-    const url = `${process.env.REACT_APP_EVENTS_SERVICE}/events/${id}?event_id=${id}`;
+    // const url = `${process.env.REACT_APP_EVENTS_SERVICE}/events/${id}?event_id=${id}`;
+    const url = `${process.env.REACT_APP_EVENTS_API_HOST}/events/${id}?event_id=${id}`;
 
     const fetchConfig = {
       method: "delete",
