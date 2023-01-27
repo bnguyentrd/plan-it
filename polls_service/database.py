@@ -5,8 +5,7 @@ from sqlalchemy.orm import sessionmaker
 
 # longer one is for deployment, shorter for local
 SQLALCHEMY_DATABASE_URL = (
-    # fmt: skip
-    "postgresql://postgres:5f16cd70ae6ab2c1@srv-captain--postgres-polls/postgres"
+    "postgresql://postgres:5f16cd70ae6ab2c1@srv-captain--postgres-polls/postgres"  # fmt: skip
 )
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
