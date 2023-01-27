@@ -51,12 +51,6 @@ def create_choice(db:Session, qid: int, choice: poll_schema.ChoiceCreate):
 	db.commit()
 	return obj
 
-def create_choice(db: Session, qid: int, choice: ChoiceCreate):
-    obj = Choice(**choice.dict(), question_id=qid)
-    db.add(obj)
-    db.commit()
-    return obj
-
 
 def update_vote(choice_id: int, db: Session):
     obj = db.query(Choice).filter(Choice.id == choice_id).first()

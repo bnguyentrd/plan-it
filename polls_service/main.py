@@ -49,11 +49,6 @@ def get_question(qid: int, db: Session = Depends(get_db)):
     return get_question_obj(db=db, qid=qid)
 
 
-@app.put("/questions/{qid}", response_model=QuestionInfo)
-def edit_question(qid: int, question: QuestionEdit, db: Session = Depends(get_db)):
-    get_question_obj(db=db, qid=qid)
-    obj = crud.edit_question(db=db, qid=qid, question=question)
-    return obj
 
 @app.put("/questions/{qid}", response_model=poll_schema.QuestionInfo)
 def edit_question(qid: int, question: poll_schema.QuestionEdit, db: Session = Depends(get_db)):
