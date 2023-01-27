@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import ChecklistDetail from '../checklists/checklistDetails.js';
 
 
 
@@ -33,6 +34,7 @@ const EventDetail = () => {
             <div className='card-body'>
                 <p>Add cancel event button here</p>
             </div>
+            <ChecklistDetail id/>
         </div>
 
     )
