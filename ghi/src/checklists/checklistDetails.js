@@ -88,7 +88,7 @@ const ChecklistDetail = () => {
                                     return(
                                         <tr>
                                             <td>{obj.item}</td>
-                                            <td>{obj.stat ? 'in progress': 'complete'}</td>
+                                            <td>{obj.stat ? 'complete': 'in progress'}</td>
                                         </tr>
                                     )})}
                                 </tbody>

@@ -34,7 +34,8 @@ const ChecklistForm = () =>{
 
 
     const handleSubmit = async (checklist) => {
-        checklist.preventDefault();
+        //checklist.preventDefault();
+        // debugger
         const data = {
             "event_id":id,
             "items": items,
