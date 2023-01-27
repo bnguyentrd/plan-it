@@ -16,7 +16,7 @@ function MainPage(props) {
     const [darkMode, setDarkMode] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
 
-    
+
   const logout = () => {
     fetch(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`, {
       method: "DELETE",
@@ -50,7 +50,7 @@ function MainPage(props) {
                     <img className="logo-radius" src={logo} width="500" />
                     <text className="logotxt" style={{ fontSize: 200}}>
                         ∞
-                    </text> 
+                    </text>
                 </h1> */}
             </header>
             <div>
@@ -64,8 +64,8 @@ function MainPage(props) {
                 'https://luccastyle.com/wp-content/uploads/2022/10/pg-fine-dining-1641394981-1080x630.jpg',
                 'https://www.perrygroup.com/wp-content/uploads/2016/02/shutterstock_287171675.jpg',
                 'https://www.ft.com/__origami/service/image/v2/images/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2F164e49da-ec60-448d-b398-ca04eb5bf0fc.jpg?fit=scale-down&source=next&width=700'
-                
-            ]} 
+
+            ]}
             size={400}
             duration={10000}
             />
@@ -77,7 +77,7 @@ function MainPage(props) {
             <div>You are not logged in</div>
           )}
         </div>
-            <EventForm />
+            {/* <EventForm /> */}
             <div>
                 <h1 className="footer-1">Plan it</h1>
             </div>

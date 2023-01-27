@@ -11,6 +11,7 @@ import { AuthProvider, AuthContext } from "./accounts/Authentication";
 import EventForm from './events/eventForm';
 import EventList from './events/eventList';
 import EventDetails from "./events/eventDetails.js";
+import UpdateEvent from "./events/updateEvent.js";
 
 function App(props) {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -61,6 +62,7 @@ function App(props) {
                   <Route path="/events" element={<EventList />} />
                   <Route path="/create" element={<EventForm />} />
                   <Route path="/details/:id" element={<EventDetails />} />
+                  <Route path="/update/:id" element={<UpdateEvent />} />
                   {/* <ErrorNotification error={error} /> */}
                   {/* <Construct info={launch_info} /> */}
                   {/* <MainPage info={launch_info} /> */}

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { getToken } from '../accounts/Authentication';
 import '../css/EventForm.css';
 import Nav from '../Nav';
 
@@ -14,7 +15,8 @@ const EventForm = () => {
     const [description, setDescription] = useState("")
     // const [url, setUrl] = useState("")
     // const [weather, setWeather] = useState("")
-    const navigate = useNavigate
+    const navigate = useNavigate()
+    const token = getToken()
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -35,12 +37,13 @@ const EventForm = () => {
             body: JSON.stringify(data),
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
             }
         }
         const response = await fetch(eventUrl, fetchConfig)
         if (response.ok) {
-            const newEvent = await response.json()
-            // navigate(`/events/${newEvent.id}`)
+            const newEvent = await response.json();
+            navigate('/details/' + newEvent.id);
         }
     }
 
@@ -64,24 +67,24 @@ const EventForm = () => {
                         </div>
                         <div className='form-floating mb-3'>
                             <input
+                            className="event-size"
                              value={city}
                              onChange={(e) => setCity(e.target.value)}
                              placeholder='City'
                              required type='text'
                              name='city'
                              id='city'
-                             className='form-control'
                             />
                         </div>
                         <div className='form-floating mb-3'>
                             <input
+                            className="event-size"
                              value={state}
                              onChange={(e) => setState(e.target.value)}
                              placeholder='State'
                              required type='text'
                              name='state'
                              id='state'
-                             className='form-control'
                             />
                         </div>
                         <div className='form-floating mb-3'>

@@ -1,4 +1,4 @@
-from .keys import OPEN_WEATHER_API_KEY
+from .keys import PEXELS_API_KEY, OPEN_WEATHER_API_KEY
 import json
 import requests
 
@@ -34,3 +34,20 @@ def get_weather(city, state):
     }
 
 
+def get_photo(city, state):
+    url = "https://api.pexels.com/v1/search"
+    headers = {"Authorization": PEXELS_API_KEY}
+    params = {
+        "query": f"{city} {state}",
+        "per_page": 1
+    }
+    res = requests.get(
+        url,
+        params=params,
+        headers=headers,
+    )
+    content = json.loads(res.content)
+    try:
+        return {"picture_url": content["photos"][0]['src']['original']}
+    except KeyError:
+        return {"picture_url": None}

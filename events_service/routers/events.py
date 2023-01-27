@@ -7,7 +7,7 @@ from queries.events import (
     EventOut
 )
 
-from queries.acls import get_weather
+from queries.acls import get_weather, get_photo
 
 
 router = APIRouter()
@@ -33,6 +33,7 @@ def create_event(
 ):
     try:
         event.weather = get_weather(event.city, event.state)["description"]
+        event.url = get_photo(event.city, event.state)["picture_url"]
         # print("::::::::::", event)
         return repo.create(event)
     except Exception:
