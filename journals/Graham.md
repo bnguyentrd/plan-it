@@ -75,7 +75,9 @@
 
 ## Jan. 26, 2023 ##
 -> attemped implementing Auth into polls... catastrophic failure...
+-> small tweaks to frontend for deployment environment
 -> assessment looms in my headspace... going to die...
 
 ## Jan. 27, 2023 ##
 -> "...for the wages of sin is death but the free gift of God is eternal life through Our Lord Jesus Christ..." Romans 6:23
+-> final tuning for submission
