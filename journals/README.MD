@@ -36,7 +36,9 @@ Back-end deployed via Caprover.
 
 
 ## Functionality
-
+- When users access the app, they will have access to sign up for an account
+- Users will have the ability to log in, logout, edit their username and email, and delete their account.
+- Logged in users
 
 
 ## Testing

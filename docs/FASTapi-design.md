@@ -5,8 +5,18 @@
 - Endpoint method: GET (Get Token)
 - Endpoint path: /token
 
-- Response:
-- JSON Response:
+- Good Response:
+  {
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxMTQxYjA3ZC03NDU3LTQ0ZmYtYTBhYi0wM2Y4NTVlNDIyMzUiLCJleHAiOjE2NzQ3Njk3MjYsInN1YiI6ImJ5ZSIsImFjY291bnQiOnsiaWQiOjIsInVzZXJuYW1lIjoiYnllIiwiZW1haWwiOiJieWVAZ21haWwuY29tIn19.doM_ammOUgLBW0IWxwVesUnmZFlQrhRGxgFpFYWSuec",
+  "token_type": "Bearer",
+  "account": {
+  "id": 2,
+  "username": "bye",
+  "email": "bye@gmail.com"
+  }
+  }
+- Bad Response:
+  null
 
 ---
 
@@ -14,7 +24,14 @@
 - Endpoint path: /token
 
 - Response:
-- JSON Response:
+  {
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyNzE3NDU2Mi1mNTRmLTRlYzktOWE2Ni00ZmZhYTUyMzNjNzMiLCJleHAiOjE2NzQ3NzM5NjIsInN1YiI6ImJ5ZSIsImFjY291bnQiOnsiaWQiOjIsInVzZXJuYW1lIjoiYnllIiwiZW1haWwiOiJieWVAZ21haWwuY29tIn19.RiOgO7r2zrOrcodwv2wjK_T3UER5O41aF4GdIzFJMx4",
+  "token_type": "Bearer"
+  }
+- Bad Response:
+  {
+  "detail": "Incorrect username or password"
+  }
 
 ---
 
@@ -22,7 +39,7 @@
 - Endpoint path: /token
 
 - Response:
-- JSON Response:
+  true
 
 ---
 
@@ -30,7 +47,15 @@
 - Endpoint path: /api/accounts
 
 - Response:
-- JSON Response:
+  {
+  "accounts": [
+  {
+  "id": 2,
+  "username": "bye",
+  "email": "bye@gmail.com"
+  }
+  ]
+  }
 
 ---
 
@@ -38,7 +63,16 @@
 - Endpoint path: /api/accounts{id}
 
 - Response:
-- JSON Response:
+- JSON Body Example:
+  {
+  "accounts": [
+  {
+  "id": 2,
+  "username": "bye",
+  "email": "bye@gmail.com"
+  }
+  ]
+  }
 
 ---
 
@@ -46,7 +80,12 @@
 - Endpoint path: /api/accounts{id}
 
 - Response:
-- JSON Response:
+  {
+  "username": "string",
+  "email": "string",
+  "password": "string"
+  }
+- JSON Body:
 
 ---
 
@@ -54,7 +93,7 @@
 - Endpoint path: /api/accounts{id}
 
 - Response:
-- JSON Response:
+  true
 
 ---
 
@@ -62,7 +101,21 @@
 - Endpoint path: /api/accounts/new
 
 - Response:
-- JSON Response:
+  {
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzZmNmZDg1Zi1jMjVmLTQwNTEtOTgwMC1hYWQxMzYzZmNhNmIiLCJleHAiOjE2NzQ3NzQ1NzEsInN1YiI6InlvbG8iLCJhY2NvdW50Ijp7ImlkIjo0LCJ1c2VybmFtZSI6InlvbG8iLCJlbWFpbCI6InlvbG9AZ21haWwuY29tIn19.t4sAPh0MSKWdfWjp7L86GerzdSVGbh3f55wpxooGBUI",
+  "token_type": "Bearer",
+  "account": {
+  "id": 4,
+  "username": "yolo",
+  "email": "yolo@gmail.com"
+  }
+  }
+- JSON Body Example:
+  {
+  "username": "string",
+  "email": "string",
+  "password": "string"
+  }
 
 ---
 
@@ -70,7 +123,11 @@
 - Endpoint path: /api/accounts/{id}/email
 
 - Response:
-- JSON Response:
+  true
+- JSON Body Example:
+  {
+  "email": "youOnlyLiveOnce@gmail.com"
+  }
 
 ---
 
@@ -78,6 +135,10 @@
 - Endpoint path: /api/accounts/{id}/username
 
 - Response:
-- JSON Response:
+  true
+- JSON Body Example:
+  {
+  "username": "sayonara"
+  }
 
 ---

@@ -1,50 +1,29 @@
-// 1/19
 // import React, { useState, useEffect } from "react";
 // import { NavLink } from "react-router-dom";
 // // import { NavLink } from "react-router-dom";
 // import SignUpForm from "./accounts/SignUpForm";
 // import "./css/Nav.css";
 // // import { useToken } from "./Authentication";
-// import { useToken } from "./accounts/Authentication";
+// import { useAuthContext, useToken } from "./accounts/Authentication";
 // import { useNavigate } from "react-router-dom";
+// // import { ErrorBoundary } from "react-error-boundary";
 
 // function Nav(props) {
 //   const [isMenuOpen, setIsMenuOpen] = useState(false);
-//   // const [token, useToken] = useState();
 //   const [currentUser, setCurrentUser] = useState(null);
-//   const [isLoggedIn, setIsLoggedIn] = useState(false);
-//   const [token, login] = useToken();
-//   const navigate = useNavigate();
+//   const logout = useToken()[2];
+//   const token = useToken()[0];
+
+//   const handleLogout = async (e) => {
+//     console.log("HANDLE LOGOUT");
+//     e.preventDefault();
+//     logout();
+//     // navigate("/");
+//   };
 
 //   const toggleMenu = () => {
 //     setIsMenuOpen(!isMenuOpen);
 //   };
-
-//   useEffect(() => {
-//     if (token) {
-//       setIsLoggedIn(true);
-//     }
-//   }, [token]);
-
-//   // const handleSubmit = async (e) => {
-//   //   e.preventDefault();
-//   //   token();
-
-//   //   e.preventDefault();
-//   // };
-
-//   const logout = () => {
-//     fetch(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/token`, {
-//       method: "DELETE",
-//       credentials: "include", // include cookies in the request
-//     }).then(() => {
-//       setCurrentUser(null);
-//       setIsLoggedIn(false);
-//       navigate("/");
-//     });
-//   };
-
-//   // const login = () => {}
 
 //   return (
 //     <nav>
@@ -73,39 +52,51 @@
 //             {/* <li className="nav-li">About</li> */}
 //             <li className="item-1">Contact</li>
 //             {/* <li className="item-2"> <NavLink to="/signup">Sign Up</NavLink> </li> */}
-//             {!isLoggedIn ? (
+//             {/* {!token ? (
 //               <li>
 //                 {" "}
 //                 <NavLink to="/signup">Sign Up</NavLink>{" "}
 //               </li>
-//             ) : null}
+//             ) : null} */}
 
 //             {/* <li> <NavLink to="/login">Log in</NavLink> </li> */}
-//             {!isLoggedIn ? (
+//             {/* {!token ? (
 //               <li className="item-1">
 //                 {" "}
 //                 <NavLink to="/login">Log in</NavLink>{" "}
 //               </li>
-//             ) : null}
+//             ) : null} */}
 
 //             <li className="item-2">
 //               {/* <NavLink to="/accountdetails">Account Details</NavLink> */}
 //               {/* <NavLink to="/api/accounts/me/token/">Account Details</NavLink> */}
 //               {/* <NavLink to="/api/accounts/me/id/">Account Details</NavLink> */}
-//               <NavLink to={`/api/accounts/${props.accountid}/`}>
+//               <NavLink to={`/api/accounts/${props.accountid}`}>
 //                 Account Details
 //               </NavLink>
 //             </li>
 //             <li className="item-1">
 //               <NavLink to="/create">Create Event Form</NavLink>
 //             </li>
+//             <li className="item-1">
+//               <NavLink to="/events">Events</NavLink>
+//             </li>
+//             <li className="item-1">
+//               <NavLink to="/details">Event Details</NavLink>
+//             </li>
 
-//             {isLoggedIn ? (
+//             {/* {token ? (
 //               <li>
 //                 {" "}
-//                 <NavLink onClick={logout}>Logout</NavLink>
+//                 <NavLink onClick={handleLogout}>Logout</NavLink>{" "}
 //               </li>
-//             ) : null}
+//             ) : null} */}
+
+//             {/* <li>
+//               <NavLink onClick={handleLogout}>Logout</NavLink>
+//             </li> */}
+
+//             {!token ? null : <NavLink onClick={handleLogout}>Logout</NavLink>}
 //           </ul>
 //         )}
 //       </div>
