@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
+import Nav from '../Nav';
 
 
 const EventDetail = () => {
@@ -19,7 +19,8 @@ const EventDetail = () => {
     }, [id])
 
     return (
-        <div className='card'>
+        <div className='card page-size'>
+            <Nav />
             <img className='card-img-top' src={eventDetail.url} width="200" height="200" alt=''/>
             <div className="card-body">
                 <h5 className="card-title">{eventDetail.title}</h5>

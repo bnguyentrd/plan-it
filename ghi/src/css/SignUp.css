@@ -85,3 +85,11 @@
     background-position: 0 0;
   }
 }
+
+.signup-form {
+  height: 100px;
+  width: 40%;
+  position: absolute;
+  top: 30% !important;
+  left: 30% !important;
+}

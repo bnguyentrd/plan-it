@@ -115,3 +115,27 @@
   display: inline-block;
   cursor: pointer;
 }
+
+.item-logout {
+    background-color: rgb(70, 206, 240);
+    border-radius: 10px;
+    opacity: 0.6;
+    height: 30px;
+    width: 100px;
+    font-weight: 700;
+    position: flex;
+    margin: 1px;
+    border: transparent;
+    margin-top: 60px;
+}
+.item-logout:hover {
+    background: red;
+}
+
+.nav-sep {
+    width: 140px;
+    height: 5px;
+    background-color: #333;
+    border-radius: 5px;
+    margin-top: 10px;
+}
