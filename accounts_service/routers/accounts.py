@@ -1,4 +1,6 @@
 from fastapi import (
+    UploadFile,
+    # Body,
     Depends,
     HTTPException,
     status,
@@ -7,10 +9,10 @@ from fastapi import (
     Request,
 )
 
+
 from jwtdown_fastapi.authentication import Token
 from .authenticator import authenticator
 from pydantic import BaseModel
-
 
 from queries.accounts import (
     Error,
@@ -34,6 +36,19 @@ def is_valid_email(email: str) -> bool:
 
 
 router = APIRouter()
+
+
+@router.post("/api/accounts/{id}/profilepicture")
+async def profile_picture(id: int, upload_file: UploadFile, accounts: AccountQueries = Depends()):
+    image = await upload_file.read()
+    result = accounts.uploadProfilePicture(id, image)
+    if result:
+        return {"message": "Profile picture uploaded"}
+    else:
+        return HTTPException(
+            status_code = status.HTTP_400_BAD_REQUEST,
+            detail="Could not update user's profile picture",
+        )
 
 
 @router.get("/api/protected", response_model=bool)

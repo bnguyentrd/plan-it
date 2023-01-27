@@ -67,6 +67,7 @@ export function useToken() {
   useEffect(() => {
     async function fetchToken() {
       const token = await getTokenInternal();
+      console.log(token, "THIS IS THE USE EFFECT");
       setToken(token);
     }
     if (!token) {

@@ -10,9 +10,10 @@ import { AuthProvider } from "./accounts/Authentication";
 import EventForm from "./events/eventForm";
 import EventList from "./events/eventList";
 import EventDetails from "./events/eventDetails.js";
-import { useToken } from "./accounts/Authentication.js";
 import PollForm from "./polls/PollForm.js";
 import PollList from "./polls/PollList.js";
+import { useToken } from './accounts/Authentication';
+
 
 function GetToken() {
   useToken();
@@ -20,11 +21,14 @@ function GetToken() {
 }
 
 function App(props) {
-  const [launch_info, setLaunchInfo] = useState([]);
-  const [error, setError] = useState(null);
   const [account_id, setAccountId] = useState(0);
   const domain = /https:\/\/[^/]+/;
   const basename = process.env.PUBLIC_URL.replace(domain, "");
+
+  function GetToken() {
+  useToken();
+  return null;
+}
 
   return (
     <>

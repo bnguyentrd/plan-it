@@ -124,6 +124,33 @@ function AccountDetails() {
     setLoading(false);
   };
 
+
+//   async function handleUpload() {
+//     const formData = new FormData();
+//     formData.append('upload_file', file);
+
+//     try {
+//       const response = await fetch(`/api/accounts/${props.account.id}/profilepicture`, {
+//         method: 'POST',
+//         body: formData,
+//       });
+
+//       if (!response.ok) {
+//         throw new Error('Upload failed');
+//       }
+
+//       const data = await response.json();
+//       setProfilePicUrl(`/api/accounts/${props.account.id}/profilepicture`);
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   }
+
+//   const handleFileChange = e => {
+//   const file = e.target.files[0];
+//   setFileUrl(URL.createObjectURL(file));
+// }
+
   return (
     <>
       <div className="account-detail-size">
@@ -163,6 +190,11 @@ function AccountDetails() {
                   />
                   <button type="submit">Update Username</button>
                 </form>
+                {/* <div>
+                  <input type="file" accept="image/*" onChange={handleFileChange} />
+                  <button onClick={handleUpload}>Upload Profile Picture</button>
+                  <img src={fileUrl} />
+                </div> */}
               </div>
             </div>
           </>
