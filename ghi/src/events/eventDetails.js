@@ -19,7 +19,7 @@ const EventDetail = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
-            const url = `http://localhost:8001/events/${id}/`
+            const url = `${process.env.REACT_APP_EVENTS_SERVICE}/events/${id}`
             const response = await fetch(url)
             const data = await response.json()
             setEventDetail(data)
