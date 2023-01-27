@@ -66,8 +66,7 @@ def accounts_list(queries: AccountQueries = Depends()):
 def account_detail(
     id: int,
     response: Response,
-    # repo: AccountQueries = Depends(authenticator.get_current_account_data),
-    #   account: dict = Depends(authenticator.get_current_account_data),
+    account: dict = Depends(authenticator.get_current_account_data),
     repo: AccountQueries = Depends(),
 ) -> AccountOut:
     print(repo)
@@ -106,7 +105,9 @@ async def create_account(
             detail="Cannot create an account with those credentials",
         )
     form = AccountForm(
-        username=info.username, email=info.email, password=info.password
+        username=info.username,
+        email=info.email,
+        password=info.password
     )
     token = await authenticator.login(response, request, form, accounts)
     return AccountToken(account=account, **token.dict())
@@ -155,5 +156,5 @@ def update_username(
         return repo.updateUsername(user_id, user_data)
     else:
         raise ValueError(
-            "user_data object not defined | does not have 'id' property."
-        )
+            "user_data object not defined\
+            does not have 'id' property.")

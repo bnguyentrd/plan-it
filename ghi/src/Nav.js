@@ -38,7 +38,6 @@ function Nav(props) {
             <li className="item-2">
               <NavLink to="/about">About</NavLink>
             </li>
-
             <li className="item-1">Contact</li>
             {!token ? (
               <li>
@@ -46,14 +45,12 @@ function Nav(props) {
                 <NavLink to="/signup">Sign Up</NavLink>{" "}
               </li>
             ) : null}
-
             {!token ? (
               <li className="item-1">
                 {" "}
-                <NavLink to="/login">Log in</NavLink>{" "}
+                <NavLink to="/login">Log in</NavLink>
               </li>
             ) : null}
-
             <li className="item-2">
               <NavLink to={`/api/accounts/${props.accountid}`}>
                 Account Details
@@ -68,8 +65,17 @@ function Nav(props) {
             <li className="item-1">
               <NavLink to="/details">Event Details</NavLink>
             </li>
-
-            {!token ? null : <NavLink onClick={handleLogout}>Logout</NavLink>}
+            {token && (
+              <li
+                onClick={() => {
+                  logout();
+                }}
+                role={"button"}
+                className="item-2"
+              >
+                Logout
+              </li>
+            )}
           </ul>
         )}
       </div>
