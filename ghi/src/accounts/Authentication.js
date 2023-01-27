@@ -125,7 +125,7 @@ export function useToken() {
   }
 
   async function update(username, email) {
-    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/`;
+    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts`;
     const response = await fetch(url, {
       method: "put",
       body: JSON.stringify({
