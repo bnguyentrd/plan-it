@@ -15,7 +15,7 @@ function ChoiceForm() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const url = `http://localhost:8003/questions/${ id }/choice`;
+    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/questions/${ id }/choice`;
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -53,7 +53,7 @@ function ChoiceForm() {
   return (
     <>
     <header><div>
-            <button onClick={() => window.location.href="http://localhost:3000/questions"}>Back to Poll List</button>
+            <button onClick={() => window.location.href=`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/questions`}>Back to Poll List</button>
         </div></header>
 
     <div className="signup-form-size">

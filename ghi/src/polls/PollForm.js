@@ -11,10 +11,15 @@ function PollForm() {
   const [title, setTitle] = useState("");
    let navigate = useNavigate();
 
+    async function handleNav(event) {
+    event.preventDefault();
+    navigate("/questions")
+    }
+
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const url = "http://localhost:8003/questions/";
+    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/questions/`;
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -55,7 +60,7 @@ function PollForm() {
     <>
     <header>
             <div>
-            <button onClick={() => window.location.href="http://localhost:3000/questions"}>Back to Poll List</button>
+            <button onClick={handleNav}>Back to Poll List</button>
         </div>
         </header>
     <div className="signup-form-size">

@@ -1,15 +1,22 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import "../css/SignUp.css";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const PollDetail = () => {
+    let navigate = useNavigate();
     const [question, setQuestion] = useState([]);
     const { id } = useParams();
     const [choices, setChoices] = useState([]);
 
+ async function handleNav(event) {
+    event.preventDefault();
+    navigate("/questions")
+    }
+
     async function handleVote(choice_id) {
 
-    const url = `http://localhost:8003/choices/${choice_id}/vote`;
+    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/choices/${choice_id}/vote`;
     const response = await fetch(url, {
       method: "PUT",
       headers: {
@@ -40,11 +47,11 @@ const PollDetail = () => {
     // Handle successful response
   }
   const fetchData = async () => {
-    const questionResponse = await fetch(`http://localhost:8003/questions/${id}`);
+    const questionResponse = await fetch(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/questions/${id}`);
     const questionData = await questionResponse.json();
     setQuestion(questionData);
 
-    const choicesResponse = await fetch(`http://localhost:8003/choices`);
+    const choicesResponse = await fetch(`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/choices`);
     const choicesData = await choicesResponse.json();
     setChoices(choicesData);
 }
@@ -68,7 +75,7 @@ for (let choice in choices) {
         <>
         <header>
             <div>
-            <button onClick={() => window.location.href="http://localhost:3000/questions"}>Back Poll List</button>
+            <button onClick={handleNav}>Back Poll List</button>
         </div>
         </header>
         <div>
@@ -107,7 +114,7 @@ for (let choice in choices) {
         </tbody>
         </table>
         </div>
-        <button onClick={() => window.location.href=`http://localhost:3000/questions/${id}/choice`}>Create a Choice for this Poll</button>
+        <button onClick={() => window.location.href=`${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/questions/${id}/choice`}>Create a Choice for this Poll</button>
         </div>
         </>
     )
