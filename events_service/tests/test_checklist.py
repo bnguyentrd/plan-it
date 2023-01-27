@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 from main import app
-from queries.checklists import ChecklistIn, ChecklistOut
+from queries.checklists import ChecklistIn
 
 
 client = TestClient(app)

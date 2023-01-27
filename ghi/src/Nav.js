@@ -30,13 +30,14 @@ function Nav(props) {
         </button>
         {isMenuOpen && (
           <ul className="drpdwn">
+            <header className="neonText">Plan it</header>
+            <div className="breakbar"></div>
             <li className="item-1">
               <NavLink to="/">Home</NavLink>
             </li>
-             <li className="item-2">
+            <li className="item-2">
               <NavLink to="/about">About</NavLink>
             </li>
-
             <li className="item-1">Contact</li>
             {!token ? (
               <li className="item-2">
@@ -47,7 +48,7 @@ function Nav(props) {
             {!token ? (
               <li className="item-1">
                 {" "}
-                <NavLink to="/login">Log in</NavLink>{" "}
+                <NavLink to="/login">Log in</NavLink>
               </li>
             ) : null}
             <li className="item-2">
@@ -58,8 +59,14 @@ function Nav(props) {
             <li className="item-1">
               <NavLink to="/create">Create Event Form</NavLink>
             </li>
-            <li className="item-2">
+            <li className="item-1">
               <NavLink to="/events">Events</NavLink>
+            </li>
+            <li className="item-1">
+              <NavLink to="/details">Event Details</NavLink>
+            </li>
+            <li className="item-2">
+              <NavLink to="/questions">Polls</NavLink>
             </li>
             <div className="nav-sep"></div>
             {token ? ( <button className="item-logout" onClick={handleLogout} >Log Out</button> ) : null}

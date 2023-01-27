@@ -2,17 +2,24 @@ import { useState } from "react";
 import { Container, Box, TextField, Button } from "@mui/material";
 import "../css/SignUp.css";
 import Nav from "../Nav";
+import { Navigate, useNavigate } from "react-router-dom";
 
 // import "../css/SignUp.css";
 
 function PollForm() {
   const [question_text, setQuestion] = useState("");
   const [title, setTitle] = useState("");
+   let navigate = useNavigate();
+
+    async function handleNav(event) {
+    event.preventDefault();
+    navigate("/questions")
+    }
 
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const url = "http://localhost:8003/questions/";
+    const url = `${process.env.REACT_APP_POLLS_SERVICE_API_HOST}/questions`;
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -38,6 +45,7 @@ function PollForm() {
     if (response.ok) {
       const data = await response.json();
       console.log(data);
+      navigate("/questions")
 
       // Handle error response
     } else {
@@ -49,6 +57,12 @@ function PollForm() {
   }
 
   return (
+    <>
+    <header>
+            <div>
+            <button onClick={handleNav}>Back to Poll List</button>
+        </div>
+        </header>
     <div className="signup-form-size">
       <div className="signup-form-location" component="main" maxWidth="xs">
         <Nav />
@@ -100,6 +114,7 @@ function PollForm() {
         </Box>
       </div>
     </div>
+    </>
   );
 }
 
