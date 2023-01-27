@@ -1,22 +1,24 @@
 from fastapi.testclient import TestClient
-from queries.events import EventRepository, EventIn
+from queries.events import EventIn
 from main import app
-from datetime import date
+
+# from datetime import date
 
 
 client = TestClient(app)
 
 excepted_post_response = {
-    'id': 1,
-    'title': 'testing',
-    'city': 'Tucson',
-    'state': 'AZ',
-    'from_date': 2023-1-10,
-    'to_date': 2023-1-12,
-    'description': 'testing test',
-    'url': 'none',
-    'weather': 'None',
+    "id": 1,
+    "title": "testing",
+    "city": "Tucson",
+    "state": "AZ",
+    "from_date": 2023 - 1 - 10,
+    "to_date": 2023 - 1 - 12,
+    "description": "testing test",
+    "url": "none",
+    "weather": "None",
 }
+
 
 class MockEventIn:
     def create_event(self, new_event):
@@ -27,14 +29,14 @@ def test_create_event():
     req_body = {
         "id": 1,
         "title": "ex",
-        'city': 'Tucson',
-        'state': 'AZ',
-        'from_date': 2023-1-10,
-        'to_date': 2023-1-12,
-        'description': 'testing test',
-        'url': 'none',
-        'weather': 'None',
-        }
+        "city": "Tucson",
+        "state": "AZ",
+        "from_date": 2023 - 1 - 10,
+        "to_date": 2023 - 1 - 12,
+        "description": "testing test",
+        "url": "none",
+        "weather": "None",
+    }
 
     app.dependency_overrides[EventIn] = MockEventIn
 
@@ -43,6 +45,7 @@ def test_create_event():
     assert res.status_code == 200
 
     app.dependency_overrides = {}
+
 
 # class TestEventQueries(unittest.TestCase):
 #     def test_get_events(self):

@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from typing import List, Optional, Union
 from datetime import date
 from queries.pool import pool
+
 # from queries.acls import get_weather
 
 # from queries.locations import locations
@@ -77,6 +78,7 @@ class EventRepository:
                     return True
 
         except Exception as e:
+            print(e)
             return False
 
     def update(self, event_id: int, event: EventIn) -> Union[EventOut, Error]:
@@ -119,7 +121,8 @@ class EventRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        SELECT id, title, city, state, from_date, to_date, description, url, weather
+                        SELECT id, title, city, state,\
+                              from_date, to_date, description, url, weather
                         FROM events
                         ORDER BY from_date
                         """
@@ -138,7 +141,9 @@ class EventRepository:
                     result = db.execute(
                         """
                         INSERT INTO events
-                            (title, city, state, from_date, to_date, description, url, weather)
+                            (title, city, state,\
+                                  from_date, to_date,\
+                                      description, url, weather)
                         VALUES
                             (%s, %s, %s, %s, %s, %s, %s, %s)
                         RETURNING id
