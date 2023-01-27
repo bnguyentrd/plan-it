@@ -7,6 +7,7 @@ import os
 OPEN_WEATHER_API_KEY = os.environ["OPEN_WEATHER_API_KEY"]
 PEXELS_API_KEY = os.environ["PEXELS_API_KEY"]
 
+
 def get_lat_lon(city, state):
     url = "http://api.openweathermap.org/geo/1.0/direct"
     params = {
