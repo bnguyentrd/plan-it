@@ -18,6 +18,7 @@ function ChoiceForm() {
   }
   async function handleSubmit(event) {
     event.preventDefault();
+    console.log("QUESTION POST FETCH CHOICE CREATE LINE 21", id);
     const url = `${process.env.REACT_APP_POLLS_API_HOST}/questions/${id}/choice`;
     const response = await fetch(url, {
       method: "POST",

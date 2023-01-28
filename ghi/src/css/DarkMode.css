@@ -1,6 +1,5 @@
-
 body {
-  background: linear-gradient(140deg, #6de3e7, #218513); 
+  background: linear-gradient(140deg, #6de3e7, #218513);
   text-align: center;
   background-size: 400% 400%;
   animation: animate-background 10s infinite ease-in-out;
@@ -18,21 +17,20 @@ body {
   }
 }
 
-
-
 .dark-mode {
-  background: linear-gradient(140deg, #404242, #030303); 
+  background: linear-gradient(140deg, #404242, #030303);
   background-size: 400% 400%;
   animation: animate-background 10s infinite ease-in-out;
   color: rgba(66, 226, 247, 0.582);
+  height: 100vh;
 }
 
 .toggle-switch {
   position: relative;
-  width: 50px; 
-  height: 32px; 
+  width: 50px;
+  height: 32px;
   background: grey;
-  border-radius: 30px; 
+  border-radius: 30px;
   cursor: pointer;
 }
 
@@ -56,12 +54,12 @@ body {
   position: relative;
   width: 100px;
   height: 50px;
-  background-image: url('https://i.postimg.cc/857jHw2q/Screenshot-2020-04-16-at-1-07-06-PM.png');
+  background-image: url("https://i.postimg.cc/857jHw2q/Screenshot-2020-04-16-at-1-07-06-PM.png");
   background-size: cover;
   border-radius: 50px;
   outline: none;
   background-color: transparent;
-  transition: background-image .90s;
+  transition: background-image 0.9s;
   box-shadow: 0px 2px 5px 1px gray;
 }
 
@@ -73,22 +71,22 @@ body {
   height: 50px;
   width: 50px;
   border-radius: 50px;
-  transition: all .9s;
+  transition: all 0.9s;
   background-size: cover;
-  background-image: url('https://www.iconpacks.net/icons/2/free-sun-icon-1846-thumb.png');
+  background-image: url("https://www.iconpacks.net/icons/2/free-sun-icon-1846-thumb.png");
 }
 
 .input:checked {
-  background-image: url('https://i.postimg.cc/Hn0nstVK/Screenshot-2020-04-16-at-1-07-19-PM.png');
-  transition: background-image .90s;
+  background-image: url("https://i.postimg.cc/Hn0nstVK/Screenshot-2020-04-16-at-1-07-19-PM.png");
+  transition: background-image 0.9s;
 }
 
 .input:checked:before {
   transform: translate(100%);
-  transition: all .9s;
+  transition: all 0.9s;
   background-size: cover;
   box-shadow: 0.5px 0.5px 0.5px 0.5px rgb(138, 135, 135);
-  background-image: url('https://i.pinimg.com/564x/1c/22/43/1c22433b8d3aec799fd8187ca3030193.jpg');
+  background-image: url("https://i.pinimg.com/564x/1c/22/43/1c22433b8d3aec799fd8187ca3030193.jpg");
 }
 
 .button-transpar {
@@ -113,7 +111,7 @@ body {
 .footer1 {
   background-color: rgba(4, 243, 231, 0.26);
   height: 400px;
-  background-image: url('https://images.pexels.com/photos/1761282/pexels-photo-1761282.jpeg?cs=srgb&dl=pexels-jacob-colvin-1761282.jpg&fm=jpg');
+  background-image: url("https://images.pexels.com/photos/1761282/pexels-photo-1761282.jpeg?cs=srgb&dl=pexels-jacob-colvin-1761282.jpg&fm=jpg");
   background-size: cover;
   margin-top: 10%;
   top: 10%;
@@ -136,48 +134,48 @@ body {
   font-size: 70px;
   bottom: 10%;
   height: 80px;
-  color:rgb(107, 166, 235);
+  color: rgb(107, 166, 235);
 }
 
 .footer-quote2 {
   font-size: 30px;
-  color:rgb(107, 166, 235);
+  color: rgb(107, 166, 235);
 }
 
-@import url('https://fonts.googleapis.com/css?family=Coiny');
+@import url("https://fonts.googleapis.com/css?family=Coiny");
 
 .cloud-text {
-	font-family: 'Coiny', cursive;
-	-webkit-background-clip: text;
-  	-webkit-text-fill-color: transparent;	
-	background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/769286/clouds.jpg);
-	background-size: auto;
-	background-attachment: unset;
-	background-position: 0%;
-	width: 80%;
-	margin: 10%;
-	font-size: 134px;
-	animation: clouds-moving infinite 220s;
-	animation-fill-mode: forwards;
-	animation-play-state: running;
-	animation-timing-function: linear;
-	text-align: center;
+  font-family: "Coiny", cursive;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/769286/clouds.jpg);
+  background-size: auto;
+  background-attachment: unset;
+  background-position: 0%;
+  width: 80%;
+  margin: 10%;
+  font-size: 134px;
+  animation: clouds-moving infinite 220s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  animation-timing-function: linear;
+  text-align: center;
 }
 @keyframes clouds-moving {
-	0% {
-		background-position: 0%;	
-	}
-	50% {
-		background-position: 100%;	
-	}
-	100% {
-		background-position: 0%;
-	}
+  0% {
+    background-position: 0%;
+  }
+  50% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: 0%;
+  }
 }
 .attribute {
-	position: relative;
-	font-size: 26px;
-	text-align: center;
+  position: relative;
+  font-size: 26px;
+  text-align: center;
 }
 
 .logo-position {
@@ -185,35 +183,35 @@ body {
 }
 
 .cloud-text2 {
-	font-family: 'Coiny', cursive;
-	-webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;	
-	background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/769286/clouds.jpg);
-	background-size: auto;
-	background-attachment: unset;
-	background-position: 0%;
-	width: 80%;
-	margin: 10%;
-	font-size: 75px;
-	animation: clouds-moving infinite 220s;
-	animation-fill-mode: forwards;
-	animation-play-state: running;
-	animation-timing-function: linear;
-	text-align: center;
+  font-family: "Coiny", cursive;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/769286/clouds.jpg);
+  background-size: auto;
+  background-attachment: unset;
+  background-position: 0%;
+  width: 80%;
+  margin: 10%;
+  font-size: 75px;
+  animation: clouds-moving infinite 220s;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+  animation-timing-function: linear;
+  text-align: center;
 }
 @keyframes clouds-moving {
-	0% {
-		background-position: 0%;	
-	}
-	50% {
-		background-position: 100%;	
-	}
-	100% {
-		background-position: 0%;
-	}
+  0% {
+    background-position: 0%;
+  }
+  50% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: 0%;
+  }
 }
 .attribute {
-	position: relative;
-	font-size: 26px;
-	text-align: center;
+  position: relative;
+  font-size: 26px;
+  text-align: center;
 }
