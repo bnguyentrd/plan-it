@@ -24,8 +24,8 @@ class FakeAuthenticator:
     def hash_password(self, password):
         return "password"
 
-    def login(self, response, request, form, accounts):
-        return Token(access_token="anystring", token_type="anotherstring")
+    async def login(self, response, request, form, accounts):
+        return Token(access_token="", token_type="Bearer")
 
 
 def get_fake_authenticator():
