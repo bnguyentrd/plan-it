@@ -11,7 +11,7 @@ from fastapi import (
 
 
 from jwtdown_fastapi.authentication import Token
-from .authenticator import authenticator
+from .authenticator import PlanitAuthenticator, authenticator
 from pydantic import BaseModel
 
 from queries.accounts import (
@@ -105,6 +105,8 @@ async def get_token(
             "account": account,
         }
 
+def get_authenticator():
+    return authenticator
 
 @router.post("/api/accounts/new", response_model=AccountToken | HttpError)
 async def create_account(
@@ -112,6 +114,7 @@ async def create_account(
     request: Request,
     response: Response,
     accounts: AccountQueries = Depends(),
+    authenticator: PlanitAuthenticator = Depends(get_authenticator)
 ):
     hashed_password = authenticator.hash_password(info.password)
     try:

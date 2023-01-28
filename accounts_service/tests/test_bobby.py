@@ -1,7 +1,8 @@
 from fastapi.testclient import TestClient
 from queries.accounts import AccountQueries, DuplicateAccountError
 from main import app
-
+from jwtdown_fastapi.authentication import Token
+from routers.accounts import get_authenticator
 
 client = TestClient(app)
 
@@ -17,6 +18,18 @@ expected_dummy_response = {
     "account": {"email": "bob@gmail.com", "id": 1, "username": "bob"},
     "token_type": "Bearer",
 }
+
+
+class FakeAuthenticator:
+    def hash_password(self, password):
+        return "password"
+
+    def login(self, response, request, form, accounts):
+        return Token(access_token="anystring", token_type="anotherstring")
+
+
+def get_fake_authenticator():
+    return FakeAuthenticator()
 
 
 def test_create_account():
@@ -40,7 +53,7 @@ def test_create_account():
             }
 
     app.dependency_overrides[AccountQueries] = dummyAccQuery
-
+    app.dependency_overrides[get_authenticator] = get_fake_authenticator
     response = client.post("/api/accounts/new", json=dummyAcc)
 
     assert response.status_code == 200
@@ -57,7 +70,7 @@ def test_duplicate_account():
             raise DuplicateAccountError
 
     app.dependency_overrides[AccountQueries] = fakeDuplicateAccQuery
-
+    app.dependency_overrides[get_authenticator] = get_fake_authenticator
     response = client.post("/api/accounts/new", json=dummyAcc)
 
     assert response.status_code == 400
