@@ -11,8 +11,6 @@ const EventForm = () => {
     const [from_date, setFromDate] = useState("")
     const [to_date, setToDate] = useState("")
     const [description, setDescription] = useState("")
-    // const [url, setUrl] = useState("")
-    // const [weather, setWeather] = useState("")
     const navigate = useNavigate()
 
     const handleSubmit = async (Event) => {
@@ -24,8 +22,6 @@ const EventForm = () => {
             "from_date": from_date,
             "to_date": to_date,
             "description": description,
-            // "url": url,
-            // "weather": weather
         }
 
         const eventUrl = "http://localhost:8001/events/"

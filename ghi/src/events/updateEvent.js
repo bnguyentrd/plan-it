@@ -79,7 +79,6 @@ const UpdateEvent = () => {
                         <div className='form-floating mb-3'>
                             <input
                             className="event-size"
-                            //  value={city}
                              onChange={(e) => setCity(e.target.value)}
                              placeholder={city}
                              type='text'
@@ -91,7 +90,6 @@ const UpdateEvent = () => {
                         <div className='form-floating mb-3'>
                             <input
                             className="event-size"
-                            //  value={state}
                              onChange={(e) => setState(e.target.value)}
                              placeholder={state}
                              type='text'
@@ -103,7 +101,6 @@ const UpdateEvent = () => {
                         <div className='form-floating mb-3'>
                             <input
                             className="event-size"
-                            //  value={from_date}
                              onChange={(e) => setFromDate(e.target.value)}
                              placeholder={from_date}
                              type='date'
@@ -114,7 +111,6 @@ const UpdateEvent = () => {
                         <div className='form-floating mb-3'>
                             <input
                             className="event-size"
-                            //  value={to_date}
                              onChange={(e) => setFromDate(e.target.value)}
                              placeholder={to_date}
                              type='date'
