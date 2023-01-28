@@ -36,7 +36,7 @@ export default function EventList() {
                     {eventData.map(event => (
                         <tr key={event.id}>
                             <td>
-                                <Link to={`/details/${event.id}/`}>
+                                <Link to={`/details/${event.id}`}>
                                     {event.title}
                                 </Link>
                             </td>
