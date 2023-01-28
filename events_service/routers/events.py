@@ -21,14 +21,23 @@ def get_one_event(
     else:
         return event
 
+def get_weather_getter():
+    return get_weather
+
+def get_photo_getter():
+    return get_photo
+
 
 @router.post("/events", response_model=Union[EventOut, Error])
 def create_event(
     event: EventIn,
     response: Response,
     repo: EventRepository = Depends(),
+    get_weather = Depends(get_weather_getter),
+    get_photo = Depends(get_photo_getter),
 ):
     try:
+        
         event.weather = get_weather(event.city, event.state)["description"]
         event.url = get_photo(event.city, event.state)["picture_url"]
         return repo.create(event)

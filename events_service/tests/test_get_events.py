@@ -1,13 +1,12 @@
 from fastapi.testclient import TestClient
-from queries.events import EventIn
+from queries.events import EventRepository
 from main import app
-
-# from datetime import date
+from routers.events import get_photo_getter, get_weather_getter
 
 
 client = TestClient(app)
 
-excepted_post_response = {
+expected_post_response = {
     "id": 1,
     "title": "testing",
     "city": "Tucson",
@@ -20,9 +19,17 @@ excepted_post_response = {
 }
 
 
-class MockEventIn:
-    def create_event(self, new_event):
-        return excepted_post_response
+class MockEventRepository:
+    def create(self, new_event):
+        return expected_post_response
+
+
+def fake_weather_getter():
+    return lambda city, state: {"description": "weather"}
+
+
+def fake_photo_getter():
+    return lambda city, state: {"picture_url": "photo"}
 
 
 def test_create_event():
@@ -38,7 +45,9 @@ def test_create_event():
         "weather": "None",
     }
 
-    app.dependency_overrides[EventIn] = MockEventIn
+    app.dependency_overrides[EventRepository] = MockEventRepository
+    app.dependency_overrides[get_weather_getter] = fake_weather_getter
+    app.dependency_overrides[get_photo_getter] = fake_photo_getter
 
     res = client.post("/events", json=req_body)
 

@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 from main import app
-from queries.checklists import ChecklistIn
+from queries.checklists import ChecklistRepository
 
 
 client = TestClient(app)
@@ -13,16 +13,16 @@ expected_post_response = {
 }
 
 
-class MockChecklistIn:
-    def create_checklist(self, new_checklist):
+class MockChecklistRepository:
+    def create(self, new_checklist):
         return expected_post_response
 
 
-def test_create_truck():
+def test_checklist():
     # Arrange
     req_body = {"event_id": 1, "items": ["list"], "status": ["false"]}
 
-    app.dependency_overrides[ChecklistIn] = MockChecklistIn
+    app.dependency_overrides[ChecklistRepository] = MockChecklistRepository
 
     # Act
     res = client.post("/checklists", json=req_body)
