@@ -35,14 +35,14 @@ def get_db():
         db.close()
 
 
-@app.post("/questions/", response_model=poll_schema.QuestionInfo)
+@app.post("/questions", response_model=poll_schema.QuestionInfo)
 def create_question(
     question: poll_schema.QuestionCreate, db: Session = Depends(get_db)
 ):
     return crud.create_question(db=db, question=question)
 
 
-@app.get("/questions/", response_model=List[poll_schema.Question])
+@app.get("/questions", response_model=List[poll_schema.Question])
 def get_questions(db: Session = Depends(get_db)):
     return crud.get_all_questions(db=db)
 
@@ -88,6 +88,6 @@ def update_vote(choice_id: int, db: Session = Depends(get_db)):
     return crud.update_vote(choice_id=choice_id, db=db)
 
 
-@app.get("/choices/", response_model=List[poll_schema.ChoiceList])
+@app.get("/choices", response_model=List[poll_schema.ChoiceList])
 def get_choices(db: Session = Depends(get_db)):
     return crud.get_choices(db=db)
