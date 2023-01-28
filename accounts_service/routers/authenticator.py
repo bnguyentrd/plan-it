@@ -13,6 +13,7 @@ class PlanitAuthenticator(Authenticator):
     ):
         # Use your repo to get the account based on the
         # email (which could be an email)
+        print(os.environ["SIGNING_KEY"])
         return accounts.get(username)
 
     def get_account_getter(

@@ -27,6 +27,7 @@ services:
     volumes:
       - ./polls_service:/app
     environment:
+      SIGNING_KEY: ${SIGNING_KEY}
       DATABASE_URL: postgresql://polls:password@postgres/polls
       WAIT_HOSTS: postgres:5432
 
@@ -39,6 +40,9 @@ services:
     volumes:
       - ./events_service:/app
     environment:
+      SIGNING_KEY: ${SIGNING_KEY}
+      OPEN_WEATHER_API_KEY: ${OPEN_WEATHER_API_KEY}
+      PEXELS_API_KEY: ${PEXELS_API_KEY}
       DATABASE_URL: postgresql://admin:test-databases@postgres/eventsdb
       WAIT_HOSTS: postgres:5432
       WAIT_BEFORE: 5
