@@ -17,34 +17,35 @@ lint-test-job:
     - flake8 events_service
     - flake8 polls_service
 
-# accounts_service-unit-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   needs:
-#     - lint-test-job
-#   script:
-#     - cd accounts_service
-#     - pip install -r requirements.txt
-#     - python -m pytest
+accounts_service-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  needs:
+    - lint-test-job
+  script:
+    - cd accounts_service
+    - pip install -r requirements.txt
+    - python -m pytest
 
-# events-service-unit-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   needs:
-#     - lint-test-job
-#   script:
-#     - cd events_service
-#     - pip install -r requirements.txt
-#     - python -m pytest
+events-service-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  needs:
+    - lint-test-job
+  script:
+    - cd events_service
+    - pip install -r requirements.txt
+    - python -m pytest
 
-# polls-service-unit-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   # needs:
-#   #   - lint-test-job
-#   script:
-#     - cd polls_service
-#     - pip install -r requirements.txt
+polls-service-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  needs:
+    - lint-test-job
+  script:
+    - cd polls_service
+    - pip install -r requirements.txt
+    - python -m pytest pollCrudTest.py
 
 build-accounts-image-job:
   only:
@@ -132,8 +133,9 @@ build-front-end-job:
   image: node:lts-bullseye
   needs:
     - lint-test-job
-    # - accounts_service-unit-test-job
-    # - events-service-unit-test-job
+    - accounts_service-unit-test-job
+    - events-service-unit-test-job
+    - polls-service-unit-test-job
   variables:
     # If either of these variables is defined in the GitLab
     # CI/CD variables, that value will override the value here.
