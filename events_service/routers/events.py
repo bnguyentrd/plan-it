@@ -49,6 +49,8 @@ def update_event(
     event: EventIn,
     repo: EventRepository = Depends(),
 ) -> Union[Error, EventOut]:
+    event.weather = get_weather(event.city, event.state)["description"]
+    event.url = get_photo(event.city, event.state)["picture_url"]
     return repo.update(event_id, event)
 
 
