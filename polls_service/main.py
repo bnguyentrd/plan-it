@@ -9,7 +9,8 @@ import crud
 from database import SessionLocal, engine
 from models import Base
 
-Base.metadata.create_all(bind=engine)
+if os.environ.get("PRODUCTION", "True")=="True":
+    Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -71,6 +72,11 @@ def create_choice(qid: int, choice: poll_schema.ChoiceCreate, db: Session = Depe
 def update_vote(choice_id: int, db: Session = Depends(get_db)):
 	return crud.update_vote(choice_id=choice_id, db=db)
 
+def get_crud():
+    return crud
+
+
 @app.get("/choices/", response_model=List[poll_schema.ChoiceList])
-def get_choices(db: Session = Depends(get_db)):
+def get_choices(db: Session = Depends(get_db),
+                crud=Depends(get_crud)):
 	return crud.get_choices(db=db)
