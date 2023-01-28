@@ -37,6 +37,7 @@ export const LoginForm = () => {
             alignItems: "center",
           }}
         >
+          <form className="login-form">
           <h1>Login</h1>
           <TextField
             margin="normal"
@@ -49,12 +50,10 @@ export const LoginForm = () => {
             variant="outlined"
             autoFocus
           />
-
           <TextField
             margin="normal"
             required
             fullWidth
-            input
             type="password"
             name="password"
             label="Password"
@@ -66,10 +65,12 @@ export const LoginForm = () => {
           <Button
             className="glow-on-hover glowing glow-button"
             onClick={handleSubmit}
+            type="submit"
           >
             Login
           </Button>
           <div>{error}</div>
+          </form>
         </Box>
       </Container>
     </>

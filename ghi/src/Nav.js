@@ -30,30 +30,25 @@ function Nav(props) {
         </button>
         {isMenuOpen && (
           <ul className="drpdwn">
-            <header className="neonText">Plan it</header>
-            <div className="breakbar"></div>
             <li className="item-1">
               <NavLink to="/">Home</NavLink>
             </li>
             <li className="item-2">
               <NavLink to="/about">About</NavLink>
             </li>
-
             <li className="item-1">Contact</li>
             {!token ? (
-              <li>
+              <li className="item-2">
                 {" "}
                 <NavLink to="/signup">Sign Up</NavLink>{" "}
               </li>
             ) : null}
-
             {!token ? (
               <li className="item-1">
                 {" "}
-                <NavLink to="/login">Log in</NavLink>{" "}
+                <NavLink to="/login">Log in</NavLink>
               </li>
             ) : null}
-
             <li className="item-2">
               <NavLink to={`/api/accounts/${props.accountid}`}>
                 Account Details
@@ -62,17 +57,19 @@ function Nav(props) {
             <li className="item-1">
               <NavLink to="/create">Create Event Form</NavLink>
             </li>
-            <li className="item-1">
+            <li className="item-2">
               <NavLink to="/events">Events</NavLink>
             </li>
-            <li className="item-2">
+
+            <li className="item-1">
               <NavLink to="/questions">Polls</NavLink>
             </li>
-            <li className="item-1">
-              <NavLink to="/details">Event Details</NavLink>
-            </li>
-
-            {!token ? null : <NavLink onClick={handleLogout}>Logout</NavLink>}
+            <div className="nav-sep"></div>
+            {token ? (
+              <button className="item-logout" onClick={handleLogout}>
+                Log Out
+              </button>
+            ) : null}
           </ul>
         )}
       </div>

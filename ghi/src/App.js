@@ -15,12 +15,14 @@ import PollList from "./polls/PollList.js";
 import PollDetail from "./polls/PollDetail.js";
 import ChoiceForm from "./polls/ChoiceCreate.js";
 import { useToken } from './accounts/Authentication';
+import UpdateEvent from "./events/updateEvent.js";
 
 
 function GetToken() {
   useToken();
   return null;
 }
+
 
 function App(props) {
   const [account_id, setAccountId] = useState(0);
@@ -48,6 +50,7 @@ function App(props) {
               <Route path="/events" element={<EventList />} />
               <Route path="/create" element={<EventForm />} />
               <Route path="/details/:id" element={<EventDetails />} />
+              <Route path="/update/:id" element={<UpdateEvent />} />
               <Route path="/questions/new" element={<PollForm />} />
               <Route path="/questions" element={<PollList />} />
               <Route path="/questions/:id" element={<PollDetail/>} />

@@ -2,22 +2,24 @@ import { useState } from "react";
 import { Box, TextField } from "@mui/material";
 import "../css/SignUp.css";
 import Nav from "../Nav";
-import { useAuthContext } from "./Authentication";
-
+import { useToken } from "./Authentication";
+import { useNavigate } from "react-router-dom";
 
 
 function SignUpForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const { signup } = useAuthContext();
+  const signup = useToken()[3];
+  const navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
-      await signup(username, password, email);
+      signup(username, email, password);
       console.log("Signup Successful!");
+      navigate("/");
     } catch (error) {
       console.log("Signup Error: ", error);
     }
@@ -33,6 +35,7 @@ function SignUpForm() {
             flexDirection: "column",
           }}
         >
+          <form className="signup-form">
           <h1>Sign Up</h1>
           <TextField
             margin="normal"
@@ -60,6 +63,7 @@ function SignUpForm() {
             margin="normal"
             required
             fullWidth
+            type="password"
             name="password"
             label="Password"
             value={password}
@@ -76,6 +80,7 @@ function SignUpForm() {
               Sign Up
             </button>
           </div>
+          </form>
         </Box>
       </div>
     </div>

@@ -191,3 +191,23 @@ Today, I worked on:
 - Deployment
 
 Today I spent all day working on deployment again. I was able to deploy Elija's events microservice but not without running into a "Mixed Content" Error. After Andrew's suggestion, I went into my code to remove all trailing backslashes and reran the pipeline but I was still getting the error. It wasn't until refreshing the webpage with the option to clear the cache did it finally work. The next hurdle was configuring Graham's microservice since his microservice was implementing SQLalchemy. Since his microservice's file structure was different, it was difficult to figure out which variables needed to be modified for his dockerfile. My "a-ha!" moment today was figuring out the refresh/cache clearing issue and my second "a-ha" moment was figuring out that the dockerfile for Graham's code needed to have COPY commands for every python file in his code. I only have one more microservice to implement and moving forward, we can finally start troubleshooting the functionality of the deployed apps since im sure there will be differences in functionality compared to running things locally.
+
+
+## Jan 25
+
+Today, I worked on:
+
+- Authentication
+
+Today I spent all day getting nowhere trying to figure out deployment again. I had made decent progress trying to manage state using zustand but it wasn't quite where I wanted it to be. Unfortunately, when asking for help, the SEIRS and instructors were limited in their ability to troubleshoot with me since they never used it before. They also said I was using my auth code incorrectly by calling on getinternaltoken. I eventually refactored my code backto the boilerplate auth code and learned that the order in which I can my functions from auth matters which was a huge "ah-ha" moment. Although I didnt finish and felt like i made very little progress, I had a moment where I realized that everything im learning now was so complex that if I had to explain this to myself in module 1, I would be overwhelmed so overall im proud of my progress. I just hop I dont drag down my teammates especially after putting in so many late nights since the beginning of this module.
+
+
+
+
+## Jan 26
+
+Today, I worked on:
+
+- Authentication
+
+Today I was finally able to get authentication working for accounts. Users are now able to log in, logout, and signup. Managing the state now works as intended by using ternary operators to display links that are dependent on the logged in state of the user. Although we still need more functionality for our mvp, our instructor recommended that I should make sure that deployment was up and running. The biggest issue with that is that my teammates code is not where they want to be so they are currently dealing with merge requests but after every merge request, there are a lot of conflicts to resolve. Its not until everything is updated can I make the final merge to main to make sure we have a functioning deployed site on gitlab and caprover. 

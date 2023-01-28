@@ -13,34 +13,39 @@ function AccountDetails() {
   const [, token] = useToken();
 
   useEffect(() => {
-    async function fetchAccountDetails() {
-      const userdata = await getTokenInternal();
-      console.log(token);
-      if (!token) {
-        navigate("/login");
-      } else {
-        const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${userdata.account.id}`;
-        try {
-          const response = await fetch(url, {
-            headers: {
-              Authorization: `Bearer ${userdata.access_token}`,
-            },
-          });
-          console.log(response);
-          if (response.ok) {
-            console.log("RECEIVED GOOD RESPONSE");
-            const data = await response.json();
-            setAccountDetails(data);
-          } else {
-            navigate("/");
-          }
-        } catch (e) {
-          console.log(e);
-        }
-      }
-    }
-    fetchAccountDetails();
-  }, [updateUsername]);
+    async function fetchAccountDetails() {}
+  });
+
+  // useEffect(() => {
+  //   console.log("THIS IS THE TOKEN: ", token);
+  //   async function fetchAccountDetails() {
+  //     const userdata = await getTokenInternal();
+  //     console.log(token);
+  //     if (!token) {
+  //       navigate("/login");
+  //     } else {
+  //       const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${userdata.account.id}`;
+  //       try {
+  //         const response = await fetch(url, {
+  //           headers: {
+  //             Authorization: `Bearer ${userdata.access_token}`,
+  //           },
+  //         });
+  //         console.log(response);
+  //         if (response.ok) {
+  //           console.log("RECEIVED GOOD RESPONSE");
+  //           const data = await response.json();
+  //           setAccountDetails(data);
+  //         } else {
+  //           navigate("/");
+  //         }
+  //       } catch (e) {
+  //         console.log(e);
+  //       }
+  //     }
+  //   }
+  //   fetchAccountDetails();
+  // }, [updateUsername]);
 
   // const handleDelete = async (e) => {
   //   e.preventDefault();
@@ -97,8 +102,9 @@ function AccountDetails() {
   const handleUsernameUpdate = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // const token = await getTokenInternal();
-    const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${token.account.id}/username`;
+    const userData = await getTokenInternal();
+    console.log("THIS IS USER DATA MAYBE TOKEN?", userData);
+    // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/${userData.}/username`;
     // const url = `${process.env.REACT_APP_ACCOUNTS_SERVICE_API_HOST}/api/accounts/username/${id}`;
     try {
       const response = await fetch(url, {
