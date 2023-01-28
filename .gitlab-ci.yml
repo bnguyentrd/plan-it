@@ -26,6 +26,8 @@ accounts_service-unit-test-job:
     - cd accounts_service
     - pip install -r requirements.txt
     - python -m pytest
+  variables:
+    SIGNING_KEY: BLAH
 
 events-service-unit-test-job:
   image: python:3-bullseye
@@ -36,6 +38,8 @@ events-service-unit-test-job:
     - cd events_service
     - pip install -r requirements.txt
     - python -m pytest
+  variables:
+    SIGNING_KEY: BLAH
 
 polls-service-unit-test-job:
   image: python:3-bullseye
@@ -46,6 +50,8 @@ polls-service-unit-test-job:
     - cd polls_service
     - pip install -r requirements.txt
     - python -m pytest pollCrudTest.py
+  variables:
+    SIGNING_KEY: BLAH
 
 build-accounts-image-job:
   only:
